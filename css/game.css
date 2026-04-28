@@ -1,0 +1,470 @@
+/* =========================================================
+   Reverse Typing Game - game.css
+   Page-specific styling for game.html
+   Use together with css/style.css
+   ========================================================= */
+
+
+/* ---------- Main page layout ---------- */
+
+.game-page main {
+    padding-top: 1.5rem;
+}
+
+.game-page .page-grid {
+    align-items: start;
+    grid-template-columns: 280px minmax(0, 1fr) 300px;
+}
+
+.game-page .sidebar-section {
+    display: grid;
+    gap: 1rem;
+    position: sticky;
+    top: 96px;
+}
+
+.game-page .play-area {
+    min-width: 0;
+}
+
+
+/* ---------- Card polish ---------- */
+
+.game-page .card {
+    overflow: hidden;
+}
+
+.game-page .card-header {
+    background: linear-gradient( 180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0));
+}
+
+.game-page .card-header h2,
+.game-page .card-header h3 {
+    letter-spacing: 0.01em;
+}
+
+.game-page .card-body {
+    display: grid;
+    gap: 1rem;
+}
+
+
+/* ---------- Mode buttons ---------- */
+
+.game-page .mode-buttons {
+    gap: 0.7rem;
+}
+
+.game-page .mode-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    border-radius: 16px;
+    padding: 0.95rem 1rem;
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text);
+    transition: transform var(--transition), background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.game-page .mode-btn strong {
+    display: block;
+    margin-bottom: 0.15rem;
+    font-size: 0.98rem;
+}
+
+.game-page .mode-btn span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.45;
+}
+
+.game-page .mode-btn.active {
+    background: linear-gradient( 135deg, rgba(177, 76, 255, 0.18), rgba(255, 107, 231, 0.12)), rgba(255, 255, 255, 0.04);
+    border-color: rgba(193, 143, 255, 0.32);
+    box-shadow: var(--glow);
+}
+
+.game-page .mode-btn:hover,
+.game-page .mode-btn:focus-visible {
+    transform: translateY(-2px);
+}
+
+
+/* ---------- Session overview ---------- */
+
+.game-page .mini-grid {
+    gap: 0.85rem;
+}
+
+.game-page .stat-box {
+    min-height: 96px;
+    display: grid;
+    align-content: start;
+}
+
+.game-page .stat-box strong {
+    font-size: 1.28rem;
+    font-weight: 800;
+}
+
+.game-page .stat-box small {
+    line-height: 1.35;
+}
+
+
+/* ---------- Main shell ---------- */
+
+.game-page .game-shell {
+    padding: 1.25rem;
+}
+
+.game-page .status-line {
+    align-items: start;
+    margin-bottom: 1.15rem;
+}
+
+.game-page .status-line h2 {
+    margin-bottom: 0.35rem;
+}
+
+.game-page .status-line p {
+    max-width: 60ch;
+}
+
+
+/* ---------- HUD ---------- */
+
+.game-page .main-hud {
+    gap: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.game-page .hud-box {
+    position: relative;
+    overflow: hidden;
+    min-height: 96px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+
+.game-page .hud-box::before {
+    content: "";
+    position: absolute;
+    inset: auto -16px -22px auto;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.06), transparent 70%);
+    pointer-events: none;
+}
+
+.game-page .hud-box span {
+    margin-bottom: 0.28rem;
+    letter-spacing: 0.01em;
+}
+
+.game-page .hud-box strong {
+    font-size: 1.28rem;
+    font-weight: 900;
+}
+
+
+/* Timer box special state */
+
+.game-page #timerBox {
+    transition: border-color var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition);
+}
+
+.game-page #timerBox.timer-critical {
+    animation: timerPulse 1s infinite ease-in-out;
+}
+
+@keyframes timerPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(255, 122, 154, 0.15);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 18px rgba(255, 122, 154, 0.2);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(255, 122, 154, 0.15);
+    }
+}
+
+
+/* ---------- Progress ---------- */
+
+.game-page .progress-wrap {
+    margin-bottom: 1rem;
+}
+
+.game-page .progress-label {
+    font-weight: 600;
+}
+
+.game-page .progress-bar {
+    height: 15px;
+}
+
+.game-page .progress-fill {
+    background: linear-gradient(90deg, var(--accent), var(--accent-3));
+}
+
+
+/* ---------- Prompt display ---------- */
+
+.game-page .prompt-panel {
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-page .prompt-panel::after {
+    content: "";
+    position: absolute;
+    left: -40px;
+    top: -40px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.06), transparent 70%);
+    pointer-events: none;
+}
+
+.game-page .prompt-label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.game-page .prompt-word {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    line-height: 1.05;
+    margin: 0.3rem 0 0.4rem;
+    text-shadow: 0 0 24px rgba(177, 76, 255, 0.22);
+}
+
+.game-page .prompt-meta {
+    max-width: 48ch;
+    margin: 0 auto;
+    line-height: 1.45;
+}
+
+
+/* ---------- Input panel ---------- */
+
+.game-page .input-panel {
+    gap: 0.9rem;
+}
+
+.game-page .input-panel label {
+    font-size: 0.98rem;
+}
+
+.game-page .input-row {
+    align-items: stretch;
+}
+
+.game-page #answerInput {
+    min-height: 60px;
+    font-size: 1.05rem;
+    border-radius: 16px;
+    transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.game-page #answerInput:focus {
+    border-color: rgba(193, 143, 255, 0.4);
+    box-shadow: 0 0 0 4px rgba(177, 76, 255, 0.14);
+}
+
+.game-page #submitBtn {
+    min-width: 180px;
+}
+
+.game-page .action-row {
+    gap: 0.75rem;
+}
+
+.game-page .action-row>* {
+    flex: 1 1 150px;
+}
+
+.game-page .action-row button,
+.game-page .action-row a {
+    min-height: 50px;
+}
+
+
+/* ---------- Feedback ---------- */
+
+.game-page .feedback-box {
+    min-height: 78px;
+    align-items: center;
+}
+
+.game-page .feedback-title {
+    font-size: 1rem;
+}
+
+.game-page .feedback-text {
+    line-height: 1.45;
+}
+
+
+/* ---------- Achievement preview ---------- */
+
+.game-page .ach-list {
+    gap: 0.7rem;
+}
+
+.game-page .ach-item {
+    align-items: flex-start;
+    padding: 0.8rem;
+}
+
+.game-page .ach-item h4 {
+    margin-bottom: 0.14rem;
+    font-size: 0.95rem;
+}
+
+.game-page .ach-item p {
+    font-size: 0.84rem;
+    line-height: 1.4;
+}
+
+.game-page .ach-item.locked {
+    opacity: 0.58;
+}
+
+
+/* ---------- Side lists ---------- */
+
+.game-page .side-list {
+    gap: 0.75rem;
+}
+
+.game-page .side-list li {
+    padding: 0.85rem;
+}
+
+.game-page .side-list strong {
+    margin-bottom: 0.1rem;
+}
+
+
+/* ---------- Save status ---------- */
+
+.game-page #saveStatus,
+.game-page #modePill {
+    white-space: nowrap;
+}
+
+
+/* ---------- Modal styling ---------- */
+
+.game-page .modal {
+    width: min(100%, 580px);
+}
+
+.game-page .modal-head h3 {
+    font-size: 1.15rem;
+}
+
+.game-page .modal-body {
+    gap: 1.1rem;
+}
+
+.game-page .results-grid {
+    gap: 0.9rem;
+}
+
+.game-page .result-box strong {
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.game-page .modal-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.game-page .modal-actions>* {
+    flex: 1 1 160px;
+}
+
+
+/* ---------- Utility visual enhancements ---------- */
+
+.game-page .pill,
+.game-page .mode-tag,
+.game-page .mode-label {
+    backdrop-filter: blur(6px);
+}
+
+.game-page .ghost-btn[disabled],
+.game-page .secondary-btn[disabled],
+.game-page .primary-btn[disabled],
+.game-page button[disabled] {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+
+/* ---------- Reduced motion support ---------- */
+
+body.reduced-motion .game-page #timerBox.timer-critical,
+body.high-contrast .game-page #timerBox.timer-critical {
+    animation: none;
+}
+
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1180px) {
+    .game-page .page-grid {
+        grid-template-columns: 1fr;
+    }
+    .game-page .sidebar-section {
+        position: static;
+    }
+}
+
+@media (max-width: 760px) {
+    .game-page .main-hud {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .game-page .input-row {
+        grid-template-columns: 1fr;
+    }
+    .game-page #submitBtn {
+        min-width: 100%;
+    }
+    .game-page .status-line {
+        gap: 0.85rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .game-page .main-hud {
+        grid-template-columns: 1fr;
+    }
+    .game-page .prompt-panel {
+        padding: 1.15rem 0.95rem;
+    }
+    .game-page .game-shell {
+        padding: 1rem;
+    }
+    .game-page .modal-actions {
+        flex-direction: column;
+    }
+}

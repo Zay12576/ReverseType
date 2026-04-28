@@ -1,0 +1,2192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ReverseType achievements page with unlockable rewards, progress tracking, filters, and game launch buttons." />
+    <title>ReverseType | Achievements</title>
+
+    <link rel="stylesheet" href="css/shared-settings.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+
+    <style>
+         :root {
+            --bg-1: #07111f;
+            --bg-2: #10172f;
+            --bg-3: #151034;
+            --text: #ffffff;
+            --muted: #c9d7ff;
+            --soft: #9fb2e8;
+            --accent: #7b55ff;
+            --accent-2: #2f80ed;
+            --accent-3: #33c8f2;
+            --green: #2ecc71;
+            --red: #ff5d73;
+            --yellow: #ffc83d;
+            --panel: rgba(255, 255, 255, 0.1);
+            --panel-2: rgba(255, 255, 255, 0.16);
+            --border: rgba(255, 255, 255, 0.14);
+            --shadow: 0 22px 50px rgba(0, 0, 0, 0.28);
+            --glow: 0 0 28px rgba(51, 200, 242, 0.34);
+            --radius-xl: 28px;
+            --radius-lg: 22px;
+            --radius-md: 16px;
+            --transition: 220ms ease;
+            --max-width: 1400px;
+        }
+        
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text);
+            background: radial-gradient(circle at 8% 10%, rgba(47, 128, 237, 0.34), transparent 30%), radial-gradient(circle at 92% 16%, rgba(123, 85, 255, 0.35), transparent 30%), radial-gradient(circle at 50% 100%, rgba(51, 200, 242, 0.16), transparent 38%), linear-gradient(135deg, var(--bg-1), var(--bg-2) 48%, var(--bg-3));
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        body.theme-blue {
+            --accent: #2f80ed;
+            --accent-2: #2f80ed;
+            --accent-3: #59d7ff;
+            background: radial-gradient(circle at 8% 10%, rgba(47, 128, 237, 0.38), transparent 28%), radial-gradient(circle at 88% 16%, rgba(51, 200, 242, 0.3), transparent 30%), linear-gradient(135deg, #07101f, #0c1b35);
+        }
+        
+        body.theme-green {
+            --accent: #2ecc71;
+            --accent-2: #2ecc71;
+            --accent-3: #74ffcb;
+            background: radial-gradient(circle at 8% 10%, rgba(46, 204, 113, 0.32), transparent 28%), radial-gradient(circle at 88% 16%, rgba(116, 255, 203, 0.22), transparent 30%), linear-gradient(135deg, #06140f, #0a2018);
+        }
+        
+        body.theme-light {
+            --bg-1: #ffffff;
+            --bg-2: #ffffff;
+            --bg-3: #ffffff;
+            --text: #14213d;
+            --muted: #667085;
+            --soft: #6f84a7;
+            --panel: #ffffff;
+            --panel-2: #f7f9fd;
+            --border: rgba(20, 33, 61, 0.1);
+            --shadow: 0 18px 38px rgba(20, 33, 61, 0.12);
+            color: #14213d;
+            background: #ffffff !important;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        button {
+            border: none;
+            cursor: pointer;
+        }
+        
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+        
+        .skip-link {
+            position: absolute;
+            top: -60px;
+            left: 12px;
+            z-index: 999;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #000000;
+            box-shadow: var(--shadow);
+            transition: top var(--transition);
+        }
+        
+        .skip-link:focus {
+            top: 12px;
+        }
+        
+        .container {
+            width: min(100% - 32px, var(--max-width));
+            margin: 0 auto;
+        }
+        
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: radial-gradient(circle at 8% 10%, rgba(46, 204, 113, 0.24), transparent 32%), radial-gradient(circle at 92% 18%, rgba(51, 200, 242, 0.12), transparent 34%), linear-gradient(135deg, rgba(6, 20, 15, 0.96), rgba(10, 32, 24, 0.96));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+        }
+        
+        .header-inner {
+            min-height: 86px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 900;
+            color: #f1fff8;
+        }
+        
+        .brand-mark {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #2ecc71, #33c8f2);
+            color: #ffffff;
+            font-weight: 900;
+            box-shadow: 0 10px 22px rgba(46, 204, 113, 0.24), 0 0 24px rgba(51, 200, 242, 0.18);
+            overflow: hidden;
+        }
+        
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .brand-text {
+            display: grid;
+            gap: 2px;
+        }
+        
+        .brand-name {
+            font-size: 1.2rem;
+            letter-spacing: -0.03em;
+            color: #f1fff8;
+        }
+        
+        .brand-subtitle {
+            font-size: 0.78rem;
+            color: #9fb2e8;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav a {
+            min-height: 44px;
+            padding: 0 14px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #c9d7ff;
+            font-size: 0.95rem;
+            font-weight: 800;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid transparent;
+            transition: background var(--transition), color var(--transition), transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+        }
+        
+        .nav a:hover,
+        .nav a:focus-visible {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.16);
+            transform: translateY(-1px);
+            outline: none;
+        }
+        
+        .nav a[aria-current="page"] {
+            background: linear-gradient(135deg, #2ecc71, #33c8f2);
+            color: #041126;
+            box-shadow: 0 10px 24px rgba(46, 204, 113, 0.25);
+        }
+        
+        main {
+            min-height: calc(100vh - 86px);
+            padding: 44px 0 72px;
+        }
+        
+        .hero {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 24px;
+            align-items: stretch;
+            margin-bottom: 26px;
+        }
+        
+        .hero-card,
+        .reward-card,
+        .game-card,
+        .panel,
+        .achievement-card,
+        .summary-box,
+        .recent-item,
+        .mini-list li,
+        .challenge-card {
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(16px);
+        }
+        
+        .hero-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-xl);
+            padding: clamp(24px, 4vw, 50px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06)), radial-gradient(circle at top right, rgba(51, 200, 242, 0.2), transparent 35%);
+        }
+        
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            right: -110px;
+            top: -110px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 66%);
+            pointer-events: none;
+        }
+        
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 14px;
+            border-radius: 999px;
+            margin-bottom: 18px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            color: #dff6ff;
+            font-size: 0.92rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        
+        .hero-card h1 {
+            max-width: 860px;
+            font-size: clamp(2.35rem, 5vw, 5rem);
+            line-height: 0.95;
+            letter-spacing: -0.07em;
+            margin-bottom: 18px;
+        }
+        
+        .hero-card h1 span {
+            color: #bfefff;
+            text-shadow: 0 0 26px rgba(51, 200, 242, 0.55);
+        }
+        
+        .hero-card p {
+            max-width: 780px;
+            color: var(--muted);
+            font-size: clamp(1rem, 1.7vw, 1.18rem);
+            font-weight: 650;
+            margin-bottom: 22px;
+        }
+        
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .big-play-btn,
+        .outline-play-btn {
+            min-height: 56px;
+            padding: 0 22px;
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 950;
+            transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+        }
+        
+        .big-play-btn {
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-3));
+            box-shadow: var(--glow);
+        }
+        
+        .outline-play-btn {
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .big-play-btn:hover,
+        .outline-play-btn:hover,
+        .big-play-btn:focus-visible,
+        .outline-play-btn:focus-visible {
+            transform: translateY(-3px);
+            outline: none;
+        }
+        
+        .reward-card {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            display: grid;
+        }
+        
+        .reward-top {
+            padding: 24px;
+            background: radial-gradient(circle at 28% 20%, rgba(255, 255, 255, 0.22), transparent 24%), linear-gradient(135deg, rgba(47, 128, 237, 0.62), rgba(123, 85, 255, 0.6));
+        }
+        
+        .reward-top h2 {
+            font-size: 1.8rem;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            margin-bottom: 8px;
+        }
+        
+        .reward-top p {
+            color: rgba(255, 255, 255, 0.84);
+            font-weight: 700;
+        }
+        
+        .reward-body {
+            padding: 20px;
+            display: grid;
+            gap: 14px;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .summary-box {
+            padding: 14px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .summary-box span {
+            display: block;
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+        
+        .summary-box strong {
+            display: block;
+            margin-top: 3px;
+            font-size: 1.15rem;
+            color: #ffffff;
+        }
+        
+        .summary-box small {
+            color: var(--soft);
+            font-size: 0.82rem;
+        }
+        
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 26px;
+        }
+        
+        .game-card {
+            position: relative;
+            min-height: 240px;
+            overflow: hidden;
+            border-radius: var(--radius-xl);
+            padding: 22px;
+            display: grid;
+            align-content: end;
+            transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+        }
+        
+        .game-card:hover,
+        .game-card:focus-visible {
+            transform: translateY(-8px);
+            border-color: rgba(51, 200, 242, 0.42);
+            box-shadow: 0 28px 60px rgba(0, 0, 0, 0.35);
+            outline: none;
+        }
+        
+        .game-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+        }
+        
+        .game-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 15%, rgba(0, 0, 0, 0.62));
+            z-index: -1;
+        }
+        
+        .game-card.reverse::before {
+            background: radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.22), transparent 18%), linear-gradient(135deg, #07162f, #1b3d73 48%, #7b55ff);
+        }
+        
+        .game-card.jump::before {
+            background: radial-gradient(circle at 16% 22%, rgba(255, 255, 255, 0.45), transparent 8%), radial-gradient(circle at 78% 26%, rgba(255, 255, 255, 0.35), transparent 7%), linear-gradient(to bottom, #3fb4e8 0%, #6fc8ef 68%, #7bc043 68%, #4d9f2d 100%);
+        }
+        
+        .game-card.circus::before {
+            background: repeating-linear-gradient(90deg, #9b0000 0 42px, #c70b0b 42px 84px), linear-gradient(to bottom, #d71920, #790000);
+        }
+        
+        .game-card.shooter::before {
+            background: radial-gradient(circle at 22% 22%, rgba(57, 255, 231, 0.35), transparent 16%), radial-gradient(circle at 78% 18%, rgba(255, 151, 0, 0.3), transparent 15%), linear-gradient(180deg, #02070d, #06181b 68%, #082b2e);
+        }
+        
+        .game-card h2 {
+            font-size: 1.55rem;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            margin-bottom: 8px;
+        }
+        
+        .game-card p {
+            color: rgba(255, 255, 255, 0.86);
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+        
+        .mini-play {
+            width: fit-content;
+            min-height: 42px;
+            padding: 0 14px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            font-weight: 900;
+        }
+        
+        .layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 18px;
+        }
+        
+        .section-stack {
+            display: grid;
+            gap: 18px;
+        }
+        
+        .panel {
+            border-radius: var(--radius-xl);
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.09);
+        }
+        
+        .panel h2,
+        .panel h3 {
+            color: #ffffff;
+            font-size: 1.18rem;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+        
+        .panel p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+        
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-btn,
+        .primary-btn,
+        .secondary-btn,
+        .ghost-btn,
+        .danger-btn {
+            min-height: 50px;
+            border-radius: 15px;
+            padding: 0.85rem 1rem;
+            font-weight: 900;
+            transition: transform var(--transition), background var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .filter-btn {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--accent), var(--accent-3));
+            color: #ffffff;
+            box-shadow: var(--glow);
+        }
+        
+        .primary-btn {
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-3));
+            box-shadow: var(--glow);
+            width: 100%;
+        }
+        
+        .secondary-btn {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            width: 100%;
+        }
+        
+        .ghost-btn {
+            color: var(--muted);
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            width: 100%;
+        }
+        
+        .danger-btn {
+            position: relative;
+            overflow: hidden;
+            min-height: 58px;
+            width: fit-content;
+            gap: 12px;
+            color: #ffe7ec;
+            background: linear-gradient(135deg, rgba(255, 93, 115, 0.18), rgba(123, 85, 255, 0.12)), rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 93, 115, 0.34);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+        
+        .danger-btn::before {
+            content: "⚠";
+            width: 34px;
+            height: 34px;
+            border-radius: 12px;
+            display: inline-grid;
+            place-items: center;
+            flex-shrink: 0;
+            background: rgba(255, 93, 115, 0.18);
+            border: 1px solid rgba(255, 93, 115, 0.28);
+            box-shadow: 0 0 18px rgba(255, 93, 115, 0.18);
+        }
+        
+        .danger-btn::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+            transform: translateX(-120%);
+            transition: transform 500ms ease;
+        }
+        
+        .filter-btn:hover,
+        .primary-btn:hover,
+        .secondary-btn:hover,
+        .ghost-btn:hover,
+        .filter-btn:focus-visible,
+        .primary-btn:focus-visible,
+        .secondary-btn:focus-visible,
+        .ghost-btn:focus-visible {
+            transform: translateY(-3px);
+            outline: none;
+        }
+        
+        .danger-btn:hover,
+        .danger-btn:focus-visible {
+            transform: translateY(-4px);
+            outline: none;
+            background: linear-gradient(135deg, rgba(255, 93, 115, 0.26), rgba(123, 85, 255, 0.16)), rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 93, 115, 0.55);
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.28), 0 0 26px rgba(255, 93, 115, 0.2);
+        }
+        
+        .danger-btn:hover::after,
+        .danger-btn:focus-visible::after {
+            transform: translateX(120%);
+        }
+        
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .achievement-card {
+            padding: 18px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.075);
+            display: grid;
+            gap: 14px;
+            transition: transform var(--transition), border-color var(--transition), background var(--transition), opacity var(--transition);
+        }
+        
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.11);
+        }
+        
+        .achievement-card.locked {
+            opacity: 0.68;
+        }
+        
+        .achievement-card.unlocked {
+            border-color: rgba(46, 204, 113, 0.38);
+            background: radial-gradient(circle at top right, rgba(46, 204, 113, 0.12), transparent 38%), rgba(255, 255, 255, 0.1);
+        }
+        
+        .achievement-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .achievement-main {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        .achievement-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, rgba(123, 85, 255, 0.9), rgba(51, 200, 242, 0.85));
+            color: #ffffff;
+            box-shadow: var(--glow);
+        }
+        
+        .achievement-card.locked .achievement-icon {
+            filter: grayscale(1);
+            opacity: 0.72;
+        }
+        
+        .achievement-text h3 {
+            font-size: 1.08rem;
+            margin-bottom: 4px;
+            color: #ffffff;
+        }
+        
+        .achievement-text p {
+            color: var(--muted);
+            font-size: 0.93rem;
+            line-height: 1.5;
+        }
+        
+        .achievement-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag,
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 34px;
+            padding: 0 12px;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 900;
+            background: rgba(255, 255, 255, 0.09);
+            color: #edf8ff;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        
+        .tag.success,
+        .pill.success {
+            background: rgba(46, 204, 113, 0.14);
+            color: #cbffdf;
+            border-color: rgba(46, 204, 113, 0.26);
+        }
+        
+        .tag.warning,
+        .pill.warning {
+            background: rgba(255, 200, 61, 0.14);
+            color: #fff0b6;
+            border-color: rgba(255, 200, 61, 0.28);
+        }
+        
+        .achievement-footer {
+            color: var(--soft);
+            font-size: 0.88rem;
+            font-weight: 750;
+        }
+        
+        .empty-state {
+            padding: 18px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.075);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--muted);
+        }
+        
+        .mini-list {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+        
+        .mini-list li {
+            display: grid;
+            gap: 3px;
+            padding: 13px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.065);
+        }
+        
+        .mini-list strong {
+            color: #ffffff;
+            font-size: 0.96rem;
+        }
+        
+        .mini-list span {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+        
+        .recent-list {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .recent-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 13px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.065);
+        }
+        
+        .recent-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent), var(--accent-3));
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+        
+        .recent-item h4 {
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+            color: #ffffff;
+        }
+        
+        .recent-item p {
+            color: var(--muted);
+            font-size: 0.84rem;
+            margin-bottom: 0;
+        }
+        
+        .action-column {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .challenge-card {
+            border-radius: var(--radius-xl);
+            padding: 22px;
+            background: radial-gradient(circle at top right, rgba(255, 200, 61, 0.16), transparent 34%), rgba(255, 255, 255, 0.09);
+        }
+        
+        .challenge-card h3 {
+            color: #ffffff;
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+        
+        .challenge-card p {
+            color: var(--muted);
+            margin-bottom: 14px;
+        }
+        
+        .final-cta {
+            margin-top: 26px;
+            border-radius: var(--radius-xl);
+            padding: clamp(24px, 4vw, 42px);
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(255, 255, 255, 0.16), transparent 32%), linear-gradient(135deg, rgba(47, 128, 237, 0.34), rgba(123, 85, 255, 0.32));
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+        
+        .final-cta h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1;
+            letter-spacing: -0.05em;
+            margin-bottom: 12px;
+        }
+        
+        .final-cta p {
+            color: var(--muted);
+            max-width: 720px;
+            margin: 0 auto 20px;
+            font-weight: 700;
+        }
+        
+        .final-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 10000;
+            max-width: min(420px, calc(100% - 40px));
+            padding: 14px 16px;
+            border-radius: 18px;
+            color: #d7ffe8;
+            background: rgba(46, 204, 113, 0.16);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(16px);
+            font-weight: 900;
+            opacity: 0;
+            transform: translateY(16px);
+            pointer-events: none;
+            transition: opacity 220ms ease, transform 220ms ease;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .confirm-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: grid;
+            place-items: center;
+            padding: 20px;
+            background: rgba(3, 7, 18, 0.72);
+            backdrop-filter: blur(14px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 220ms ease;
+        }
+        
+        .confirm-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .confirm-modal {
+            width: min(100%, 470px);
+            border-radius: 28px;
+            padding: 24px;
+            background: radial-gradient(circle at top left, rgba(255, 93, 115, 0.18), transparent 34%), radial-gradient(circle at top right, rgba(123, 85, 255, 0.2), transparent 38%), rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transform: translateY(18px) scale(0.96);
+            transition: transform 220ms ease;
+        }
+        
+        .confirm-overlay.show .confirm-modal {
+            transform: translateY(0) scale(1);
+        }
+        
+        .confirm-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 20px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 16px;
+            font-size: 1.6rem;
+            background: rgba(255, 93, 115, 0.16);
+            border: 1px solid rgba(255, 93, 115, 0.34);
+            box-shadow: 0 0 30px rgba(255, 93, 115, 0.22);
+        }
+        
+        .confirm-kicker {
+            color: #ffb8c3;
+            font-size: 0.82rem;
+            font-weight: 950;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+        }
+        
+        .confirm-content h2 {
+            color: #ffffff;
+            font-size: 1.55rem;
+            line-height: 1.1;
+            margin-bottom: 8px;
+            letter-spacing: -0.04em;
+        }
+        
+        .confirm-content p {
+            color: var(--muted);
+            font-weight: 700;
+        }
+        
+        .confirm-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 22px;
+        }
+        
+        .confirm-cancel,
+        .confirm-delete {
+            min-height: 50px;
+            border-radius: 16px;
+            font-weight: 950;
+            transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
+        }
+        
+        .confirm-cancel {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+        }
+        
+        .confirm-delete {
+            color: #ffffff;
+            background: linear-gradient(135deg, #ff5d73, #b8336a);
+            box-shadow: 0 0 26px rgba(255, 93, 115, 0.28);
+        }
+        
+        .confirm-cancel:hover,
+        .confirm-delete:hover,
+        .confirm-cancel:focus-visible,
+        .confirm-delete:focus-visible {
+            transform: translateY(-3px);
+            outline: none;
+        }
+        
+        footer {
+            margin-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            padding: 28px 0 36px;
+            color: var(--soft);
+            text-align: center;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.04);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--soft);
+            font-size: 0.95rem;
+        }
+        
+        .footer-links a:hover,
+        .footer-links a:focus-visible {
+            color: var(--accent-3);
+            outline: none;
+        }
+        
+         :focus-visible {
+            outline: 3px solid rgba(51, 200, 242, 0.5);
+            outline-offset: 2px;
+            border-radius: 12px;
+        }
+        
+        body.theme-light .site-header {
+            background: rgba(255, 255, 255, 0.92);
+            border-bottom: 1px solid rgba(20, 33, 61, 0.1);
+            box-shadow: none;
+        }
+        
+        body.theme-light .brand,
+        body.theme-light .brand-name {
+            color: #14213d;
+        }
+        
+        body.theme-light .brand-subtitle {
+            color: #667085;
+        }
+        
+        body.theme-light .nav a {
+            color: #344054;
+            background: transparent;
+            border-color: transparent;
+        }
+        
+        body.theme-light .nav a:hover,
+        body.theme-light .nav a:focus-visible {
+            background: rgba(47, 128, 237, 0.1);
+            color: var(--accent-2);
+            border-color: transparent;
+        }
+        
+        body.theme-light .nav a[aria-current="page"] {
+            background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+            color: #ffffff;
+        }
+        
+        body.theme-light .hero-card,
+        body.theme-light .reward-card,
+        body.theme-light .panel,
+        body.theme-light .achievement-card,
+        body.theme-light .summary-box,
+        body.theme-light .recent-item,
+        body.theme-light .mini-list li,
+        body.theme-light .challenge-card {
+            background: #ffffff;
+            border-color: #d9e1ef;
+            box-shadow: 0 16px 36px rgba(20, 33, 61, 0.12);
+        }
+        
+        body.theme-light .hero-card {
+            background: radial-gradient(circle at top right, rgba(47, 128, 237, 0.12), transparent 35%), #ffffff;
+        }
+        
+        body.theme-light .eyebrow {
+            background: rgba(47, 128, 237, 0.1);
+            border-color: rgba(47, 128, 237, 0.14);
+            color: #1f6db6;
+        }
+        
+        body.theme-light .hero-card h1,
+        body.theme-light .panel h2,
+        body.theme-light .panel h3,
+        body.theme-light .achievement-text h3,
+        body.theme-light .mini-list strong,
+        body.theme-light .recent-item h4,
+        body.theme-light .challenge-card h3,
+        body.theme-light .final-cta h2 {
+            color: #14213d;
+        }
+        
+        body.theme-light .hero-card h1 span {
+            color: #2f80ed;
+            text-shadow: none;
+        }
+        
+        body.theme-light .hero-card p,
+        body.theme-light .panel p,
+        body.theme-light .achievement-text p,
+        body.theme-light .recent-item p,
+        body.theme-light .mini-list span,
+        body.theme-light .challenge-card p,
+        body.theme-light .final-cta p {
+            color: #667085;
+        }
+        
+        body.theme-light .summary-box strong {
+            color: #14213d;
+        }
+        
+        body.theme-light .summary-box span,
+        body.theme-light .summary-box small {
+            color: #667085;
+        }
+        
+        body.theme-light .secondary-btn,
+        body.theme-light .ghost-btn,
+        body.theme-light .outline-play-btn,
+        body.theme-light .filter-btn {
+            color: #14213d;
+            background: #f3f6fb;
+            border: 1px solid #d9e1ef;
+        }
+        
+        body.theme-light .filter-btn.active {
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+        }
+        
+        body.theme-light .tag,
+        body.theme-light .pill {
+            background: #f3f6fb;
+            color: #4f6587;
+            border-color: #dce4f1;
+        }
+        
+        body.theme-light .tag.success,
+        body.theme-light .pill.success {
+            background: #eef8f4;
+            border-color: #b8e6cf;
+            color: #239260;
+        }
+        
+        body.theme-light .tag.warning,
+        body.theme-light .pill.warning {
+            background: #fff8df;
+            border-color: #ffe7a4;
+            color: #9b7000;
+        }
+        
+        body.theme-light .empty-state {
+            background: #f7f9fd;
+            border-color: #e3e9f3;
+            color: #667085;
+        }
+        
+        body.theme-light .final-cta {
+            background: radial-gradient(circle at top, rgba(47, 128, 237, 0.1), transparent 32%), #ffffff;
+            border-color: #d9e1ef;
+        }
+        
+        body.theme-light footer {
+            background: #ffffff;
+            color: #667085;
+            border-top: 1px solid rgba(20, 33, 61, 0.1);
+        }
+        
+        body.theme-light .footer-links a {
+            color: #475467;
+        }
+        
+        @media (max-width: 1120px) {
+            .hero,
+            .layout {
+                grid-template-columns: 1fr;
+            }
+            .game-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 760px) {
+            .container {
+                width: min(100% - 20px, var(--max-width));
+            }
+            .header-inner {
+                min-height: auto;
+                padding: 14px 0;
+            }
+            .nav {
+                justify-content: flex-start;
+            }
+            .nav a {
+                min-height: 42px;
+                padding: 0 12px;
+                font-size: 0.9rem;
+            }
+            main {
+                padding: 34px 0 50px;
+            }
+            .game-grid,
+            .summary-grid,
+            .achievement-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-card h1 {
+                font-size: 2.45rem;
+            }
+        }
+        
+        @media (max-width: 520px) {
+            .header-inner {
+                align-items: stretch;
+            }
+            .hero-actions,
+            .final-actions {
+                flex-direction: column;
+            }
+            .big-play-btn,
+            .outline-play-btn {
+                width: 100%;
+            }
+            .achievement-top {
+                flex-direction: column;
+            }
+            .confirm-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 460px) {
+            .brand-subtitle {
+                display: none;
+            }
+            .hero-card {
+                padding: 22px;
+            }
+            .hero-card h1 {
+                font-size: 2.1rem;
+            }
+            .filter-row {
+                flex-direction: column;
+            }
+            .filter-btn,
+            .danger-btn {
+                width: 100%;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                scroll-behavior: auto;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        (function() {
+            const value = localStorage.getItem("rtgSettings");
+
+            try {
+                const settings = value ? JSON.parse(value) : {};
+
+                if (settings.theme === "blue") {
+                    document.body.classList.add("theme-blue");
+                } else if (settings.theme === "green") {
+                    document.body.classList.add("theme-green");
+                } else if (settings.theme === "light") {
+                    document.body.classList.add("theme-light");
+                }
+
+                if (settings.highContrast) {
+                    document.body.classList.add("high-contrast");
+                }
+
+                if (settings.fontSize) {
+                    document.documentElement.style.setProperty("--base-font-size", `${settings.fontSize}px`);
+                }
+            } catch (error) {
+                console.warn("Theme settings could not be loaded.");
+            }
+        })();
+    </script>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand" aria-label="ReverseType home">
+                <div class="brand-mark">
+                    <img src="images/logo.png" alt="ReverseType logo" onerror="this.style.display='none'; this.parentNode.textContent='RT';" />
+                </div>
+
+                <div class="brand-text">
+                    <div class="brand-name">ReverseType</div>
+                    <div class="brand-subtitle">Typing Games</div>
+                </div>
+            </a>
+
+            <nav class="nav" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="reverse-setup.html">Reverse Game</a>
+                <a href="keyboard-jump.html">Keyboard Jump</a>
+                <a href="circus-game.html">Circus Game</a>
+                <a href="typing-shooter.html">Typing Shooter</a>
+                <a href="scores.html">Scores</a>
+                <a href="achievements.html" aria-current="page">Achievements</a>
+                <a href="settings.html">Settings</a>
+                <a href="about.html">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="container">
+            <section class="hero" aria-labelledby="achievementsTitle">
+                <div class="hero-card">
+                    <div class="eyebrow">🏆 Rewards are waiting</div>
+
+                    <h1 id="achievementsTitle">
+                        Play more games, unlock more badges, and prove your <span>typing skill</span>.
+                    </h1>
+
+                    <p>
+                        Achievements turn every round into a challenge. Complete runs, improve accuracy, build streaks, survive space waves, and come back to collect more rewards.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="big-play-btn" href="reverse-setup.html">▶ Start Earning Badges</a>
+                        <a class="outline-play-btn" href="keyboard-jump.html">Try Keyboard Jump</a>
+                        <a class="outline-play-btn" href="circus-game.html">Enter Circus Game</a>
+                        <a class="outline-play-btn" href="typing-shooter.html">Typing Shooter</a>
+                    </div>
+                </div>
+
+                <aside class="reward-card" aria-label="Achievements summary">
+                    <div class="reward-top">
+                        <h2>Your reward board</h2>
+                        <p>Track progress, find locked rewards, then jump back into the game.</p>
+                    </div>
+
+                    <div class="reward-body">
+                        <div class="summary-grid">
+                            <div class="summary-box">
+                                <span>Unlocked</span>
+                                <strong id="unlockedCount">0</strong>
+                                <small>Rewards earned</small>
+                            </div>
+
+                            <div class="summary-box">
+                                <span>Locked</span>
+                                <strong id="lockedCount">0</strong>
+                                <small>Still waiting</small>
+                            </div>
+
+                            <div class="summary-box">
+                                <span>Total</span>
+                                <strong id="totalCount">0</strong>
+                                <small>Full collection</small>
+                            </div>
+
+                            <div class="summary-box">
+                                <span>Latest</span>
+                                <strong id="latestUnlock">None</strong>
+                                <small>Newest badge</small>
+                            </div>
+                        </div>
+
+                        <span class="pill warning" id="completionBadge">0% Complete</span>
+                        <a class="primary-btn" href="typing-shooter.html">Play to Unlock More</a>
+                    </div>
+                </aside>
+            </section>
+
+            <section class="game-grid" aria-label="Choose a game to earn achievements">
+                <a class="game-card reverse" href="reverse-setup.html">
+                    <h2>Reverse Typing</h2>
+                    <p>Complete runs, improve speed, and unlock core progress badges.</p>
+                    <span class="mini-play">Earn badges →</span>
+                </a>
+
+                <a class="game-card jump" href="keyboard-jump.html">
+                    <h2>Keyboard Jump</h2>
+                    <p>Type fast, keep jumping, and challenge your reaction time.</p>
+                    <span class="mini-play">Jump in →</span>
+                </a>
+
+                <a class="game-card circus" href="circus-game.html">
+                    <h2>Type Toss Circus</h2>
+                    <p>Play a colourful typing challenge and keep your streak alive.</p>
+                    <span class="mini-play">Enter circus →</span>
+                </a>
+
+                <a class="game-card shooter" href="typing-shooter.html">
+                    <h2>Typing Shooter</h2>
+                    <p>Destroy falling space words, use EMP power, and survive higher waves.</p>
+                    <span class="mini-play">Shoot words →</span>
+                </a>
+            </section>
+
+            <section class="layout">
+                <section class="section-stack" aria-label="Main achievements content">
+                    <section class="panel">
+                        <h2>Find your next reward</h2>
+                        <p>
+                            Use the filters to see what you have unlocked and what challenge to complete next.
+                        </p>
+
+                        <div class="controls-row">
+                            <div class="filter-row" id="filterRow">
+                                <button class="filter-btn active" type="button" data-filter="all">All</button>
+                                <button class="filter-btn" type="button" data-filter="unlocked">Unlocked</button>
+                                <button class="filter-btn" type="button" data-filter="locked">Locked</button>
+                                <button class="filter-btn" type="button" data-filter="progress">Progress</button>
+                                <button class="filter-btn" type="button" data-filter="challenge">Challenge</button>
+                            </div>
+
+                            <button class="danger-btn" id="resetAchievementsBtn" type="button">Reset Achievements</button>
+                        </div>
+                    </section>
+
+                    <section class="panel">
+                        <div class="card-header" style="padding:0 0 0.8rem 0;border-bottom:none;">
+                            <h2>Achievement Collection</h2>
+                            <span class="pill" id="resultsCountLabel">Showing 0</span>
+                        </div>
+
+                        <div class="achievement-grid" id="achievementGrid"></div>
+                    </section>
+                </section>
+
+                <aside class="section-stack" aria-label="Achievements side information">
+                    <section class="challenge-card">
+                        <h3>Next challenge</h3>
+                        <p>
+                            Start a game now and try to unlock your next badge. Typing Shooter can unlock space wave, EMP, reverse, score, and accuracy badges.
+                        </p>
+
+                        <div class="action-column">
+                            <a class="primary-btn" href="typing-shooter.html">Play Typing Shooter</a>
+                            <a class="secondary-btn" href="reverse-setup.html">Reverse Game</a>
+                            <a class="secondary-btn" href="keyboard-jump.html">Keyboard Jump</a>
+                            <a class="secondary-btn" href="circus-game.html">Circus Game</a>
+                        </div>
+                    </section>
+
+                    <section class="panel">
+                        <h3>Recent Unlocks</h3>
+                        <div class="recent-list" id="recentUnlockList">
+                            <div class="empty-state">
+                                No achievements unlocked yet. Play the game to begin earning rewards.
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="panel">
+                        <h3>How to unlock more</h3>
+                        <ul class="mini-list">
+                            <li>
+                                <strong>Finish one run</strong>
+                                <span>Complete your first game to unlock beginner progress rewards.</span>
+                            </li>
+
+                            <li>
+                                <strong>Improve accuracy</strong>
+                                <span>Type carefully and aim for 90% accuracy or higher.</span>
+                            </li>
+
+                            <li>
+                                <strong>Survive shooter waves</strong>
+                                <span>Reach wave 3 or wave 5 in Typing Shooter to unlock space badges.</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="panel">
+                        <h3>Quick Navigation</h3>
+
+                        <div class="action-column">
+                            <a class="secondary-btn" href="scores.html">View Scores</a>
+                            <a class="secondary-btn" href="settings.html">Open Settings</a>
+                            <a class="ghost-btn" href="index.html">Back to Home</a>
+                        </div>
+                    </section>
+                </aside>
+            </section>
+
+            <section class="final-cta" aria-label="Final play call to action">
+                <h2>Your next badge is one game away.</h2>
+
+                <p>
+                    Enter a challenge, complete a run, and come back to see what you unlocked.
+                </p>
+
+                <div class="final-actions">
+                    <a class="big-play-btn" href="typing-shooter.html">▶ Play Typing Shooter</a>
+                    <a class="outline-play-btn" href="reverse-setup.html">Start Reverse Game</a>
+                    <a class="outline-play-btn" href="index.html">Choose Another Game</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="scores.html">Scores</a>
+                <a href="settings.html">Settings</a>
+                <a href="about.html">About</a>
+            </div>
+
+            <p>© 2026 ReverseType.fun. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="confirm-overlay" id="confirmOverlay" aria-hidden="true">
+        <div class="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+            <div class="confirm-icon">⚠</div>
+
+            <div class="confirm-content">
+                <p class="confirm-kicker">Danger action</p>
+                <h2 id="confirmTitle">Reset achievements?</h2>
+                <p id="confirmMessage">
+                    This will remove all unlocked achievements and recent unlock history. This action cannot be undone.
+                </p>
+            </div>
+
+            <div class="confirm-actions">
+                <button class="confirm-cancel" type="button" id="confirmCancelBtn">Cancel</button>
+                <button class="confirm-delete" type="button" id="confirmDeleteBtn">Reset achievements</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toastMessage" role="status" aria-live="polite">
+        Achievements have been reset.
+    </div>
+
+    <script>
+        const STORAGE_KEYS = {
+            achievements: "rtgAchievements",
+            achievementHistory: "rtgAchievementHistory",
+
+            reverseScores: "rtgHighScores",
+            keyboardScores: "keyboardJumpHighScores",
+            circusScores: "circusTypingHighScores",
+
+            shooterScores: "typingShooterScores",
+            shooterNormalBest: "ztypeNormalBest",
+            shooterReverseBest: "ztypeReverseBest"
+        };
+
+        const ACHIEVEMENTS = [{
+            id: "first_game",
+            icon: "★",
+            title: "First Run",
+            description: "Complete your first game session.",
+            type: "progress",
+            difficulty: "Beginner",
+            hint: "Start any game and finish one full run."
+        }, {
+            id: "first_score",
+            icon: "⚡",
+            title: "On the Board",
+            description: "Save your first score to the leaderboard.",
+            type: "progress",
+            difficulty: "Beginner",
+            hint: "Finish one session so a score is stored."
+        }, {
+            id: "accuracy_90",
+            icon: "✓",
+            title: "Sharp Accuracy",
+            description: "Reach 90% or higher accuracy in any saved run.",
+            type: "challenge",
+            difficulty: "Medium",
+            hint: "Focus on precision and reduce errors."
+        }, {
+            id: "wpm_40",
+            icon: "🚀",
+            title: "Speed Builder",
+            description: "Reach 40 WPM or higher.",
+            type: "challenge",
+            difficulty: "Medium",
+            hint: "Practice short accurate runs to improve speed."
+        }, {
+            id: "level_5",
+            icon: "⬆",
+            title: "Level Climber",
+            description: "Reach level 5 or wave 5 in a game.",
+            type: "progress",
+            difficulty: "Medium",
+            hint: "Keep playing as difficulty increases."
+        }, {
+            id: "streak_3",
+            icon: "🔥",
+            title: "Hot Streak",
+            description: "Reach a best streak of 3 or more.",
+            type: "challenge",
+            difficulty: "Medium",
+            hint: "Stay consistent and keep the correct flow going."
+        }, {
+            id: "quotes_mode",
+            icon: "❝",
+            title: "Quote Player",
+            description: "Save a score while playing Quotes mode.",
+            type: "progress",
+            difficulty: "Beginner",
+            hint: "Choose Quotes mode and finish a run."
+        }, {
+            id: "reverse_master",
+            icon: "🏆",
+            title: "Reverse Master",
+            description: "Save 5 total scores across your sessions.",
+            type: "challenge",
+            difficulty: "Hard",
+            hint: "Keep playing and completing sessions."
+        }, {
+            id: "shooter_first",
+            icon: "🚀",
+            title: "Space Cadet",
+            description: "Complete one Typing Shooter run.",
+            type: "progress",
+            difficulty: "Beginner",
+            hint: "Play Typing Shooter until the result screen appears."
+        }, {
+            id: "shooter_wave_3",
+            icon: "🌊",
+            title: "Wave Survivor",
+            description: "Reach wave 3 in Typing Shooter.",
+            type: "challenge",
+            difficulty: "Medium",
+            hint: "Destroy falling words and survive longer."
+        }, {
+            id: "shooter_wave_5",
+            icon: "🛡",
+            title: "Deep Space Defender",
+            description: "Reach wave 5 in Typing Shooter.",
+            type: "challenge",
+            difficulty: "Hard",
+            hint: "Use EMP wisely and keep your streak alive."
+        }, {
+            id: "shooter_score_300",
+            icon: "💫",
+            title: "Word Blaster",
+            description: "Score 300 or more in Typing Shooter.",
+            type: "challenge",
+            difficulty: "Medium",
+            hint: "Destroy more enemies and reach higher waves."
+        }, {
+            id: "shooter_score_500",
+            icon: "🌟",
+            title: "Star Blaster",
+            description: "Score 500 or more in Typing Shooter.",
+            type: "challenge",
+            difficulty: "Hard",
+            hint: "Survive longer and keep destroying enemy words."
+        }, {
+            id: "shooter_reverse",
+            icon: "↔",
+            title: "Reverse Space Pilot",
+            description: "Complete a Typing Shooter run in Reverse Type mode.",
+            type: "challenge",
+            difficulty: "Hard",
+            hint: "Turn on Reverse Type before starting Typing Shooter."
+        }, {
+            id: "shooter_emp",
+            icon: "⚡",
+            title: "EMP Activated",
+            description: "Use EMP power in Typing Shooter.",
+            type: "progress",
+            difficulty: "Beginner",
+            hint: "Press ENTER during Typing Shooter when enemies are visible."
+        }];
+
+        const ui = {
+            unlockedCount: document.getElementById("unlockedCount"),
+            lockedCount: document.getElementById("lockedCount"),
+            totalCount: document.getElementById("totalCount"),
+            latestUnlock: document.getElementById("latestUnlock"),
+            completionBadge: document.getElementById("completionBadge"),
+            achievementGrid: document.getElementById("achievementGrid"),
+            resultsCountLabel: document.getElementById("resultsCountLabel"),
+            recentUnlockList: document.getElementById("recentUnlockList"),
+            filterButtons: document.querySelectorAll(".filter-btn"),
+            resetAchievementsBtn: document.getElementById("resetAchievementsBtn"),
+            confirmOverlay: document.getElementById("confirmOverlay"),
+            confirmCancelBtn: document.getElementById("confirmCancelBtn"),
+            confirmDeleteBtn: document.getElementById("confirmDeleteBtn"),
+            toastMessage: document.getElementById("toastMessage")
+        };
+
+        let currentFilter = "all";
+        let toastTimer = null;
+
+        function safeParse(value, fallback) {
+            try {
+                return value ? JSON.parse(value) : fallback;
+            } catch {
+                return fallback;
+            }
+        }
+
+        function toNumber(value, fallback = 0) {
+            const number = Number(value);
+            return Number.isFinite(number) ? number : fallback;
+        }
+
+        function readStorageArray(key) {
+            const stored = safeParse(localStorage.getItem(key), []);
+            return Array.isArray(stored) ? stored : [];
+        }
+
+        function loadUnlockedAchievements() {
+            const stored = safeParse(localStorage.getItem(STORAGE_KEYS.achievements), []);
+            return Array.isArray(stored) ? stored : [];
+        }
+
+        function saveUnlockedAchievements(list) {
+            localStorage.setItem(STORAGE_KEYS.achievements, JSON.stringify(list));
+        }
+
+        function loadAchievementHistory() {
+            const stored = safeParse(localStorage.getItem(STORAGE_KEYS.achievementHistory), []);
+            return Array.isArray(stored) ? stored : [];
+        }
+
+        function saveAchievementHistory(list) {
+            localStorage.setItem(STORAGE_KEYS.achievementHistory, JSON.stringify(list));
+        }
+
+        function normaliseReverseScore(score) {
+            return {
+                gameKey: "reverse",
+                mode: score.mode || "",
+                score: toNumber(score.score),
+                wpm: toNumber(score.wpm),
+                accuracy: toNumber(score.accuracy),
+                bestStreak: toNumber(score.bestStreak),
+                level: toNumber(score.level),
+                wave: 0,
+                typingMode: score.typingMode || "",
+                empUsed: 0
+            };
+        }
+
+        function normaliseKeyboardScore(score) {
+            return {
+                gameKey: "keyboard",
+                mode: score.mode || score.difficulty || "",
+                score: toNumber(score.score),
+                wpm: toNumber(score.wpm),
+                accuracy: toNumber(score.accuracy),
+                bestStreak: toNumber(score.bestStreak),
+                level: toNumber(score.level),
+                wave: 0,
+                typingMode: score.typingMode || "",
+                empUsed: 0
+            };
+        }
+
+        function normaliseCircusScore(score) {
+            return {
+                gameKey: "circus",
+                mode: score.mode || score.difficulty || "",
+                score: toNumber(score.score),
+                wpm: toNumber(score.wpm),
+                accuracy: toNumber(score.accuracy),
+                bestStreak: toNumber(score.bestStreak),
+                level: toNumber(score.level),
+                wave: 0,
+                typingMode: score.typingMode || "",
+                empUsed: 0
+            };
+        }
+
+        function normaliseShooterScore(score) {
+            return {
+                gameKey: "shooter",
+                mode: score.mode || "Space",
+                score: toNumber(score.score),
+                wpm: toNumber(score.wpm),
+                accuracy: toNumber(score.accuracy),
+                bestStreak: toNumber(score.bestStreak || score.longestStreak),
+                level: 0,
+                wave: toNumber(score.wave),
+                typingMode: score.typingMode || "normal",
+                empUsed: toNumber(score.empUsed)
+            };
+        }
+
+        function getShooterBestScores() {
+            const normalBest = toNumber(localStorage.getItem(STORAGE_KEYS.shooterNormalBest));
+            const reverseBest = toNumber(localStorage.getItem(STORAGE_KEYS.shooterReverseBest));
+            const scores = [];
+
+            if (normalBest > 0) {
+                scores.push({
+                    gameKey: "shooter",
+                    mode: "Space",
+                    score: normalBest,
+                    wpm: 0,
+                    accuracy: 0,
+                    bestStreak: 0,
+                    level: 0,
+                    wave: 0,
+                    typingMode: "normal",
+                    empUsed: 0
+                });
+            }
+
+            if (reverseBest > 0) {
+                scores.push({
+                    gameKey: "shooter",
+                    mode: "Space",
+                    score: reverseBest,
+                    wpm: 0,
+                    accuracy: 0,
+                    bestStreak: 0,
+                    level: 0,
+                    wave: 0,
+                    typingMode: "reverse",
+                    empUsed: 0
+                });
+            }
+
+            return scores;
+        }
+
+        function loadScores() {
+            const reverseScores = readStorageArray(STORAGE_KEYS.reverseScores).map(normaliseReverseScore);
+            const keyboardScores = readStorageArray(STORAGE_KEYS.keyboardScores).map(normaliseKeyboardScore);
+            const circusScores = readStorageArray(STORAGE_KEYS.circusScores).map(normaliseCircusScore);
+            const shooterScores = readStorageArray(STORAGE_KEYS.shooterScores).map(normaliseShooterScore);
+            const shooterBestScores = getShooterBestScores();
+
+            return [
+                ...reverseScores,
+                ...keyboardScores,
+                ...circusScores,
+                ...shooterScores,
+                ...shooterBestScores
+            ];
+        }
+
+        function unlockAchievement(id, history, unlocked) {
+            if (unlocked.includes(id)) {
+                return;
+            }
+
+            unlocked.push(id);
+
+            history.push({
+                id,
+                unlockedAt: new Date().toISOString()
+            });
+        }
+
+        function syncAchievementsFromScores() {
+            const scores = loadScores();
+            const shooterScores = scores.filter(score => score.gameKey === "shooter");
+            const unlocked = loadUnlockedAchievements();
+            const history = loadAchievementHistory();
+
+            if (scores.length >= 1) {
+                unlockAchievement("first_game", history, unlocked);
+                unlockAchievement("first_score", history, unlocked);
+            }
+
+            if (scores.some(score => toNumber(score.accuracy) >= 90)) {
+                unlockAchievement("accuracy_90", history, unlocked);
+            }
+
+            if (scores.some(score => toNumber(score.wpm) >= 40 || toNumber(score.score) >= 40)) {
+                unlockAchievement("wpm_40", history, unlocked);
+            }
+
+            if (scores.some(score => toNumber(score.level) >= 5 || toNumber(score.wave) >= 5)) {
+                unlockAchievement("level_5", history, unlocked);
+            }
+
+            if (scores.some(score => toNumber(score.bestStreak) >= 3)) {
+                unlockAchievement("streak_3", history, unlocked);
+            }
+
+            if (scores.some(score => String(score.mode).toLowerCase() === "quotes")) {
+                unlockAchievement("quotes_mode", history, unlocked);
+            }
+
+            if (scores.length >= 5) {
+                unlockAchievement("reverse_master", history, unlocked);
+            }
+
+            if (shooterScores.length >= 1) {
+                unlockAchievement("shooter_first", history, unlocked);
+            }
+
+            if (shooterScores.some(score => toNumber(score.wave) >= 3)) {
+                unlockAchievement("shooter_wave_3", history, unlocked);
+            }
+
+            if (shooterScores.some(score => toNumber(score.wave) >= 5)) {
+                unlockAchievement("shooter_wave_5", history, unlocked);
+            }
+
+            if (shooterScores.some(score => toNumber(score.score) >= 300)) {
+                unlockAchievement("shooter_score_300", history, unlocked);
+            }
+
+            if (shooterScores.some(score => toNumber(score.score) >= 500)) {
+                unlockAchievement("shooter_score_500", history, unlocked);
+            }
+
+            if (shooterScores.some(score => score.typingMode === "reverse")) {
+                unlockAchievement("shooter_reverse", history, unlocked);
+            }
+
+            if (shooterScores.some(score => toNumber(score.empUsed) >= 1)) {
+                unlockAchievement("shooter_emp", history, unlocked);
+            }
+
+            saveUnlockedAchievements(unlocked);
+            saveAchievementHistory(history);
+        }
+
+        function formatDate(isoString) {
+            if (!isoString) {
+                return "Unknown";
+            }
+
+            const date = new Date(isoString);
+
+            if (Number.isNaN(date.getTime())) {
+                return "Unknown";
+            }
+
+            return date.toLocaleString();
+        }
+
+        function getLatestUnlock(history) {
+            if (!history.length) {
+                return null;
+            }
+
+            const sorted = [...history].sort((a, b) => {
+                return new Date(b.unlockedAt).getTime() - new Date(a.unlockedAt).getTime();
+            });
+
+            return sorted[0] || null;
+        }
+
+        function updateSummary(unlocked, history) {
+            const total = ACHIEVEMENTS.length;
+            const unlockedCount = unlocked.length;
+            const lockedCount = total - unlockedCount;
+            const latest = getLatestUnlock(history);
+            const percentage = total ? Math.round((unlockedCount / total) * 100) : 0;
+
+            ui.unlockedCount.textContent = String(unlockedCount);
+            ui.lockedCount.textContent = String(lockedCount);
+            ui.totalCount.textContent = String(total);
+
+            const latestAchievement = latest ? ACHIEVEMENTS.find(item => item.id === latest.id) : null;
+            ui.latestUnlock.textContent = latestAchievement ? latestAchievement.title : "None";
+
+            ui.completionBadge.textContent = `${percentage}% Complete`;
+
+            if (percentage === 100) {
+                ui.completionBadge.className = "pill success";
+            } else if (percentage > 0) {
+                ui.completionBadge.className = "pill warning";
+            } else {
+                ui.completionBadge.className = "pill";
+            }
+        }
+
+        function getFilteredAchievements(unlocked) {
+            return ACHIEVEMENTS.filter((achievement) => {
+                const isUnlocked = unlocked.includes(achievement.id);
+
+                if (currentFilter === "all") return true;
+                if (currentFilter === "unlocked") return isUnlocked;
+                if (currentFilter === "locked") return !isUnlocked;
+                if (currentFilter === "progress") return achievement.type === "progress";
+                if (currentFilter === "challenge") return achievement.type === "challenge";
+
+                return true;
+            });
+        }
+
+        function buildAchievementCard(achievement, unlocked, history) {
+            const isUnlocked = unlocked.includes(achievement.id);
+            const historyItem = history.find(item => item.id === achievement.id);
+
+            return `
+                <article class="achievement-card ${isUnlocked ? "unlocked" : "locked"}">
+                    <div class="achievement-top">
+                        <div class="achievement-main">
+                            <div class="achievement-icon" aria-hidden="true">${achievement.icon}</div>
+                            <div class="achievement-text">
+                                <h3>${achievement.title}</h3>
+                                <p>${achievement.description}</p>
+                            </div>
+                        </div>
+
+                        <span class="tag ${isUnlocked ? "success" : "warning"}">
+                            ${isUnlocked ? "Unlocked" : "Locked"}
+                        </span>
+                    </div>
+
+                    <div class="achievement-meta">
+                        <span class="tag">${achievement.type}</span>
+                        <span class="tag">${achievement.difficulty}</span>
+                    </div>
+
+                    <div class="achievement-footer">
+                        ${
+                            isUnlocked
+                                ? `Unlocked: ${formatDate(historyItem?.unlockedAt)}`
+                                : `Hint: ${achievement.hint}`
+                        }
+                    </div>
+                </article>
+            `;
+        }
+
+        function renderRecentUnlocks(unlocked, history) {
+            if (!unlocked.length || !history.length) {
+                ui.recentUnlockList.innerHTML = `
+                    <div class="empty-state">
+                        No achievements unlocked yet. Play the game to begin earning rewards.
+                    </div>
+                `;
+                return;
+            }
+
+            const sorted = [...history]
+                .sort((a, b) => new Date(b.unlockedAt).getTime() - new Date(a.unlockedAt).getTime())
+                .slice(0, 3);
+
+            ui.recentUnlockList.innerHTML = sorted.map(item => {
+                const achievement = ACHIEVEMENTS.find(a => a.id === item.id);
+
+                if (!achievement) {
+                    return "";
+                }
+
+                return `
+                    <div class="recent-item">
+                        <div class="recent-icon" aria-hidden="true">${achievement.icon}</div>
+                        <div>
+                            <h4>${achievement.title}</h4>
+                            <p>${formatDate(item.unlockedAt)}</p>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        function renderAchievements() {
+            syncAchievementsFromScores();
+
+            const unlocked = loadUnlockedAchievements();
+            const history = loadAchievementHistory();
+            const filtered = getFilteredAchievements(unlocked);
+
+            ui.achievementGrid.innerHTML = filtered.length
+                ? filtered.map(item => buildAchievementCard(item, unlocked, history)).join("")
+                : `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        No achievements match the selected filter.
+                    </div>
+                `;
+
+            ui.resultsCountLabel.textContent = `Showing ${filtered.length}`;
+            updateSummary(unlocked, history);
+            renderRecentUnlocks(unlocked, history);
+        }
+
+        function setActiveFilter(button) {
+            ui.filterButtons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+        }
+
+        function bindFilters() {
+            ui.filterButtons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    currentFilter = button.dataset.filter;
+                    setActiveFilter(button);
+                    renderAchievements();
+                });
+            });
+        }
+
+        function openConfirmModal() {
+            ui.confirmOverlay.classList.add("show");
+            ui.confirmOverlay.setAttribute("aria-hidden", "false");
+
+            setTimeout(() => {
+                ui.confirmCancelBtn.focus();
+            }, 50);
+        }
+
+        function closeConfirmModal() {
+            ui.confirmOverlay.classList.remove("show");
+            ui.confirmOverlay.setAttribute("aria-hidden", "true");
+        }
+
+        function showToast(message) {
+            ui.toastMessage.textContent = message;
+            ui.toastMessage.classList.add("show");
+
+            clearTimeout(toastTimer);
+
+            toastTimer = setTimeout(() => {
+                ui.toastMessage.classList.remove("show");
+            }, 2600);
+        }
+
+        function resetAchievements() {
+            saveUnlockedAchievements([]);
+            saveAchievementHistory([]);
+            renderAchievements();
+            closeConfirmModal();
+            showToast("Achievements have been reset.");
+        }
+
+        function bindActions() {
+            ui.resetAchievementsBtn.addEventListener("click", openConfirmModal);
+            ui.confirmCancelBtn.addEventListener("click", closeConfirmModal);
+            ui.confirmDeleteBtn.addEventListener("click", resetAchievements);
+
+            ui.confirmOverlay.addEventListener("click", (event) => {
+                if (event.target === ui.confirmOverlay) {
+                    closeConfirmModal();
+                }
+            });
+
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape" && ui.confirmOverlay.classList.contains("show")) {
+                    closeConfirmModal();
+                }
+            });
+        }
+
+        function init() {
+            bindFilters();
+            bindActions();
+            renderAchievements();
+        }
+
+        document.addEventListener("DOMContentLoaded", init);
+    </script>
+
+    <script src="js/shared-settings.js"></script>
+    <script src="js/theme-loader.js"></script>
+</body>
+
+</html>

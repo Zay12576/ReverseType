@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Keyboard Jump typing game where players type platform words to make the character jump." />
+    <title>ReverseType | Keyboard Jump</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/keyboard-jump.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/shared-settings.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+
+    <style>
+         :root {
+            --bg-1: #07111f;
+            --bg-2: #10172f;
+            --bg-3: #151034;
+            --dark: #14213d;
+            --muted: #c9d7ff;
+            --blue: #2f80ed;
+            --cyan: #33c8f2;
+            --red-main: #d71920;
+            --gold: #ffc83d;
+            --purple-main: #7b55ff;
+            --green-main: #2ecc71;
+            --card: rgba(255, 255, 255, 0.09);
+            --line: rgba(255, 255, 255, 0.14);
+            --shadow: 0 22px 50px rgba(0, 0, 0, 0.28);
+            --shadow-hover: 0 24px 52px rgba(0, 0, 0, 0.35);
+            --radius: 24px;
+            --transition: 220ms ease;
+            --max-width: 1400px;
+            --dark-1: #06142d;
+            --dark-2: #0b2245;
+            --text: #f1f7ff;
+            --soft: #9fb2e8;
+            --blue-1: #4aa3ff;
+            --blue-2: #33d1ff;
+            --purple: #7b55ff;
+            --gold-2: #ffd54a;
+            --green: #47ffbe;
+            --red: #ff6b8a;
+            --card-line: rgba(255, 255, 255, 0.14);
+            --shadow-soft: 0 16px 36px rgba(0, 0, 0, 0.24);
+        }
+        
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #ffffff;
+            background: radial-gradient(circle at 8% 10%, rgba(47, 128, 237, 0.34), transparent 30%), radial-gradient(circle at 92% 16%, rgba(123, 85, 255, 0.35), transparent 30%), radial-gradient(circle at 50% 100%, rgba(51, 200, 242, 0.16), transparent 38%), linear-gradient(135deg, var(--bg-1), var(--bg-2) 48%, var(--bg-3));
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        body.theme-blue {
+            --blue: #2f80ed;
+            --cyan: #59d7ff;
+            --purple: #33c8f2;
+            background: radial-gradient(circle at 8% 10%, rgba(47, 128, 237, 0.38), transparent 28%), radial-gradient(circle at 88% 16%, rgba(51, 200, 242, 0.3), transparent 30%), linear-gradient(135deg, #07101f, #0c1b35);
+        }
+        
+        body.theme-green {
+            --blue: #2ecc71;
+            --cyan: #74ffcb;
+            --purple: #29d98c;
+            background: radial-gradient(circle at 8% 10%, rgba(46, 204, 113, 0.32), transparent 28%), radial-gradient(circle at 88% 16%, rgba(116, 255, 203, 0.22), transparent 30%), linear-gradient(135deg, #06140f, #0a2018);
+        }
+        
+        body.theme-light {
+            --bg-1: #ffffff;
+            --bg-2: #ffffff;
+            --bg-3: #ffffff;
+            --dark: #14213d;
+            --muted: #667085;
+            --soft: #6f84a7;
+            --blue: #2f80ed;
+            --cyan: #33c8f2;
+            --card: #ffffff;
+            --line: rgba(20, 33, 61, 0.1);
+            --card-line: #d9e1ef;
+            --shadow: 0 18px 38px rgba(20, 33, 61, 0.12);
+            --shadow-soft: 0 16px 36px rgba(20, 33, 61, 0.12);
+            color: #14213d;
+            background: #ffffff !important;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        button,
+        input {
+            font: inherit;
+        }
+        
+        button {
+            border: none;
+            cursor: pointer;
+        }
+        
+        .skip-link {
+            position: absolute;
+            top: -60px;
+            left: 12px;
+            z-index: 999;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #000000;
+            box-shadow: var(--shadow);
+            transition: top var(--transition);
+        }
+        
+        .skip-link:focus {
+            top: 12px;
+        }
+        
+        .container {
+            width: min(100% - 32px, var(--max-width));
+            margin: 0 auto;
+        }
+        /* =========================
+           Header with green dark effect
+        ========================= */
+        
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: radial-gradient(circle at 8% 10%, rgba(46, 204, 113, 0.24), transparent 32%), radial-gradient(circle at 92% 18%, rgba(51, 200, 242, 0.12), transparent 34%), linear-gradient(135deg, rgba(6, 20, 15, 0.96), rgba(10, 32, 24, 0.96));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+        }
+        
+        .header-inner {
+            min-height: 86px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 900;
+            color: #f1fff8;
+            text-decoration: none;
+        }
+        
+        .brand-mark {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #2ecc71, #33c8f2);
+            color: #ffffff;
+            font-weight: 900;
+            box-shadow: 0 10px 22px rgba(46, 204, 113, 0.24), 0 0 24px rgba(51, 200, 242, 0.18);
+            overflow: hidden;
+            flex: 0 0 auto;
+        }
+        
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .brand-text {
+            display: grid;
+            gap: 2px;
+        }
+        
+        .brand-name {
+            font-size: 1.2rem;
+            letter-spacing: -0.03em;
+            color: #f1fff8;
+            line-height: 1.1;
+        }
+        
+        .brand-subtitle {
+            font-size: 0.78rem;
+            color: #9fb2e8;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            line-height: 1.1;
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav a {
+            min-height: 44px;
+            padding: 0 14px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #c9d7ff;
+            font-size: 0.95rem;
+            font-weight: 800;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid transparent;
+            transition: background var(--transition), color var(--transition), transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+        }
+        
+        .nav a:hover,
+        .nav a:focus-visible {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.16);
+            transform: translateY(-1px);
+            outline: none;
+        }
+        
+        .nav a[aria-current="page"] {
+            background: linear-gradient(135deg, #2ecc71, #33c8f2);
+            color: #041126;
+            box-shadow: 0 10px 24px rgba(46, 204, 113, 0.25);
+        }
+        /* =========================
+           Footer - Scores page style
+        ========================= */
+        
+        footer {
+            margin-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            padding: 28px 0 36px;
+            color: var(--soft);
+            text-align: center;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.04);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--soft);
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover,
+        .footer-links a:focus-visible {
+            color: var(--cyan);
+            outline: none;
+        }
+        
+         :focus-visible {
+            outline: 3px solid rgba(47, 128, 237, 0.35);
+            outline-offset: 2px;
+            border-radius: 12px;
+        }
+        /* =========================
+           White Light fixes
+        ========================= */
+        
+        body.theme-light .site-header {
+            background: rgba(255, 255, 255, 0.92);
+            border-bottom: 1px solid rgba(20, 33, 61, 0.1);
+            box-shadow: none;
+        }
+        
+        body.theme-light .brand,
+        body.theme-light .brand-name {
+            color: #14213d;
+        }
+        
+        body.theme-light .brand-subtitle {
+            color: #667085;
+        }
+        
+        body.theme-light .nav a {
+            color: #344054;
+            background: transparent;
+            border-color: transparent;
+        }
+        
+        body.theme-light .nav a:hover,
+        body.theme-light .nav a:focus-visible {
+            background: rgba(47, 128, 237, 0.1);
+            color: var(--blue);
+            border-color: transparent;
+        }
+        
+        body.theme-light .nav a[aria-current="page"] {
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: #ffffff;
+        }
+        
+        body.theme-light footer {
+            background: #ffffff;
+            color: #667085;
+            border-top: 1px solid rgba(20, 33, 61, 0.1);
+        }
+        
+        body.theme-light .footer-links a {
+            color: #475467;
+        }
+        
+        body.theme-light .footer-links a:hover,
+        body.theme-light .footer-links a:focus-visible {
+            color: var(--blue);
+        }
+        
+        @media (max-width: 760px) {
+            .container {
+                width: min(100% - 20px, var(--max-width));
+            }
+            .header-inner {
+                min-height: auto;
+                padding: 14px 0;
+            }
+            .nav {
+                justify-content: flex-start;
+            }
+            .nav a {
+                min-height: 42px;
+                padding: 0 12px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 460px) {
+            .brand-subtitle {
+                display: none;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                scroll-behavior: auto;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        (function() {
+            const value = localStorage.getItem("rtgSettings");
+
+            try {
+                const settings = value ? JSON.parse(value) : {};
+
+                if (settings.theme === "blue") {
+                    document.body.classList.add("theme-blue");
+                } else if (settings.theme === "green") {
+                    document.body.classList.add("theme-green");
+                } else if (settings.theme === "light") {
+                    document.body.classList.add("theme-light");
+                }
+
+                if (settings.highContrast) {
+                    document.body.classList.add("high-contrast");
+                }
+
+                if (settings.fontSize) {
+                    document.documentElement.style.setProperty("--base-font-size", `${settings.fontSize}px`);
+                }
+            } catch (error) {
+                console.warn("Theme settings could not be loaded.");
+            }
+        })();
+    </script>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand" aria-label="ReverseType home">
+                <div class="brand-mark">
+                    <img src="images/logo.png" alt="ReverseType logo" onerror="this.style.display='none'; this.parentNode.textContent='RT';" />
+                </div>
+
+                <div class="brand-text">
+                    <div class="brand-name">ReverseType</div>
+                    <div class="brand-subtitle">Typing Games</div>
+                </div>
+            </a>
+
+            <nav class="nav" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="scores.html">Scores</a>
+                <a href="achievements.html">Achievements</a>
+                <a href="settings.html">Settings</a>
+                <a href="about.html">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="jump-page">
+        <aside class="grade-panel" aria-label="Grade selection">
+            <h2>Grade Select</h2>
+
+            <div class="grade-buttons">
+                <button class="grade-btn active" data-grade="1" type="button">Pre-K</button>
+                <button class="grade-btn" data-grade="2" type="button">Kindergarten</button>
+                <button class="grade-btn" data-grade="3" type="button">1st Grade</button>
+                <button class="grade-btn" data-grade="4" type="button">2nd Grade</button>
+                <button class="grade-btn" data-grade="5" type="button">3rd Grade</button>
+                <button class="grade-btn" data-grade="6" type="button">4th Grade</button>
+                <button class="grade-btn" data-grade="7" type="button">5th Grade</button>
+                <button class="grade-btn" data-grade="8" type="button">6th Grade</button>
+                <button class="grade-btn" data-grade="9" type="button">7th Grade</button>
+                <button class="grade-btn" data-grade="10" type="button">8th Grade</button>
+            </div>
+        </aside>
+
+        <section class="jump-stage-wrap" aria-label="Keyboard Jump game area">
+            <div id="leftGameHud" class="left-game-hud hidden" aria-label="Score and life panel">
+                <div class="score-box">
+                    <span class="score-label">Score</span>
+                    <strong id="scoreValue">0</strong>
+                </div>
+
+                <div id="livesRow" class="lives-row" aria-label="Lives remaining">
+                    <span class="heart active">❤</span>
+                    <span class="heart active">❤</span>
+                    <span class="heart active">❤</span>
+                    <span class="heart active">❤</span>
+                    <span class="heart active">❤</span>
+                    <span class="heart active">❤</span>
+                    <span class="heart active">❤</span>
+                    <span class="heart active">❤</span>
+                </div>
+
+                <div class="progress-wrap" aria-label="Level progress">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+            </div>
+
+            <div id="rightGameHud" class="right-game-hud hidden" aria-label="Sound controls">
+                <button id="sfxToggleBtn" class="sound-btn" type="button" aria-pressed="true">FX</button>
+                <button id="musicToggleBtn" class="sound-btn" type="button" aria-pressed="true">🎵</button>
+            </div>
+
+            <section id="menuScreen" class="menu-screen" aria-label="Keyboard Jump menu">
+                <div class="menu-logo-wrap">
+                    <h1 class="game-logo">
+                        <span class="logo-top">KEYBOARD</span>
+                        <span class="logo-main">Jump</span>
+                    </h1>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-card-inner">
+                        <div class="menu-column">
+                            <h2>Difficulty</h2>
+
+                            <button class="option-btn selected" data-difficulty="easy" type="button">Easy</button>
+                            <button class="option-btn" data-difficulty="medium" type="button">Medium</button>
+                            <button class="option-btn" data-difficulty="hard" type="button">Hard</button>
+
+                            <h2>Typing Mode</h2>
+
+                            <button class="typing-mode-btn selected" data-typing-mode="normal" type="button">Normal</button>
+                            <button class="typing-mode-btn" data-typing-mode="reverse" type="button">Reverse</button>
+                        </div>
+
+                        <div class="menu-play-column">
+                            <button id="startGameBtn" class="play-btn" type="button">Play</button>
+                        </div>
+
+                        <div class="menu-column">
+                            <h2>Word List</h2>
+
+                            <button class="lesson-btn selected" data-lesson="easyWords" type="button">Easy Words</button>
+                            <button class="lesson-btn" data-lesson="hardWords" type="button">Hard Words</button>
+                            <button class="lesson-btn" data-lesson="homeRow" type="button">Home Row</button>
+                            <button class="lesson-btn" data-lesson="topRow" type="button">Top Row</button>
+                            <button class="lesson-btn" data-lesson="bottomRow" type="button">Bottom Row</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="gameScreen" class="game-screen hidden" aria-label="Keyboard Jump gameplay screen">
+                <div id="skyScene" class="sky-scene" aria-hidden="true">
+                    <div class="cloud cloud-1"></div>
+                    <div class="cloud cloud-2"></div>
+                    <div class="cloud cloud-3"></div>
+                </div>
+
+                <div id="mountainScene" class="mountain-scene" aria-hidden="true">
+                    <div class="mountain mountain-back"></div>
+                    <div class="mountain mountain-mid"></div>
+                    <div class="mountain mountain-front"></div>
+                </div>
+
+                <div id="forestScene" class="forest-scene" aria-hidden="true">
+                    <div class="tree tree-left"></div>
+                    <div class="tree tree-right"></div>
+                    <div class="bush bush-1"></div>
+                    <div class="bush bush-2"></div>
+                    <div class="bush bush-3"></div>
+                </div>
+
+                <div class="game-logo-small" aria-hidden="true">
+                    <span class="logo-top">KEYBOARD</span>
+                    <span class="logo-main">Jump</span>
+                </div>
+
+                <div id="platformLayer" class="platform-layer" aria-label="Platforms and target words"></div>
+
+                <div id="playerCharacter" class="player-character" aria-label="Player character">
+                    <div class="player-head"></div>
+                    <div class="player-face"></div>
+                    <div class="player-body"></div>
+                </div>
+
+                <div class="typing-input-wrap">
+                    <label for="typingInput" class="sr-only">Type the target word</label>
+
+                    <input id="typingInput" type="text" autocomplete="off" spellcheck="false" placeholder="Type the word and press Enter" />
+
+                    <button id="submitWordBtn" type="button">Jump</button>
+                    <button id="pauseGameBtn" type="button">Pause</button>
+                    <button id="backToMenuBtn" type="button">Menu</button>
+                </div>
+
+                <p id="feedbackMessage" class="feedback-message">Type the word on a platform to jump there.</p>
+            </section>
+
+            <section id="resultScreen" class="result-screen hidden" aria-label="Keyboard Jump result screen">
+                <div class="result-logo" aria-hidden="true">
+                    <span class="logo-top">KEYBOARD</span>
+                    <span class="logo-main">Jump</span>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-stat">
+                        <span>Score</span>
+                        <strong id="finalScore">0</strong>
+                    </div>
+
+                    <div class="result-stat">
+                        <span>Time Played</span>
+                        <strong id="finalTimePlayed">00:00</strong>
+                    </div>
+
+                    <div class="result-actions">
+                        <button id="playAgainBtn" type="button">Replay</button>
+                        <button id="resultMenuBtn" type="button">Back to Menu</button>
+                    </div>
+                </div>
+            </section>
+
+            <audio id="bgMusic" loop preload="auto">
+                <source src="assets/audio/background-music.mp3" type="audio/mpeg" />
+            </audio>
+
+            <audio id="jumpSound" preload="auto">
+                <source src="assets/audio/pop.mp3" type="audio/mpeg" />
+            </audio>
+
+            <audio id="wrongSound" preload="auto">
+                <source src="assets/audio/wrong.mp3" type="audio/mpeg" />
+            </audio>
+
+            <audio id="winSound" preload="auto">
+                <source src="assets/audio/circus-music.mp3" type="audio/mpeg" />
+            </audio>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="scores.html">Scores</a>
+                <a href="settings.html">Settings</a>
+                <a href="about.html">About</a>
+            </div>
+
+            <p>© 2026 ReverseType.fun. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/keyboard-jump.js"></script>
+    <script src="js/shared-settings.js"></script>
+    <script src="js/theme-loader.js"></script>
+</body>
+
+</html>

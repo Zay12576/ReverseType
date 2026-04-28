@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Reverse Typing Game setup page" />
+    <title>ReverseType | Setup</title>
+
+    <link rel="stylesheet" href="css/shared-settings.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+
+    <style>
+         :root {
+            --bg-1: #06142d;
+            --bg-2: #0b2245;
+            --bg-3: #172f5c;
+            --panel: rgba(11, 27, 58, 0.86);
+            --panel-dark: rgba(3, 14, 34, 0.92);
+            --glass: rgba(255, 255, 255, 0.08);
+            --text: #f1f7ff;
+            --muted: #9bb0d5;
+            --line: rgba(255, 255, 255, 0.12);
+            --blue-1: #4aa3ff;
+            --blue-2: #33d1ff;
+            --purple: #7b55ff;
+            --pink: #ff4fb8;
+            --gold: #ffd54a;
+            --green: #47ffbe;
+            --orange: #ff8f35;
+            --shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
+            --transition: 220ms ease;
+            --max-width: 1500px;
+            --soft: #9fb2e8;
+            --blue: #2f80ed;
+            --cyan: #33c8f2;
+        }
+        
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text);
+            background: radial-gradient(circle at 12% 12%, rgba(74, 163, 255, 0.28), transparent 28%), radial-gradient(circle at 88% 18%, rgba(123, 85, 255, 0.24), transparent 30%), radial-gradient(circle at 50% 100%, rgba(51, 209, 255, 0.12), transparent 36%), linear-gradient(135deg, var(--bg-1), var(--bg-2) 55%, #31435d);
+            overflow-x: hidden;
+        }
+        
+        body.theme-blue {
+            --blue: #2f80ed;
+            --cyan: #59d7ff;
+            --purple: #33c8f2;
+            background: radial-gradient(circle at 8% 10%, rgba(47, 128, 237, 0.38), transparent 28%), radial-gradient(circle at 88% 16%, rgba(51, 200, 242, 0.3), transparent 30%), linear-gradient(135deg, #07101f, #0c1b35);
+        }
+        
+        body.theme-green {
+            --blue: #2ecc71;
+            --cyan: #74ffcb;
+            --purple: #29d98c;
+            background: radial-gradient(circle at 8% 10%, rgba(46, 204, 113, 0.32), transparent 28%), radial-gradient(circle at 88% 16%, rgba(116, 255, 203, 0.22), transparent 30%), linear-gradient(135deg, #06140f, #0a2018);
+        }
+        
+        body.theme-light {
+            --bg-1: #ffffff;
+            --bg-2: #ffffff;
+            --bg-3: #ffffff;
+            --text: #14213d;
+            --muted: #667085;
+            --soft: #6f84a7;
+            --panel: #ffffff;
+            --panel-dark: #f3f6fb;
+            --glass: #ffffff;
+            --line: rgba(20, 33, 61, 0.1);
+            --shadow: 0 18px 38px rgba(20, 33, 61, 0.12);
+            color: #14213d;
+            background: #ffffff !important;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+            background-size: 52px 52px;
+            mask-image: linear-gradient(to bottom, black, transparent 86%);
+        }
+        
+        body::after {
+            content: "";
+            position: fixed;
+            width: 420px;
+            height: 420px;
+            right: -120px;
+            bottom: -130px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(51, 209, 255, 0.22), transparent 65%);
+            pointer-events: none;
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+        
+        body.theme-light::before,
+        body.theme-light::after {
+            display: none;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        button {
+            font: inherit;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .container {
+            width: min(100% - 32px, var(--max-width));
+            margin: 0 auto;
+        }
+        
+        .skip-link {
+            position: absolute;
+            top: -60px;
+            left: 12px;
+            z-index: 999;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #000000;
+            box-shadow: var(--shadow);
+            transition: top var(--transition);
+        }
+        
+        .skip-link:focus {
+            top: 12px;
+        }
+        /* =========================
+           Header with green dark effect
+        ========================= */
+        
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: radial-gradient(circle at 8% 10%, rgba(46, 204, 113, 0.24), transparent 32%), radial-gradient(circle at 92% 18%, rgba(51, 200, 242, 0.12), transparent 34%), linear-gradient(135deg, rgba(6, 20, 15, 0.96), rgba(10, 32, 24, 0.96));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+        }
+        
+        .header-inner {
+            min-height: 86px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 900;
+            color: #f1fff8;
+        }
+        
+        .brand-mark {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #2ecc71, #33c8f2);
+            color: #ffffff;
+            font-weight: 900;
+            box-shadow: 0 10px 22px rgba(46, 204, 113, 0.24), 0 0 24px rgba(51, 200, 242, 0.18);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .brand-text {
+            display: grid;
+            gap: 2px;
+        }
+        
+        .brand-name {
+            font-size: 1.2rem;
+            letter-spacing: -0.03em;
+            color: #f1fff8;
+            line-height: 1.1;
+        }
+        
+        .brand-subtitle {
+            font-size: 0.78rem;
+            color: #9fb2e8;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            line-height: 1.1;
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav a {
+            min-height: 44px;
+            padding: 0 14px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #c9d7ff;
+            font-size: 0.95rem;
+            font-weight: 800;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid transparent;
+            transition: background var(--transition), color var(--transition), transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+        }
+        
+        .nav a:hover,
+        .nav a:focus-visible {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.16);
+            transform: translateY(-1px);
+            outline: none;
+        }
+        
+        .nav a[aria-current="page"] {
+            background: linear-gradient(135deg, #2ecc71, #33c8f2);
+            color: #041126;
+            box-shadow: 0 10px 24px rgba(46, 204, 113, 0.25);
+        }
+        /* =========================
+           Main
+        ========================= */
+        
+        main {
+            position: relative;
+            z-index: 2;
+            min-height: calc(100vh - 86px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 0 4rem;
+        }
+        
+        .setup-shell {
+            width: min(100%, 1420px);
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .hero-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 36px;
+            padding: clamp(2rem, 4vw, 4rem);
+            background: linear-gradient(135deg, rgba(8, 25, 58, 0.96), rgba(19, 48, 96, 0.86)), radial-gradient(circle at top right, rgba(51, 209, 255, 0.28), transparent 36%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: var(--shadow);
+        }
+        
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            right: -80px;
+            top: -140px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(123, 85, 255, 0.36), transparent 68%);
+            pointer-events: none;
+        }
+        
+        .hero-card::after {
+            content: "epyT";
+            position: absolute;
+            right: 5%;
+            bottom: -0.1em;
+            color: rgba(255, 255, 255, 0.035);
+            font-size: clamp(5rem, 14vw, 13rem);
+            font-weight: 900;
+            letter-spacing: -0.08em;
+            pointer-events: none;
+        }
+        
+        .hero-layout {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .eyebrow {
+            display: inline-flex;
+            width: fit-content;
+            align-items: center;
+            gap: 0.5rem;
+            min-height: 38px;
+            padding: 0 14px;
+            border-radius: 999px;
+            background: rgba(71, 255, 190, 0.12);
+            color: var(--green);
+            font-size: 0.86rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.1rem;
+        }
+        
+        .hero-title-row {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            margin-bottom: 1.2rem;
+        }
+        
+        .title-logo {
+            width: 66px;
+            height: 66px;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
+            color: #ffffff;
+            font-size: 1.15rem;
+            font-weight: 900;
+            box-shadow: 0 16px 34px rgba(74, 163, 255, 0.35);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .title-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        h1 {
+            font-size: clamp(3.2rem, 8vw, 6.6rem);
+            line-height: 0.92;
+            font-weight: 900;
+            letter-spacing: -0.08em;
+            color: #f1f7ff;
+            text-shadow: 0 12px 34px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-copy {
+            max-width: 680px;
+            color: #b9c9e8;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            line-height: 1.7;
+            font-weight: 700;
+        }
+        
+        .hero-actions {
+            margin-top: 1.6rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .primary-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 62px;
+            padding: 0 1.6rem;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #4aa3ff, #33d1ff);
+            color: #ffffff;
+            font-weight: 900;
+            font-size: 1.05rem;
+            box-shadow: 0 16px 34px rgba(51, 209, 255, 0.28);
+            transition: transform var(--transition), filter var(--transition), box-shadow var(--transition);
+        }
+        
+        .primary-cta:hover,
+        .primary-cta:focus-visible {
+            transform: translateY(-3px);
+            filter: brightness(1.05);
+            outline: none;
+            box-shadow: 0 22px 44px rgba(51, 209, 255, 0.35);
+        }
+        
+        .secondary-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 62px;
+            padding: 0 1.3rem;
+            border-radius: 18px;
+            color: #dfe8f8;
+            background: rgba(255, 255, 255, 0.08);
+            font-weight: 900;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: transform var(--transition), background var(--transition);
+        }
+        
+        .secondary-cta:hover,
+        .secondary-cta:focus-visible {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.13);
+            outline: none;
+        }
+        
+        .preview-panel {
+            position: relative;
+            min-height: 360px;
+            border-radius: 30px;
+            padding: 1.5rem;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04));
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+        }
+        
+        .typing-window {
+            position: absolute;
+            left: 1.5rem;
+            right: 1.5rem;
+            top: 1.5rem;
+            min-height: 130px;
+            border-radius: 24px;
+            padding: 1.3rem;
+            text-align: left;
+            background: rgba(3, 14, 34, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        
+        .typing-label {
+            color: #7f96bb;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-size: 0.78rem;
+            font-weight: 900;
+            margin-bottom: 0.7rem;
+        }
+        
+        .typing-text {
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            line-height: 1.15;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+        }
+        
+        .typing-text span:nth-child(1) {
+            color: var(--green);
+        }
+        
+        .typing-text span:nth-child(2) {
+            color: #f1f7ff;
+        }
+        
+        .typing-text span:nth-child(3) {
+            color: var(--gold);
+        }
+        
+        .floating-key {
+            position: absolute;
+            width: 74px;
+            height: 74px;
+            border-radius: 20px;
+            display: grid;
+            place-items: center;
+            color: #ffffff;
+            font-size: 1.6rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, rgba(74, 163, 255, 0.94), rgba(123, 85, 255, 0.94));
+            box-shadow: 0 18px 34px rgba(0, 0, 0, 0.24);
+            animation: floatKey 3.5s ease-in-out infinite;
+        }
+        
+        .key-one {
+            left: 14%;
+            bottom: 18%;
+        }
+        
+        .key-two {
+            right: 18%;
+            bottom: 26%;
+            animation-delay: 0.5s;
+            background: linear-gradient(135deg, var(--orange), var(--pink));
+        }
+        
+        .key-three {
+            right: 38%;
+            bottom: 9%;
+            animation-delay: 1s;
+            background: linear-gradient(135deg, var(--green), var(--blue-2));
+        }
+        
+        .speed-card {
+            position: absolute;
+            left: 1.5rem;
+            right: 1.5rem;
+            bottom: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+        }
+        
+        .mini-stat {
+            min-height: 86px;
+            border-radius: 20px;
+            display: grid;
+            place-items: center;
+            gap: 0.3rem;
+            padding: 0.8rem;
+            background: rgba(3, 14, 34, 0.68);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .mini-stat strong {
+            font-size: 1.4rem;
+            font-weight: 900;
+        }
+        
+        .mini-stat span {
+            color: #91a6cb;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 900;
+        }
+        
+        .stats-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            min-height: 72px;
+            padding: 0.9rem 1.6rem;
+            border-radius: 22px;
+            background: rgba(13, 30, 58, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(8px);
+            flex-wrap: wrap;
+            justify-self: center;
+        }
+        
+        .stat-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--muted);
+            font-size: 1rem;
+            white-space: nowrap;
+        }
+        
+        .stat-item strong {
+            font-weight: 900;
+        }
+        
+        .stat-item.streak strong {
+            color: #ff8f35;
+        }
+        
+        .stat-item.tests strong {
+            color: #51b2ff;
+        }
+        
+        .stat-item.achievements strong {
+            color: #c96cff;
+        }
+        
+        .control-panel {
+            width: min(100%, 1320px);
+            display: grid;
+            gap: 1.7rem;
+            justify-self: center;
+        }
+        
+        .control-bar {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 240px;
+            align-items: center;
+            gap: 1.4rem;
+            padding: 1.8rem 2rem;
+            border-radius: 30px;
+            background: var(--panel);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(8px);
+        }
+        
+        .control-group {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            gap: 1rem;
+            min-width: 0;
+        }
+        
+        .control-group.with-divider {
+            border-right: 1px solid rgba(255, 255, 255, 0.12);
+            padding-right: 1.4rem;
+        }
+        
+        .control-label {
+            color: #becbe0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.13em;
+            white-space: nowrap;
+        }
+        
+        .segmented {
+            display: inline-flex;
+            width: 100%;
+            min-height: 80px;
+            padding: 0.4rem;
+            gap: 0.4rem;
+            align-items: center;
+            border-radius: 22px;
+            background: var(--panel-dark);
+        }
+        
+        .segment-btn {
+            flex: 1 1 0;
+            min-height: 68px;
+            padding: 0 1rem;
+            border-radius: 18px;
+            background: transparent;
+            color: #dfe8f8;
+            font-size: 1.05rem;
+            font-weight: 900;
+            transition: transform var(--transition), background var(--transition), color var(--transition), box-shadow var(--transition);
+        }
+        
+        .segment-btn.active {
+            background: linear-gradient(135deg, #459cf4, #35c0e9);
+            color: #ffffff;
+            box-shadow: 0 12px 26px rgba(53, 192, 233, 0.28);
+        }
+        
+        .segment-btn:hover,
+        .segment-btn:focus-visible {
+            outline: none;
+            transform: translateY(-1px);
+        }
+        
+        .start-btn {
+            width: 100%;
+            min-height: 80px;
+            border-radius: 22px;
+            padding: 0 1.5rem;
+            background: linear-gradient(135deg, #47ffbe, #33d1ff);
+            color: #041126;
+            font-size: 1.18rem;
+            font-weight: 1000;
+            text-transform: uppercase;
+            box-shadow: 0 18px 38px rgba(71, 255, 190, 0.24), 0 0 0 1px rgba(255, 255, 255, 0.18) inset;
+            transition: transform var(--transition), filter var(--transition), box-shadow var(--transition);
+            animation: startGlow 2.4s ease-in-out infinite;
+        }
+        
+        .start-btn:hover,
+        .start-btn:focus-visible {
+            outline: none;
+            transform: translateY(-3px) scale(1.01);
+            filter: brightness(1.06);
+            box-shadow: 0 24px 52px rgba(71, 255, 190, 0.34), 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
+        }
+        
+        .hero-subtext {
+            color: #7f96bb;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .meta-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.4rem;
+            flex-wrap: wrap;
+            color: #93a8ca;
+            font-size: 1.1rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        
+        .meta-row strong {
+            font-size: 1.1rem;
+            font-weight: 900;
+        }
+        
+        .gold {
+            color: var(--gold);
+        }
+        
+        .blue {
+            color: #3fd0ff;
+        }
+        
+        .green {
+            color: var(--green);
+        }
+        
+        .divider {
+            width: 1px;
+            height: 34px;
+            background: rgba(255, 255, 255, 0.18);
+        }
+        
+        .feature-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            width: min(100%, 1320px);
+            justify-self: center;
+        }
+        
+        .feature-card {
+            min-height: 120px;
+            border-radius: 24px;
+            padding: 1.2rem;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.075);
+            border: 1px solid rgba(255, 255, 255, 0.11);
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+        }
+        
+        .feature-card strong {
+            display: block;
+            margin-bottom: 0.45rem;
+            color: #ffffff;
+            font-size: 1.05rem;
+            font-weight: 900;
+        }
+        
+        .feature-card span {
+            color: #9fb3d4;
+            line-height: 1.5;
+            font-weight: 700;
+        }
+        
+        .back-link {
+            justify-self: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 0 18px;
+            border-radius: 999px;
+            color: #cfd9ea;
+            background: rgba(255, 255, 255, 0.08);
+            font-weight: 800;
+            transition: background var(--transition), transform var(--transition);
+        }
+        
+        .back-link:hover,
+        .back-link:focus-visible {
+            background: rgba(255, 255, 255, 0.14);
+            transform: translateY(-1px);
+            outline: none;
+        }
+        /* =========================
+           Footer - Scores page style
+        ========================= */
+        
+        footer {
+            position: relative;
+            z-index: 2;
+            margin-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            padding: 28px 0 36px;
+            color: var(--soft);
+            text-align: center;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.04);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--soft);
+            font-size: 0.95rem;
+        }
+        
+        .footer-links a:hover,
+        .footer-links a:focus-visible {
+            color: var(--cyan);
+            outline: none;
+        }
+        
+         :focus-visible {
+            outline: 3px solid rgba(47, 128, 237, 0.35);
+            outline-offset: 2px;
+            border-radius: 12px;
+        }
+        /* =========================
+           White Light fixes
+        ========================= */
+        
+        body.theme-light .site-header {
+            background: rgba(255, 255, 255, 0.92);
+            border-bottom: 1px solid rgba(20, 33, 61, 0.1);
+            box-shadow: none;
+        }
+        
+        body.theme-light .brand,
+        body.theme-light .brand-name {
+            color: #14213d;
+        }
+        
+        body.theme-light .brand-subtitle {
+            color: #667085;
+        }
+        
+        body.theme-light .nav a {
+            color: #344054;
+            background: transparent;
+            border-color: transparent;
+        }
+        
+        body.theme-light .nav a:hover,
+        body.theme-light .nav a:focus-visible {
+            background: rgba(47, 128, 237, 0.1);
+            color: var(--blue);
+            border-color: transparent;
+        }
+        
+        body.theme-light .nav a[aria-current="page"] {
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: #ffffff;
+        }
+        
+        body.theme-light .hero-card {
+            background: radial-gradient(circle at top right, rgba(47, 128, 237, 0.12), transparent 36%), #ffffff;
+            border: 1px solid #d9e1ef;
+            box-shadow: 0 16px 36px rgba(20, 33, 61, 0.12);
+        }
+        
+        body.theme-light .hero-card::after {
+            color: rgba(20, 33, 61, 0.045);
+        }
+        
+        body.theme-light .hero-card::before {
+            background: radial-gradient(circle, rgba(47, 128, 237, 0.15), transparent 68%);
+        }
+        
+        body.theme-light h1,
+        body.theme-light .feature-card strong {
+            color: #14213d;
+            text-shadow: none;
+        }
+        
+        body.theme-light .hero-copy,
+        body.theme-light .feature-card span,
+        body.theme-light .hero-subtext,
+        body.theme-light .meta-row,
+        body.theme-light .stat-item {
+            color: #667085;
+        }
+        
+        body.theme-light .eyebrow {
+            background: rgba(47, 128, 237, 0.1);
+            color: #1f6db6;
+        }
+        
+        body.theme-light .preview-panel,
+        body.theme-light .stats-pill,
+        body.theme-light .control-bar,
+        body.theme-light .feature-card {
+            background: #ffffff;
+            border: 1px solid #d9e1ef;
+            box-shadow: 0 16px 36px rgba(20, 33, 61, 0.12);
+        }
+        
+        body.theme-light .typing-window,
+        body.theme-light .mini-stat,
+        body.theme-light .segmented {
+            background: #f3f6fb;
+            border: 1px solid #d9e1ef;
+        }
+        
+        body.theme-light .typing-label,
+        body.theme-light .mini-stat span,
+        body.theme-light .control-label {
+            color: #667085;
+        }
+        
+        body.theme-light .typing-text span:nth-child(2),
+        body.theme-light .segment-btn {
+            color: #14213d;
+        }
+        
+        body.theme-light .secondary-cta,
+        body.theme-light .back-link {
+            color: #14213d;
+            background: #f3f6fb;
+            border: 1px solid #d9e1ef;
+        }
+        
+        body.theme-light .divider {
+            background: rgba(20, 33, 61, 0.14);
+        }
+        
+        body.theme-light footer {
+            background: #ffffff;
+            color: #667085;
+            border-top: 1px solid rgba(20, 33, 61, 0.1);
+        }
+        
+        body.theme-light .footer-links a {
+            color: #475467;
+        }
+        
+        body.theme-light .footer-links a:hover,
+        body.theme-light .footer-links a:focus-visible {
+            color: var(--blue);
+        }
+        
+        @keyframes floatKey {
+            0%,
+            100% {
+                transform: translateY(0) rotate(-2deg);
+            }
+            50% {
+                transform: translateY(-16px) rotate(3deg);
+            }
+        }
+        
+        @keyframes startGlow {
+            0%,
+            100% {
+                box-shadow: 0 18px 38px rgba(71, 255, 190, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.18) inset;
+            }
+            50% {
+                box-shadow: 0 22px 48px rgba(71, 255, 190, 0.34), 0 0 24px rgba(51, 209, 255, 0.24), 0 0 0 1px rgba(255, 255, 255, 0.24) inset;
+            }
+        }
+        
+        @keyframes pulseGlow {
+            0%,
+            100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.08);
+            }
+        }
+        
+        @media (max-width: 1280px) {
+            .hero-layout {
+                grid-template-columns: 1fr;
+            }
+            .preview-panel {
+                min-height: 340px;
+            }
+            .control-bar {
+                grid-template-columns: 1fr;
+            }
+            .control-group {
+                grid-template-columns: 1fr;
+                align-items: stretch;
+            }
+            .control-group.with-divider {
+                border-right: none;
+                padding-right: 0;
+            }
+            .feature-strip {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 760px) {
+            .container {
+                width: min(100% - 20px, var(--max-width));
+            }
+            .header-inner {
+                min-height: auto;
+                padding: 14px 0;
+            }
+            .nav {
+                justify-content: flex-start;
+            }
+            .nav a {
+                min-height: 42px;
+                padding: 0 12px;
+                font-size: 0.9rem;
+            }
+            main {
+                padding: 2rem 0 3rem;
+            }
+            .hero-card {
+                padding: 1.4rem;
+                border-radius: 26px;
+            }
+            .hero-title-row {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+            .title-logo {
+                width: 56px;
+                height: 56px;
+            }
+            h1 {
+                font-size: clamp(2.6rem, 16vw, 4rem);
+            }
+            .hero-actions {
+                align-items: stretch;
+                flex-direction: column;
+            }
+            .primary-cta,
+            .secondary-cta {
+                width: 100%;
+            }
+            .preview-panel {
+                min-height: 380px;
+            }
+            .speed-card {
+                grid-template-columns: 1fr;
+            }
+            .floating-key {
+                width: 58px;
+                height: 58px;
+                border-radius: 16px;
+                font-size: 1.25rem;
+            }
+            .control-bar {
+                padding: 1rem;
+            }
+            .segmented {
+                min-height: auto;
+            }
+            .segment-btn {
+                min-height: 58px;
+                font-size: 0.95rem;
+            }
+            .start-btn {
+                min-height: 66px;
+            }
+            .meta-row {
+                gap: 0.8rem;
+                font-size: 0.9rem;
+            }
+            .divider {
+                height: 24px;
+            }
+        }
+        
+        @media (max-width: 460px) {
+            .brand-subtitle {
+                display: none;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                scroll-behavior: auto;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+        /* =====================================================
+   Reverse Setup Mobile Fix
+   Paste at the VERY END of reverse-setup.html <style>
+===================================================== */
+        
+        .hero-card,
+        .preview-panel,
+        .control-bar,
+        .stats-pill,
+        .feature-card {
+            max-width: 100%;
+        }
+        
+        .hero-copy-wrap,
+        .hero-layout,
+        .preview-panel,
+        .typing-window,
+        .speed-card,
+        .mini-stat {
+            min-width: 0;
+        }
+        
+        @media (max-width: 760px) {
+            main {
+                align-items: flex-start;
+                padding: 1.2rem 0 2rem;
+            }
+            .container {
+                width: min(100% - 16px, var(--max-width));
+            }
+            .setup-shell {
+                gap: 1rem;
+            }
+            .hero-card {
+                padding: 1.1rem;
+                border-radius: 22px;
+            }
+            .hero-layout {
+                grid-template-columns: 1fr;
+                gap: 1.4rem;
+                overflow: hidden;
+            }
+            .eyebrow {
+                min-height: 34px;
+                padding: 0 12px;
+                font-size: 0.72rem;
+                margin-bottom: 1rem;
+            }
+            .hero-title-row {
+                gap: 0.8rem;
+                margin-bottom: 1rem;
+            }
+            .title-logo {
+                width: 52px;
+                height: 52px;
+                border-radius: 16px;
+            }
+            h1 {
+                max-width: 100%;
+                font-size: clamp(2.4rem, 13vw, 3.2rem);
+                line-height: 0.98;
+                letter-spacing: -0.07em;
+                overflow-wrap: anywhere;
+                word-break: break-word;
+            }
+            .hero-copy {
+                max-width: 100%;
+                font-size: 0.95rem;
+                line-height: 1.65;
+            }
+            .hero-actions {
+                margin-top: 1.2rem;
+            }
+            .primary-cta {
+                width: 100%;
+                min-height: 56px;
+                font-size: 0.95rem;
+                border-radius: 16px;
+            }
+            .preview-panel {
+                position: relative;
+                min-height: 420px;
+                width: 100%;
+                padding: 1rem;
+                border-radius: 24px;
+                overflow: hidden;
+            }
+            .typing-window {
+                left: 1rem;
+                right: 1rem;
+                top: 1rem;
+                min-height: 108px;
+                padding: 1rem;
+                border-radius: 20px;
+            }
+            .typing-label {
+                font-size: 0.68rem;
+                letter-spacing: 0.12em;
+                margin-bottom: 0.5rem;
+            }
+            .typing-text {
+                font-size: clamp(1.5rem, 8vw, 2rem);
+                line-height: 1.15;
+                white-space: nowrap;
+            }
+            .floating-key {
+                width: 54px;
+                height: 54px;
+                border-radius: 16px;
+                font-size: 1.1rem;
+            }
+            .key-one {
+                left: 16%;
+                bottom: 25%;
+            }
+            .key-two {
+                right: 12%;
+                bottom: 33%;
+            }
+            .key-three {
+                right: 34%;
+                bottom: 17%;
+            }
+            .speed-card {
+                left: 1rem;
+                right: 1rem;
+                bottom: 1rem;
+                grid-template-columns: 1fr;
+                gap: 0.65rem;
+            }
+            .mini-stat {
+                min-height: 74px;
+                border-radius: 18px;
+                padding: 0.7rem;
+            }
+            .mini-stat strong {
+                font-size: 1.2rem;
+            }
+            .mini-stat span {
+                font-size: 0.68rem;
+            }
+            .stats-pill {
+                width: 100%;
+                min-height: auto;
+                padding: 0.9rem;
+                gap: 0.8rem;
+                border-radius: 20px;
+            }
+            .stat-item {
+                font-size: 0.86rem;
+            }
+            .control-panel {
+                gap: 1rem;
+            }
+            .control-bar {
+                padding: 1rem;
+                border-radius: 24px;
+                gap: 1rem;
+            }
+            .control-group {
+                grid-template-columns: 1fr;
+                gap: 0.6rem;
+            }
+            .control-label {
+                font-size: 0.78rem;
+            }
+            .segmented {
+                min-height: auto;
+                border-radius: 18px;
+            }
+            .segment-btn {
+                min-height: 52px;
+                padding: 0 0.7rem;
+                font-size: 0.82rem;
+                border-radius: 14px;
+            }
+            .start-btn {
+                min-height: 58px;
+                font-size: 0.95rem;
+                border-radius: 16px;
+            }
+            .hero-subtext {
+                font-size: 0.78rem;
+                line-height: 1.4;
+            }
+            .meta-row {
+                gap: 0.55rem;
+                font-size: 0.78rem;
+                line-height: 1.5;
+            }
+            .meta-row strong {
+                font-size: 0.82rem;
+            }
+            .divider {
+                display: none;
+            }
+            .feature-strip {
+                gap: 0.8rem;
+            }
+            .feature-card {
+                min-height: auto;
+                padding: 1rem;
+                border-radius: 20px;
+            }
+            .feature-card strong {
+                font-size: 0.95rem;
+            }
+            .feature-card span {
+                font-size: 0.88rem;
+            }
+        }
+        
+        @media (max-width: 420px) {
+            .hero-card {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: clamp(2rem, 12vw, 2.8rem);
+            }
+            .hero-copy {
+                font-size: 0.9rem;
+            }
+            .preview-panel {
+                min-height: 400px;
+                padding: 0.85rem;
+            }
+            .typing-window {
+                left: 0.85rem;
+                right: 0.85rem;
+                top: 0.85rem;
+            }
+            .typing-text {
+                font-size: 1.55rem;
+            }
+            .speed-card {
+                left: 0.85rem;
+                right: 0.85rem;
+                bottom: 0.85rem;
+            }
+            .floating-key {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+            .segment-btn {
+                font-size: 0.78rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        (function() {
+            const value = localStorage.getItem("rtgSettings");
+
+            try {
+                const settings = value ? JSON.parse(value) : {};
+
+                if (settings.theme === "blue") {
+                    document.body.classList.add("theme-blue");
+                } else if (settings.theme === "green") {
+                    document.body.classList.add("theme-green");
+                } else if (settings.theme === "light") {
+                    document.body.classList.add("theme-light");
+                }
+
+                if (settings.highContrast) {
+                    document.body.classList.add("high-contrast");
+                }
+
+                if (settings.fontSize) {
+                    document.documentElement.style.setProperty("--base-font-size", `${settings.fontSize}px`);
+                }
+            } catch (error) {
+                console.warn("Theme settings could not be loaded.");
+            }
+        })();
+    </script>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand" aria-label="ReverseType home">
+                <div class="brand-mark">
+                    <img src="images/logo.png" alt="ReverseType logo" onerror="this.style.display='none'; this.parentNode.textContent='RT';" />
+                </div>
+
+                <div class="brand-text">
+                    <div class="brand-name">ReverseType</div>
+                    <div class="brand-subtitle">Typing Games</div>
+                </div>
+            </a>
+
+            <nav class="nav" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="scores.html">Scores</a>
+                <a href="achievements.html">Achievements</a>
+                <a href="settings.html">Settings</a>
+                <a href="about.html">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="container">
+            <section class="setup-shell" aria-labelledby="setup-title">
+                <div class="hero-card">
+                    <div class="hero-layout">
+                        <div class="hero-copy-wrap">
+                            <div class="eyebrow">⚡ Speed challenge</div>
+
+                            <div class="hero-title-row">
+                                <div class="title-logo">
+                                    <img src="images/logo.png" alt="ReverseType icon" onerror="this.style.display='none'; this.parentNode.textContent='RT';" />
+                                </div>
+
+                                <h1 id="setup-title">ReverseType</h1>
+                            </div>
+
+                            <p class="hero-copy">
+                                Train your brain to type words in reverse, race the timer, improve accuracy, and challenge the computer. Choose your setup, press start, and beat your best score.
+                            </p>
+
+                            <div class="hero-actions">
+                                <button class="primary-cta" type="button" id="heroStartBtn">Start Challenge →</button>
+                            </div>
+                        </div>
+
+                        <div class="preview-panel" aria-label="Reverse typing preview">
+                            <div class="typing-window">
+                                <div class="typing-label">Reverse typing preview</div>
+
+                                <div class="typing-text">
+                                    <span>game</span>
+                                    <span> → </span>
+                                    <span>emag</span>
+                                </div>
+                            </div>
+
+                            <div class="floating-key key-one">R</div>
+                            <div class="floating-key key-two">T</div>
+                            <div class="floating-key key-three">⌫</div>
+
+                            <div class="speed-card">
+                                <div class="mini-stat">
+                                    <strong class="blue">WPM</strong>
+                                    <span>speed</span>
+                                </div>
+
+                                <div class="mini-stat">
+                                    <strong class="green">100%</strong>
+                                    <span>accuracy</span>
+                                </div>
+
+                                <div class="mini-stat">
+                                    <strong class="gold">30s</strong>
+                                    <span>round</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-pill" aria-label="Game summary">
+                    <div class="stat-item streak">
+                        <span>🔥</span>
+                        <strong id="homeStreak">0</strong>
+                        <span>streak</span>
+                    </div>
+
+                    <div class="stat-item tests">
+                        <span>🏆</span>
+                        <strong id="homeTests">0</strong>
+                        <span>tests</span>
+                    </div>
+
+                    <div class="stat-item achievements">
+                        <span>🎖</span>
+                        <strong id="homeAchievements">0</strong>
+                        <span>achievements</span>
+                    </div>
+                </div>
+
+                <div class="control-panel">
+                    <div class="control-bar">
+                        <div class="control-group with-divider">
+                            <div class="control-label">Mode</div>
+
+                            <div class="segmented" role="group" aria-label="Mode selection">
+                                <button class="segment-btn active" type="button" data-mode="reverse">reverse</button>
+                                <button class="segment-btn" type="button" data-mode="normal">normal</button>
+                            </div>
+                        </div>
+
+                        <div class="control-group with-divider">
+                            <div class="control-label">Time</div>
+
+                            <div class="segmented" role="group" aria-label="Time selection">
+                                <button class="segment-btn active" type="button" data-time="30">30s</button>
+                                <button class="segment-btn" type="button" data-time="60">60s</button>
+                                <button class="segment-btn" type="button" data-time="120">120s</button>
+                            </div>
+                        </div>
+
+                        <div class="control-group with-divider">
+                            <div class="control-label">Player</div>
+
+                            <div class="segmented" role="group" aria-label="Player selection">
+                                <button class="segment-btn active" type="button" data-player="solo">solo</button>
+                                <button class="segment-btn" type="button" data-player="computer">computer</button>
+                            </div>
+                        </div>
+
+                        <button id="startGameBtn" class="start-btn" type="button">Start</button>
+                    </div>
+
+                    <div class="hero-subtext">Choose your challenge and press start</div>
+
+                    <div class="meta-row" aria-label="Selected game information">
+                        <span id="selectedMode">REVERSE</span>
+                        <span class="divider" aria-hidden="true"></span>
+                        <strong class="gold" id="selectedTime">30S</strong>
+                        <span class="divider" aria-hidden="true"></span>
+                        <strong class="blue" id="selectedWpm">0</strong>
+                        <span>WPM</span>
+                        <span class="divider" aria-hidden="true"></span>
+                        <strong class="green" id="selectedAccuracy">100%</strong>
+                        <span class="divider" aria-hidden="true"></span>
+                        <strong id="selectedType">SOLO MODE</strong>
+                    </div>
+                </div>
+
+                <div class="feature-strip">
+                    <div class="feature-card">
+                        <strong>🧠 Brain training</strong>
+                        <span>Reverse typing makes the challenge unusual, memorable, and fun.</span>
+                    </div>
+
+                    <div class="feature-card">
+                        <strong>⚡ Timed rounds</strong>
+                        <span>Select short or long rounds depending on how intense you want the test to be.</span>
+                    </div>
+
+                    <div class="feature-card">
+                        <strong>🤖 Computer mode</strong>
+                        <span>Play solo or challenge the computer for a more competitive experience.</span>
+                    </div>
+                </div>
+
+                <a href="index.html" class="back-link">← Back to game selection</a>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="scores.html">Scores</a>
+                <a href="settings.html">Settings</a>
+                <a href="about.html">About</a>
+            </div>
+
+            <p>© 2026 ReverseType.fun. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const STORAGE_KEYS = {
+            settings: "rtgSettings",
+            currentGame: "rtgCurrentGame",
+            highScores: "rtgHighScores",
+            achievements: "rtgAchievements"
+        };
+
+        const modeButtons = document.querySelectorAll("[data-mode]");
+        const timeButtons = document.querySelectorAll("[data-time]");
+        const playerButtons = document.querySelectorAll("[data-player]");
+        const startGameBtn = document.getElementById("startGameBtn");
+        const heroStartBtn = document.getElementById("heroStartBtn");
+
+        const selectedMode = document.getElementById("selectedMode");
+        const selectedTime = document.getElementById("selectedTime");
+        const selectedType = document.getElementById("selectedType");
+
+        const homeStreak = document.getElementById("homeStreak");
+        const homeTests = document.getElementById("homeTests");
+        const homeAchievements = document.getElementById("homeAchievements");
+
+        let currentMode = "reverse";
+        let currentTime = 30;
+        let currentPlayerMode = "solo";
+
+        function safeParse(value, fallback) {
+            try {
+                return value ? JSON.parse(value) : fallback;
+            } catch {
+                return fallback;
+            }
+        }
+
+        function applySavedTheme() {
+            const settings = safeParse(localStorage.getItem(STORAGE_KEYS.settings), {});
+            document.body.classList.remove("theme-blue", "theme-green", "theme-light", "high-contrast");
+
+            if (settings.theme === "blue") {
+                document.body.classList.add("theme-blue");
+            } else if (settings.theme === "green") {
+                document.body.classList.add("theme-green");
+            } else if (settings.theme === "light") {
+                document.body.classList.add("theme-light");
+            }
+
+            if (settings.highContrast) {
+                document.body.classList.add("high-contrast");
+            }
+
+            if (settings.fontSize) {
+                const fontSize = Number(settings.fontSize);
+
+                if (!Number.isNaN(fontSize) && fontSize > 0) {
+                    document.documentElement.style.setProperty("--base-font-size", `${fontSize}px`);
+                }
+            }
+        }
+
+        function loadSavedPreferences() {
+            const settings = safeParse(localStorage.getItem(STORAGE_KEYS.settings), {});
+
+            if (settings.homeSelectedMode === "normal" || settings.homeSelectedMode === "reverse") {
+                currentMode = settings.homeSelectedMode;
+            }
+
+            if ([30, 60, 120].includes(Number(settings.homeSelectedTime))) {
+                currentTime = Number(settings.homeSelectedTime);
+            }
+
+            if (settings.homeSelectedPlayerMode === "solo" || settings.homeSelectedPlayerMode === "computer") {
+                currentPlayerMode = settings.homeSelectedPlayerMode;
+            }
+        }
+
+        function loadHomeStats() {
+            const scores = safeParse(localStorage.getItem(STORAGE_KEYS.highScores), []);
+            const achievements = safeParse(localStorage.getItem(STORAGE_KEYS.achievements), []);
+            const savedGame = safeParse(localStorage.getItem(STORAGE_KEYS.currentGame), null);
+
+            let bestStreak = 0;
+            const totalTests = Array.isArray(scores) ? scores.length : 0;
+
+            if (Array.isArray(scores) && scores.length) {
+                bestStreak = Math.max(...scores.map((item) => Number(item.bestStreak) || 0));
+            }
+
+            if (savedGame && typeof savedGame.bestStreak === "number") {
+                bestStreak = Math.max(bestStreak, savedGame.bestStreak);
+            }
+
+            homeStreak.textContent = String(bestStreak);
+            homeTests.textContent = String(totalTests);
+            homeAchievements.textContent = String(Array.isArray(achievements) ? achievements.length : 0);
+        }
+
+        function updateModeUI() {
+            modeButtons.forEach((button) => {
+                button.classList.toggle("active", button.dataset.mode === currentMode);
+            });
+
+            selectedMode.textContent = currentMode.toUpperCase();
+        }
+
+        function updateTimeUI() {
+            timeButtons.forEach((button) => {
+                button.classList.toggle("active", Number(button.dataset.time) === currentTime);
+            });
+
+            selectedTime.textContent = `${currentTime}S`;
+        }
+
+        function updatePlayerUI() {
+            playerButtons.forEach((button) => {
+                button.classList.toggle("active", button.dataset.player === currentPlayerMode);
+            });
+
+            selectedType.textContent = currentPlayerMode === "computer" ? "VS COMPUTER" : "SOLO MODE";
+        }
+
+        function saveStartPreferences() {
+            const settings = safeParse(localStorage.getItem(STORAGE_KEYS.settings), {});
+            const merged = {
+                ...settings,
+                homeSelectedMode: currentMode,
+                homeSelectedTime: currentTime,
+                homeSelectedPlayerMode: currentPlayerMode
+            };
+
+            localStorage.setItem(STORAGE_KEYS.settings, JSON.stringify(merged));
+        }
+
+        function startSelectedGame() {
+            saveStartPreferences();
+            window.location.href = "reverse-game.html";
+        }
+
+        modeButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                currentMode = button.dataset.mode;
+                updateModeUI();
+            });
+        });
+
+        timeButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                currentTime = Number(button.dataset.time);
+                updateTimeUI();
+            });
+        });
+
+        playerButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                currentPlayerMode = button.dataset.player;
+                updatePlayerUI();
+            });
+        });
+
+        startGameBtn.addEventListener("click", startSelectedGame);
+        heroStartBtn.addEventListener("click", startSelectedGame);
+
+        window.addEventListener("keydown", (event) => {
+            const active = document.activeElement;
+            const tag = active ? active.tagName : "";
+
+            if (
+                tag === "INPUT" ||
+                tag === "TEXTAREA" ||
+                tag === "SELECT" ||
+                (active && active.isContentEditable)
+            ) {
+                return;
+            }
+
+            if (event.key.length === 1 || event.key === "Enter" || event.code === "Space") {
+                startSelectedGame();
+            }
+        });
+
+        applySavedTheme();
+        loadSavedPreferences();
+        loadHomeStats();
+        updateModeUI();
+        updateTimeUI();
+        updatePlayerUI();
+    </script>
+
+    <script src="js/shared-settings.js"></script>
+    <script src="js/theme-loader.js"></script>
+</body>
+
+</html>

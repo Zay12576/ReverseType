@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ReverseType game selection home page" />
+    <title>ReverseType | Game Selection</title>
+
+    <link rel="stylesheet" href="css/shared-settings.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+
+    <style>
+         :root {
+            --bg-1: #07111f;
+            --bg-2: #10172f;
+            --bg-3: #151034;
+            --dark: #14213d;
+            --muted: #c9d7ff;
+            --blue: #2f80ed;
+            --cyan: #33c8f2;
+            --red: #d71920;
+            --gold: #ffc83d;
+            --purple: #7b55ff;
+            --green: #47ffbe;
+            --card: #ffffff;
+            --line: rgba(255, 255, 255, 0.14);
+            --shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
+            --shadow-hover: 0 24px 52px rgba(0, 0, 0, 0.35);
+            --radius: 24px;
+            --transition: 220ms ease;
+            --max-width: 1500px;
+            --soft: #9fb2e8;
+        }
+        
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: radial-gradient(circle at 85% 80%, rgba(61, 121, 151, 0.55), transparent 32%), radial-gradient(circle at 75% 8%, rgba(72, 80, 170, 0.42), transparent 34%), radial-gradient(circle at 8% 12%, rgba(47, 128, 237, 0.18), transparent 30%), linear-gradient(135deg, #07162f 0%, #081a33 45%, #13245c 100%);
+            color: var(--dark);
+            overflow-x: hidden;
+            position: relative;
+            isolation: isolate;
+            line-height: 1.6;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+            background-size: 64px 64px;
+            opacity: 0.45;
+        }
+        
+        body.theme-blue {
+            --blue: #2f80ed;
+            --cyan: #59d7ff;
+            --purple: #33c8f2;
+            background: radial-gradient(circle at 8% 10%, rgba(47, 128, 237, 0.38), transparent 28%), radial-gradient(circle at 88% 16%, rgba(51, 200, 242, 0.3), transparent 30%), linear-gradient(135deg, #07101f, #0c1b35);
+        }
+        
+        body.theme-green {
+            --blue: #2ecc71;
+            --cyan: #74ffcb;
+            --purple: #29d98c;
+            background: radial-gradient(circle at 8% 10%, rgba(46, 204, 113, 0.32), transparent 28%), radial-gradient(circle at 88% 16%, rgba(116, 255, 203, 0.22), transparent 30%), linear-gradient(135deg, #06140f, #0a2018);
+        }
+        
+        body.theme-light {
+            --bg-1: #ffffff;
+            --bg-2: #ffffff;
+            --bg-3: #ffffff;
+            --dark: #14213d;
+            --muted: #667085;
+            --soft: #6f84a7;
+            --blue: #2f80ed;
+            --cyan: #33c8f2;
+            --card: #ffffff;
+            --line: rgba(20, 33, 61, 0.1);
+            --shadow: 0 18px 38px rgba(20, 33, 61, 0.12);
+            --shadow-hover: 0 24px 52px rgba(20, 33, 61, 0.2);
+            color: #14213d;
+            background: #ffffff !important;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .skip-link {
+            position: absolute;
+            top: -60px;
+            left: 12px;
+            z-index: 999;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #000000;
+            box-shadow: var(--shadow);
+            transition: top var(--transition);
+        }
+        
+        .skip-link:focus {
+            top: 12px;
+        }
+        
+        .container {
+            width: min(100% - 32px, var(--max-width));
+            margin: 0 auto;
+        }
+        /* =========================
+           Header
+        ========================= */
+        
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: radial-gradient(circle at 8% 10%, rgba(46, 204, 113, 0.24), transparent 32%), radial-gradient(circle at 92% 18%, rgba(51, 200, 242, 0.12), transparent 34%), linear-gradient(135deg, rgba(6, 20, 15, 0.96), rgba(10, 32, 24, 0.96));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+        }
+        
+        .header-inner {
+            min-height: 86px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 900;
+            color: #f1fff8;
+        }
+        
+        .brand-mark {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #2ecc71, #33c8f2);
+            color: #ffffff;
+            font-weight: 900;
+            box-shadow: 0 10px 22px rgba(46, 204, 113, 0.24), 0 0 24px rgba(51, 200, 242, 0.18);
+            overflow: hidden;
+        }
+        
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .brand-text {
+            display: grid;
+            gap: 2px;
+        }
+        
+        .brand-name {
+            font-size: 1.2rem;
+            letter-spacing: -0.03em;
+            color: #f1fff8;
+        }
+        
+        .brand-subtitle {
+            font-size: 0.78rem;
+            color: #9fb2e8;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav a {
+            min-height: 44px;
+            padding: 0 14px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #c9d7ff;
+            font-size: 0.95rem;
+            font-weight: 800;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid transparent;
+            transition: background var(--transition), color var(--transition), transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+        }
+        
+        .nav a:hover,
+        .nav a:focus-visible {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.16);
+            transform: translateY(-1px);
+            outline: none;
+        }
+        
+        .nav a[aria-current="page"] {
+            background: linear-gradient(135deg, #2ecc71, #33c8f2);
+            color: #041126;
+            box-shadow: 0 10px 24px rgba(46, 204, 113, 0.25);
+        }
+        /* =========================
+           Hero
+        ========================= */
+        
+        main {
+            padding: 48px 0 70px;
+        }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 34px;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 9px 14px;
+            border-radius: 999px;
+            background: rgba(71, 255, 190, 0.12);
+            color: var(--green);
+            border: 1px solid rgba(95, 255, 224, 0.18);
+            font-weight: 900;
+            font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.4rem, 6vw, 4.8rem);
+            line-height: 1;
+            letter-spacing: -0.06em;
+            color: #ffffff;
+            margin-bottom: 16px;
+            text-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+        }
+        
+        .hero p {
+            width: min(780px, 100%);
+            margin: 0 auto;
+            color: #c9d7ff;
+            font-size: clamp(1rem, 2vw, 1.18rem);
+            line-height: 1.7;
+            font-weight: 600;
+        }
+        /* =========================
+           Game Grid
+        ========================= */
+        
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 24px;
+            align-items: stretch;
+        }
+        
+        .game-card {
+            position: relative;
+            display: grid;
+            grid-template-rows: 220px auto;
+            overflow: hidden;
+            border-radius: var(--radius);
+            background: var(--card);
+            border: 1px solid rgba(20, 33, 61, 0.08);
+            box-shadow: var(--shadow);
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+        }
+        
+        .game-card:hover,
+        .game-card:focus-visible {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(47, 128, 237, 0.35);
+            outline: none;
+        }
+        
+        .game-thumb {
+            position: relative;
+            min-height: 220px;
+            overflow: hidden;
+            background: #d9edf9;
+        }
+        
+        .game-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .game-thumb::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 45%, rgba(0, 0, 0, 0.18));
+            pointer-events: none;
+        }
+        
+        .game-content {
+            display: grid;
+            gap: 12px;
+            padding: 20px;
+        }
+        
+        .game-topline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .game-title {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--dark);
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+        }
+        
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 30px;
+            padding: 0 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+        
+        .tag.reverse {
+            background: rgba(123, 85, 255, 0.12);
+            color: #6046c8;
+        }
+        
+        .tag.jump {
+            background: rgba(47, 128, 237, 0.12);
+            color: #1f5fb6;
+        }
+        
+        .tag.circus {
+            background: rgba(215, 25, 32, 0.12);
+            color: #b31318;
+        }
+        
+        .tag.shooter {
+            background: rgba(51, 200, 242, 0.14);
+            color: #15779a;
+        }
+        
+        .game-desc {
+            color: #667085;
+            line-height: 1.5;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        
+        .game-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            list-style: none;
+        }
+        
+        .game-features li {
+            padding: 6px 9px;
+            border-radius: 999px;
+            background: #f2f4f7;
+            color: #475467;
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+        
+        .play-row {
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        
+        .play-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 17px;
+            border-radius: 14px;
+            color: #ffffff;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            box-shadow: 0 12px 24px rgba(47, 128, 237, 0.24);
+        }
+        
+        .play-btn.red {
+            background: linear-gradient(135deg, #e53935, #ff8a00);
+            box-shadow: 0 12px 24px rgba(229, 57, 53, 0.24);
+        }
+        
+        .play-btn.purple {
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            box-shadow: 0 12px 24px rgba(123, 85, 255, 0.24);
+        }
+        
+        .play-btn.shooter {
+            background: linear-gradient(135deg, #02070d, #33c8f2);
+            box-shadow: 0 12px 24px rgba(51, 200, 242, 0.24);
+        }
+        
+        .arrow {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #98a2b3;
+            transition: transform var(--transition), color var(--transition);
+        }
+        
+        .game-card:hover .arrow {
+            transform: translateX(4px);
+            color: var(--blue);
+        }
+        /* =========================
+           CSS Fallback Thumbnails
+        ========================= */
+        
+        .fallback-art {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            color: #ffffff;
+            text-align: center;
+            font-weight: 900;
+        }
+        
+        .fallback-title {
+            position: relative;
+            z-index: 2;
+            font-size: clamp(2rem, 4vw, 3.1rem);
+            line-height: 0.95;
+            letter-spacing: -0.06em;
+            text-shadow: 0 4px 0 rgba(0, 0, 0, 0.22);
+        }
+        
+        .art-reverse {
+            background: radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.18), transparent 20%), linear-gradient(135deg, #07162f, #1b3d73 48%, #7b55ff);
+        }
+        
+        .art-jump {
+            background: radial-gradient(circle at 16% 22%, rgba(255, 255, 255, 0.45), transparent 8%), radial-gradient(circle at 78% 26%, rgba(255, 255, 255, 0.35), transparent 7%), linear-gradient(to bottom, #3fb4e8 0%, #6fc8ef 70%, #7bc043 70%, #4d9f2d 100%);
+        }
+        
+        .art-jump .fallback-title {
+            color: #ffb22c;
+            text-shadow: 0 2px 0 #ffe5a8, 0 6px 0 #d96c16, 0 10px 0 #8b3712;
+        }
+        
+        .art-circus {
+            background: repeating-linear-gradient(90deg, #9b0000 0 42px, #c70b0b 42px 84px), linear-gradient(to bottom, #d71920, #790000);
+        }
+        
+        .art-circus::before {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border: 6px solid #ffcc4d;
+            border-radius: 22px;
+            pointer-events: none;
+        }
+        
+        .art-circus .fallback-title {
+            color: #ffffff;
+            text-shadow: 0 3px 0 #1f5fb6, 0 6px 0 rgba(0, 0, 0, 0.18);
+        }
+        
+        .art-shooter {
+            background: radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.4), transparent 8%), radial-gradient(circle at 22% 30%, rgba(57, 255, 231, 0.35), transparent 9%), radial-gradient(circle at 78% 26%, rgba(255, 151, 0, 0.32), transparent 8%), linear-gradient(180deg, #02070d, #06181b 70%, #082b2e);
+        }
+        
+        .art-shooter::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 28px;
+            width: 46px;
+            height: 46px;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, transparent 0 33%, #18e5ff 34% 60%, transparent 61%), linear-gradient(225deg, transparent 0 33%, #18e5ff 34% 60%, transparent 61%), linear-gradient(to bottom, #ff9700 0 28%, #e8f8ff 29% 52%, #0fc4ff 53% 100%);
+            clip-path: polygon(50% 0, 86% 42%, 73% 100%, 50% 74%, 27% 100%, 14% 42%);
+            filter: drop-shadow(0 0 12px #39ffe7);
+        }
+        
+        .art-shooter::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 82px;
+            width: 6px;
+            height: 105px;
+            transform: translateX(-50%);
+            border-radius: 999px;
+            background: linear-gradient(to top, rgba(57, 255, 231, 0.95), transparent);
+            box-shadow: 0 0 18px rgba(57, 255, 231, 0.8);
+        }
+        
+        .art-shooter .fallback-title {
+            color: #ffffff;
+            text-shadow: 0 0 14px rgba(57, 255, 231, 0.8), 0 4px 0 rgba(0, 0, 0, 0.35);
+        }
+        /* =========================
+           Footer
+        ========================= */
+        
+        footer {
+            margin-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            padding: 28px 0 36px;
+            color: var(--soft);
+            text-align: center;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.04);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--soft);
+            font-size: 0.95rem;
+        }
+        
+        .footer-links a:hover,
+        .footer-links a:focus-visible {
+            color: var(--cyan);
+            outline: none;
+        }
+        
+         :focus-visible {
+            outline: 3px solid rgba(47, 128, 237, 0.35);
+            outline-offset: 2px;
+            border-radius: 12px;
+        }
+        /* =========================
+           Light Theme Fixes
+        ========================= */
+        
+        body.theme-light .site-header {
+            background: rgba(255, 255, 255, 0.92);
+            border-bottom: 1px solid rgba(20, 33, 61, 0.1);
+            box-shadow: none;
+        }
+        
+        body.theme-light .brand,
+        body.theme-light .brand-name {
+            color: #14213d;
+        }
+        
+        body.theme-light .brand-subtitle {
+            color: #667085;
+        }
+        
+        body.theme-light .nav a {
+            color: #344054;
+            background: transparent;
+            border-color: transparent;
+        }
+        
+        body.theme-light .nav a:hover,
+        body.theme-light .nav a:focus-visible {
+            background: rgba(47, 128, 237, 0.1);
+            color: var(--blue);
+            border-color: transparent;
+        }
+        
+        body.theme-light .nav a[aria-current="page"] {
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: #ffffff;
+        }
+        
+        body.theme-light footer {
+            background: #ffffff;
+            color: #667085;
+            border-top: 1px solid rgba(20, 33, 61, 0.1);
+        }
+        
+        body.theme-light .footer-links a {
+            color: #475467;
+        }
+        
+        body.theme-light .footer-links a:hover,
+        body.theme-light .footer-links a:focus-visible {
+            color: var(--blue);
+        }
+        
+        body.theme-light .hero h1 {
+            color: #14213d;
+            text-shadow: none;
+        }
+        
+        body.theme-light .hero p {
+            color: #667085;
+        }
+        
+        body.theme-light .hero-badge {
+            background: rgba(47, 128, 237, 0.1);
+            color: #2f80ed;
+            border-color: rgba(47, 128, 237, 0.16);
+        }
+        /* =========================
+           Responsive
+        ========================= */
+        
+        @media (max-width: 1250px) {
+            .game-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        
+        @media (max-width: 760px) {
+            .container {
+                width: min(100% - 20px, var(--max-width));
+            }
+            .header-inner {
+                min-height: auto;
+                padding: 14px 0;
+            }
+            .nav {
+                justify-content: flex-start;
+            }
+            .nav a {
+                min-height: 42px;
+                padding: 0 12px;
+                font-size: 0.9rem;
+            }
+            main {
+                padding: 34px 0 50px;
+            }
+            .game-grid {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+            .game-card {
+                grid-template-rows: 210px auto;
+            }
+            .game-thumb {
+                min-height: 210px;
+            }
+        }
+        
+        @media (max-width: 460px) {
+            .brand-subtitle {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            .game-content {
+                padding: 20px;
+            }
+            .play-row {
+                align-items: stretch;
+                flex-direction: column;
+            }
+            .play-btn {
+                width: 100%;
+            }
+            .arrow {
+                display: none;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                scroll-behavior: auto;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        (function() {
+            const value = localStorage.getItem("rtgSettings");
+
+            try {
+                const settings = value ? JSON.parse(value) : {};
+
+                if (settings.theme === "blue") {
+                    document.body.classList.add("theme-blue");
+                } else if (settings.theme === "green") {
+                    document.body.classList.add("theme-green");
+                } else if (settings.theme === "light") {
+                    document.body.classList.add("theme-light");
+                }
+
+                if (settings.highContrast) {
+                    document.body.classList.add("high-contrast");
+                }
+
+                if (settings.fontSize) {
+                    document.documentElement.style.setProperty("--base-font-size", `${settings.fontSize}px`);
+                }
+            } catch (error) {
+                console.warn("Theme settings could not be loaded.");
+            }
+        })();
+    </script>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand" aria-label="ReverseType home">
+                <div class="brand-mark">
+                    <img src="images/logo.png" alt="ReverseType logo" onerror="this.style.display='none'; this.parentNode.textContent='RT';" />
+                </div>
+
+                <div class="brand-text">
+                    <div class="brand-name">ReverseType</div>
+                    <div class="brand-subtitle">Typing Games</div>
+                </div>
+            </a>
+
+            <nav class="nav" aria-label="Main navigation">
+                <a href="index.html" aria-current="page">Home</a>
+                <a href="scores.html">Scores</a>
+                <a href="achievements.html">Achievements</a>
+                <a href="settings.html">Settings</a>
+                <a href="about.html">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="container">
+            <section class="hero" aria-labelledby="home-title">
+                <div class="hero-badge">🎮 Choose Your Game</div>
+
+                <h1 id="home-title">Play a Typing Game</h1>
+
+                <p>
+                    Choose a game and practise typing with fun challenges.
+                </p>
+            </section>
+
+            <section class="game-grid" aria-label="Game selection">
+                <!-- Reverse Typing Game -->
+                <a class="game-card" href="reverse-setup.html" aria-label="Play Reverse Typing Game">
+                    <div class="game-thumb">
+                        <div class="fallback-art art-reverse">
+                            <div class="fallback-title">Reverse<br>Typing</div>
+                        </div>
+
+                        <img src="images/reverse-typing-banner.png" alt="Reverse Typing Game preview" onerror="this.style.display='none';" />
+                    </div>
+
+                    <div class="game-content">
+                        <div class="game-topline">
+                            <h2 class="game-title">Reverse Typing Game</h2>
+                            <span class="tag reverse">Core Game</span>
+                        </div>
+
+                        <p class="game-desc">
+                            Practise typing words forward or backward.
+                        </p>
+
+                        <ul class="game-features">
+                            <li>Reverse Mode</li>
+                            <li>Scores</li>
+                        </ul>
+
+                        <div class="play-row">
+                            <span class="play-btn purple">Play Game</span>
+                            <span class="arrow">→</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Keyboard Jump -->
+                <a class="game-card" href="keyboard-jump.html" aria-label="Play Keyboard Jump Game">
+                    <div class="game-thumb">
+                        <div class="fallback-art art-jump">
+                            <div class="fallback-title">Keyboard<br>Jump</div>
+                        </div>
+
+                        <img src="images/keyboard-jump-banner.png" alt="Keyboard Jump Game preview" onerror="this.style.display='none';" />
+                    </div>
+
+                    <div class="game-content">
+                        <div class="game-topline">
+                            <h2 class="game-title">Keyboard Jump</h2>
+                            <span class="tag jump">Platform Game</span>
+                        </div>
+
+                        <p class="game-desc">
+                            Type words to jump across platforms.
+                        </p>
+
+                        <ul class="game-features">
+                            <li>Jump</li>
+                            <li>Lives</li>
+                        </ul>
+
+                        <div class="play-row">
+                            <span class="play-btn">Play Game</span>
+                            <span class="arrow">→</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Type Toss Circus -->
+                <a class="game-card" href="circus-game.html" aria-label="Play Circus Typing Game">
+                    <div class="game-thumb">
+                        <div class="fallback-art art-circus">
+                            <div class="fallback-title">Type<br>Toss</div>
+                        </div>
+
+                        <img src="images/circus-game-banner.png" alt="Circus Typing Game preview" onerror="this.style.display='none';" />
+                    </div>
+
+                    <div class="game-content">
+                        <div class="game-topline">
+                            <h2 class="game-title">Type Toss Circus</h2>
+                            <span class="tag circus">Circus Game</span>
+                        </div>
+
+                        <p class="game-desc">
+                            Type words to pop circus targets.
+                        </p>
+
+                        <ul class="game-features">
+                            <li>Grades</li>
+                            <li>SFX</li>
+                        </ul>
+
+                        <div class="play-row">
+                            <span class="play-btn red">Play Game</span>
+                            <span class="arrow">→</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Typing Shooter -->
+                <a class="game-card" href="typing-shooter.html" aria-label="Play Typing Shooter Game">
+                    <div class="game-thumb">
+                        <div class="fallback-art art-shooter">
+                            <div class="fallback-title">Typing<br>Shooter</div>
+                        </div>
+
+                        <img src="images/typing-shooter-banner.png" alt="Typing Shooter Game preview" onerror="this.style.display='none';" />
+                    </div>
+
+                    <div class="game-content">
+                        <div class="game-topline">
+                            <h2 class="game-title">Typing Shooter</h2>
+                            <span class="tag shooter">Space Game</span>
+                        </div>
+
+                        <p class="game-desc">
+                            Type falling space words to shoot enemies.
+                        </p>
+
+                        <ul class="game-features">
+                            <li>EMP</li>
+                            <li>Reverse</li>
+                        </ul>
+
+                        <div class="play-row">
+                            <span class="play-btn shooter">Play Game</span>
+                            <span class="arrow">→</span>
+                        </div>
+                    </div>
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="scores.html">Scores</a>
+                <a href="settings.html">Settings</a>
+                <a href="about.html">About</a>
+            </div>
+
+            <p>© 2026 ReverseType.fun. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/shared-settings.js"></script>
+    <script src="js/theme-loader.js"></script>
+</body>
+
+</html>

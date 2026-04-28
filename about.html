@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="About ReverseType - discover the typing games, project purpose, features, and play options." />
+    <title>ReverseType | About</title>
+
+    <link rel="stylesheet" href="css/shared-settings.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+
+    <style>
+         :root {
+            --bg-1: #07111f;
+            --bg-2: #10172f;
+            --bg-3: #151034;
+            --text: #ffffff;
+            --muted: #c9d7ff;
+            --soft: #9fb2e8;
+            --accent: #7b55ff;
+            --accent-2: #2f80ed;
+            --accent-3: #33c8f2;
+            --red: #d71920;
+            --gold: #ffc83d;
+            --green: #2ecc71;
+            --panel: rgba(255, 255, 255, 0.1);
+            --panel-2: rgba(255, 255, 255, 0.16);
+            --border: rgba(255, 255, 255, 0.14);
+            --shadow: 0 22px 50px rgba(0, 0, 0, 0.28);
+            --glow: 0 0 28px rgba(51, 200, 242, 0.34);
+            --radius-xl: 28px;
+            --radius-lg: 22px;
+            --radius-md: 16px;
+            --max-width: 1400px;
+            --transition: 220ms ease;
+            --base-font-size: 16px;
+        }
+        
+        html {
+            font-size: var(--base-font-size);
+            scroll-behavior: smooth;
+        }
+        
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text);
+            background: radial-gradient(circle at 8% 10%, rgba(47, 128, 237, 0.34), transparent 30%), radial-gradient(circle at 92% 16%, rgba(123, 85, 255, 0.35), transparent 30%), radial-gradient(circle at 50% 100%, rgba(51, 200, 242, 0.16), transparent 38%), linear-gradient(135deg, var(--bg-1), var(--bg-2) 48%, var(--bg-3));
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        body.theme-blue {
+            --accent: #2f80ed;
+            --accent-2: #2f80ed;
+            --accent-3: #59d7ff;
+            background: radial-gradient(circle at 8% 10%, rgba(47, 128, 237, 0.38), transparent 28%), radial-gradient(circle at 88% 16%, rgba(51, 200, 242, 0.3), transparent 30%), linear-gradient(135deg, #07101f, #0c1b35);
+        }
+        
+        body.theme-green {
+            --accent: #2ecc71;
+            --accent-2: #2ecc71;
+            --accent-3: #74ffcb;
+            background: radial-gradient(circle at 8% 10%, rgba(46, 204, 113, 0.32), transparent 28%), radial-gradient(circle at 88% 16%, rgba(116, 255, 203, 0.22), transparent 30%), linear-gradient(135deg, #06140f, #0a2018);
+        }
+        
+        body.theme-light {
+            --bg-1: #ffffff;
+            --bg-2: #ffffff;
+            --bg-3: #ffffff;
+            --text: #14213d;
+            --muted: #667085;
+            --soft: #6f84a7;
+            --panel: #ffffff;
+            --panel-2: #f7f9fd;
+            --border: rgba(20, 33, 61, 0.1);
+            --shadow: 0 18px 38px rgba(20, 33, 61, 0.12);
+            color: #14213d;
+            background: #ffffff !important;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        button {
+            font: inherit;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .skip-link {
+            position: absolute;
+            top: -60px;
+            left: 12px;
+            z-index: 999;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #000000;
+            box-shadow: var(--shadow);
+            transition: top var(--transition);
+        }
+        
+        .skip-link:focus {
+            top: 12px;
+        }
+        
+        .container {
+            width: min(100% - 32px, var(--max-width));
+            margin: 0 auto;
+        }
+        /* =========================
+           Header
+        ========================= */
+        
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: radial-gradient(circle at 8% 10%, rgba(46, 204, 113, 0.24), transparent 32%), radial-gradient(circle at 92% 18%, rgba(51, 200, 242, 0.12), transparent 34%), linear-gradient(135deg, rgba(6, 20, 15, 0.96), rgba(10, 32, 24, 0.96));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+        }
+        
+        .header-inner {
+            min-height: 86px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 900;
+            color: #f1fff8;
+        }
+        
+        .brand-mark {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #2ecc71, #33c8f2);
+            color: #ffffff;
+            font-weight: 900;
+            box-shadow: 0 10px 22px rgba(46, 204, 113, 0.24), 0 0 24px rgba(51, 200, 242, 0.18);
+            overflow: hidden;
+        }
+        
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .brand-text {
+            display: grid;
+            gap: 2px;
+        }
+        
+        .brand-name {
+            font-size: 1.2rem;
+            letter-spacing: -0.03em;
+            color: #f1fff8;
+        }
+        
+        .brand-subtitle {
+            font-size: 0.78rem;
+            color: #9fb2e8;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav a {
+            min-height: 44px;
+            padding: 0 14px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #c9d7ff;
+            font-size: 0.95rem;
+            font-weight: 800;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid transparent;
+            transition: background var(--transition), color var(--transition), transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+        }
+        
+        .nav a:hover,
+        .nav a:focus-visible {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.16);
+            transform: translateY(-1px);
+            outline: none;
+        }
+        
+        .nav a[aria-current="page"] {
+            background: linear-gradient(135deg, #2ecc71, #33c8f2);
+            color: #041126;
+            box-shadow: 0 10px 24px rgba(46, 204, 113, 0.25);
+        }
+        
+        main {
+            padding: 44px 0 72px;
+        }
+        /* =========================
+           Hero
+        ========================= */
+        
+        .hero {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 24px;
+            align-items: stretch;
+            margin-bottom: 26px;
+        }
+        
+        .hero-card,
+        .play-now-card,
+        .game-card,
+        .section-card,
+        .feature-card,
+        .stat-box,
+        .mission-card {
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(16px);
+        }
+        
+        .hero-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-xl);
+            padding: clamp(24px, 4vw, 50px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06)), radial-gradient(circle at top right, rgba(51, 200, 242, 0.2), transparent 35%);
+        }
+        
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            width: 310px;
+            height: 310px;
+            right: -95px;
+            top: -95px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 66%);
+            pointer-events: none;
+        }
+        
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 14px;
+            border-radius: 999px;
+            margin-bottom: 18px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            color: #dff6ff;
+            font-size: 0.92rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        
+        .hero-card h1 {
+            max-width: 860px;
+            font-size: clamp(2.35rem, 5vw, 5rem);
+            line-height: 0.95;
+            letter-spacing: -0.07em;
+            margin-bottom: 18px;
+        }
+        
+        .hero-card h1 span {
+            color: #bfefff;
+            text-shadow: 0 0 26px rgba(51, 200, 242, 0.55);
+        }
+        
+        .hero-card p {
+            max-width: 780px;
+            color: var(--muted);
+            font-size: clamp(1rem, 1.7vw, 1.18rem);
+            font-weight: 650;
+            margin-bottom: 22px;
+        }
+        
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .big-play-btn,
+        .outline-play-btn {
+            min-height: 56px;
+            padding: 0 22px;
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 950;
+            transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+        }
+        
+        .big-play-btn {
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-3));
+            box-shadow: var(--glow);
+        }
+        
+        .outline-play-btn {
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .big-play-btn:hover,
+        .outline-play-btn:hover,
+        .big-play-btn:focus-visible,
+        .outline-play-btn:focus-visible {
+            transform: translateY(-3px);
+            outline: none;
+        }
+        
+        .play-now-card {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            display: grid;
+        }
+        
+        .play-now-top {
+            padding: 24px;
+            background: radial-gradient(circle at 28% 20%, rgba(255, 255, 255, 0.22), transparent 24%), linear-gradient(135deg, rgba(47, 128, 237, 0.62), rgba(123, 85, 255, 0.6));
+        }
+        
+        .play-now-top h2 {
+            font-size: 1.8rem;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            margin-bottom: 8px;
+        }
+        
+        .play-now-top p {
+            color: rgba(255, 255, 255, 0.84);
+            font-weight: 700;
+        }
+        
+        .play-now-body {
+            padding: 20px;
+            display: grid;
+            gap: 14px;
+        }
+        
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .stat-box {
+            padding: 14px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .stat-box span {
+            display: block;
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+        
+        .stat-box strong {
+            display: block;
+            margin-top: 3px;
+            font-size: 1.15rem;
+        }
+        /* =========================
+           Game Cards
+        ========================= */
+        
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 26px;
+        }
+        
+        .game-card {
+            position: relative;
+            min-height: 260px;
+            overflow: hidden;
+            border-radius: var(--radius-xl);
+            padding: 22px;
+            display: grid;
+            align-content: end;
+            transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+        }
+        
+        .game-card:hover,
+        .game-card:focus-visible {
+            transform: translateY(-8px);
+            border-color: rgba(51, 200, 242, 0.42);
+            box-shadow: 0 28px 60px rgba(0, 0, 0, 0.35);
+            outline: none;
+        }
+        
+        .game-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+        }
+        
+        .game-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 15%, rgba(0, 0, 0, 0.6));
+            z-index: -1;
+        }
+        
+        .game-card.reverse::before {
+            background: radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.22), transparent 18%), linear-gradient(135deg, #07162f, #1b3d73 48%, #7b55ff);
+        }
+        
+        .game-card.jump::before {
+            background: radial-gradient(circle at 16% 22%, rgba(255, 255, 255, 0.45), transparent 8%), radial-gradient(circle at 78% 26%, rgba(255, 255, 255, 0.35), transparent 7%), linear-gradient(to bottom, #3fb4e8 0%, #6fc8ef 68%, #7bc043 68%, #4d9f2d 100%);
+        }
+        
+        .game-card.circus::before {
+            background: repeating-linear-gradient(90deg, #9b0000 0 42px, #c70b0b 42px 84px), linear-gradient(to bottom, #d71920, #790000);
+        }
+        
+        .game-card.shooter::before {
+            background: radial-gradient(circle at 22% 22%, rgba(57, 255, 231, 0.35), transparent 16%), radial-gradient(circle at 78% 18%, rgba(255, 151, 0, 0.3), transparent 15%), linear-gradient(180deg, #02070d, #06181b 68%, #082b2e);
+        }
+        
+        .game-card h2 {
+            font-size: 1.65rem;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            margin-bottom: 8px;
+        }
+        
+        .game-card p {
+            color: rgba(255, 255, 255, 0.86);
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+        
+        .mini-play {
+            width: fit-content;
+            min-height: 42px;
+            padding: 0 14px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            font-weight: 900;
+        }
+        /* =========================
+           Content Layout
+        ========================= */
+        
+        .layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 18px;
+        }
+        
+        .section-stack {
+            display: grid;
+            gap: 18px;
+        }
+        
+        .section-card,
+        .mission-card {
+            border-radius: var(--radius-xl);
+            padding: 22px;
+            background: rgba(255, 255, 255, 0.085);
+        }
+        
+        .section-card h2,
+        .section-card h3,
+        .mission-card h2,
+        .mission-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+        
+        .section-card p,
+        .mission-card p {
+            color: var(--muted);
+            font-size: 0.98rem;
+            margin-bottom: 12px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        
+        .feature-card {
+            padding: 18px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.075);
+            transition: transform var(--transition), background var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.11);
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 15px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 12px;
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-3));
+            box-shadow: var(--glow);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+        
+        .feature-card p {
+            color: var(--muted);
+            font-size: 0.93rem;
+        }
+        
+        .mini-list {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+        
+        .mini-list li {
+            padding: 13px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.065);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+        }
+        
+        .mini-list strong {
+            display: block;
+            margin-bottom: 2px;
+        }
+        
+        .mini-list span {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+        
+        .action-column {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .primary-btn,
+        .secondary-btn,
+        .ghost-btn {
+            min-height: 50px;
+            border-radius: 15px;
+            padding: 0.85rem 1rem;
+            font-weight: 900;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+        }
+        
+        .primary-btn {
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-3));
+            box-shadow: var(--glow);
+        }
+        
+        .secondary-btn {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        
+        .ghost-btn {
+            color: var(--muted);
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        
+        .primary-btn:hover,
+        .secondary-btn:hover,
+        .ghost-btn:hover,
+        .primary-btn:focus-visible,
+        .secondary-btn:focus-visible,
+        .ghost-btn:focus-visible {
+            transform: translateY(-3px);
+            outline: none;
+        }
+        
+        .final-cta {
+            margin-top: 26px;
+            border-radius: var(--radius-xl);
+            padding: clamp(24px, 4vw, 42px);
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(255, 255, 255, 0.16), transparent 32%), linear-gradient(135deg, rgba(47, 128, 237, 0.34), rgba(123, 85, 255, 0.32));
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+        
+        .final-cta h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1;
+            letter-spacing: -0.05em;
+            margin-bottom: 12px;
+        }
+        
+        .final-cta p {
+            color: var(--muted);
+            max-width: 720px;
+            margin: 0 auto 20px;
+            font-weight: 700;
+        }
+        
+        .final-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        /* =========================
+           Footer
+        ========================= */
+        
+        footer {
+            margin-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            padding: 28px 0 36px;
+            color: var(--soft);
+            text-align: center;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.04);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--soft);
+            font-size: 0.95rem;
+        }
+        
+        .footer-links a:hover,
+        .footer-links a:focus-visible {
+            color: var(--accent-3);
+            outline: none;
+        }
+        
+         :focus-visible {
+            outline: 3px solid rgba(51, 200, 242, 0.5);
+            outline-offset: 2px;
+            border-radius: 12px;
+        }
+        
+        .site-header :focus-visible,
+        footer :focus-visible {
+            outline: 3px solid rgba(47, 128, 237, 0.45);
+        }
+        /* =========================
+           Light Theme
+        ========================= */
+        
+        body.theme-light .site-header {
+            background: rgba(255, 255, 255, 0.92);
+            border-bottom: 1px solid rgba(20, 33, 61, 0.1);
+            box-shadow: none;
+        }
+        
+        body.theme-light .brand,
+        body.theme-light .brand-name {
+            color: #14213d;
+        }
+        
+        body.theme-light .brand-subtitle {
+            color: #667085;
+        }
+        
+        body.theme-light .nav a {
+            color: #344054;
+            background: transparent;
+            border-color: transparent;
+        }
+        
+        body.theme-light .nav a:hover,
+        body.theme-light .nav a:focus-visible {
+            background: rgba(47, 128, 237, 0.1);
+            color: var(--accent-2);
+            border-color: transparent;
+        }
+        
+        body.theme-light .nav a[aria-current="page"] {
+            background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+            color: #ffffff;
+        }
+        
+        body.theme-light .hero-card,
+        body.theme-light .play-now-card,
+        body.theme-light .section-card,
+        body.theme-light .mission-card,
+        body.theme-light .feature-card,
+        body.theme-light .stat-box {
+            background: #ffffff;
+            border-color: #d9e1ef;
+            box-shadow: 0 16px 36px rgba(20, 33, 61, 0.12);
+        }
+        
+        body.theme-light .hero-card {
+            background: radial-gradient(circle at top right, rgba(47, 128, 237, 0.12), transparent 35%), #ffffff;
+        }
+        
+        body.theme-light .eyebrow {
+            background: rgba(47, 128, 237, 0.1);
+            border-color: rgba(47, 128, 237, 0.14);
+            color: #1f6db6;
+        }
+        
+        body.theme-light .hero-card h1,
+        body.theme-light .section-card h2,
+        body.theme-light .section-card h3,
+        body.theme-light .mission-card h2,
+        body.theme-light .mission-card h3,
+        body.theme-light .feature-card h3,
+        body.theme-light .final-cta h2 {
+            color: #14213d;
+        }
+        
+        body.theme-light .hero-card p,
+        body.theme-light .section-card p,
+        body.theme-light .mission-card p,
+        body.theme-light .feature-card p,
+        body.theme-light .mini-list span,
+        body.theme-light .final-cta p {
+            color: #667085;
+        }
+        
+        body.theme-light .hero-card h1 span {
+            color: #2f80ed;
+            text-shadow: none;
+        }
+        
+        body.theme-light .mini-list li {
+            background: #f7f9fd;
+            border-color: #e3e9f3;
+        }
+        
+        body.theme-light .mini-list strong,
+        body.theme-light .stat-box strong {
+            color: #14213d;
+        }
+        
+        body.theme-light .stat-box span {
+            color: #667085;
+        }
+        
+        body.theme-light .secondary-btn,
+        body.theme-light .ghost-btn,
+        body.theme-light .outline-play-btn {
+            color: #14213d;
+            background: #f3f6fb;
+            border: 1px solid #d9e1ef;
+        }
+        
+        body.theme-light .final-cta {
+            background: radial-gradient(circle at top, rgba(47, 128, 237, 0.1), transparent 32%), #ffffff;
+            border-color: #d9e1ef;
+        }
+        
+        body.theme-light footer {
+            background: #ffffff;
+            color: #667085;
+            border-top: 1px solid rgba(20, 33, 61, 0.1);
+        }
+        
+        body.theme-light .footer-links a {
+            color: #475467;
+        }
+        
+        body.theme-light .footer-links a:hover,
+        body.theme-light .footer-links a:focus-visible {
+            color: var(--accent-2);
+        }
+        /* =========================
+           Responsive
+        ========================= */
+        
+        @media (max-width: 1120px) {
+            .hero,
+            .layout {
+                grid-template-columns: 1fr;
+            }
+            .game-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 760px) {
+            .container {
+                width: min(100% - 20px, var(--max-width));
+            }
+            .header-inner {
+                min-height: auto;
+                padding: 14px 0;
+            }
+            .nav {
+                justify-content: flex-start;
+            }
+            .nav a {
+                min-height: 42px;
+                padding: 0 12px;
+                font-size: 0.9rem;
+            }
+            main {
+                padding: 34px 0 50px;
+            }
+            .game-grid,
+            .feature-grid,
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+            .hero-card h1 {
+                font-size: 2.45rem;
+            }
+        }
+        
+        @media (max-width: 520px) {
+            .header-inner {
+                align-items: stretch;
+            }
+            .hero-actions,
+            .final-actions {
+                flex-direction: column;
+            }
+            .big-play-btn,
+            .outline-play-btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 460px) {
+            .brand-subtitle {
+                display: none;
+            }
+            .hero-card {
+                padding: 22px;
+            }
+            .hero-card h1 {
+                font-size: 2.1rem;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                scroll-behavior: auto;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        (function() {
+            const value = localStorage.getItem("rtgSettings");
+
+            try {
+                const settings = value ? JSON.parse(value) : {};
+
+                if (settings.theme === "blue") {
+                    document.body.classList.add("theme-blue");
+                } else if (settings.theme === "green") {
+                    document.body.classList.add("theme-green");
+                } else if (settings.theme === "light") {
+                    document.body.classList.add("theme-light");
+                }
+
+                if (settings.highContrast) {
+                    document.body.classList.add("high-contrast");
+                }
+
+                if (settings.fontSize) {
+                    document.documentElement.style.setProperty("--base-font-size", `${settings.fontSize}px`);
+                }
+            } catch (error) {
+                console.warn("Theme settings could not be loaded.");
+            }
+        })();
+    </script>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand" aria-label="ReverseType home">
+                <div class="brand-mark">
+                    <img src="images/logo.png" alt="ReverseType logo" onerror="this.style.display='none'; this.parentNode.textContent='RT';" />
+                </div>
+
+                <div class="brand-text">
+                    <div class="brand-name">ReverseType</div>
+                    <div class="brand-subtitle">Typing Games</div>
+                </div>
+            </a>
+
+            <nav class="nav" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="reverse-setup.html">Reverse Game</a>
+                <a href="keyboard-jump.html">Keyboard Jump</a>
+                <a href="circus-game.html">Circus Game</a>
+                <a href="typing-shooter.html">Typing Shooter</a>
+                <a href="scores.html">Scores</a>
+                <a href="achievements.html">Achievements</a>
+                <a href="settings.html">Settings</a>
+                <a href="about.html" aria-current="page">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="container">
+            <section class="hero" aria-labelledby="aboutTitle">
+                <div class="hero-card">
+                    <div class="eyebrow">🎮 About the typing arena</div>
+
+                    <h1 id="aboutTitle">
+                        ReverseType is built to make typing feel like a <span>game challenge</span>.
+                    </h1>
+
+                    <p>
+                        This is not just an information page. It is your launch point into four typing games that test speed, focus, accuracy, reaction time, and quick thinking.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="big-play-btn" href="reverse-setup.html">▶ Start Reverse Game</a>
+                        <a class="outline-play-btn" href="keyboard-jump.html">Try Keyboard Jump</a>
+                        <a class="outline-play-btn" href="circus-game.html">Enter Circus Game</a>
+                        <a class="outline-play-btn" href="typing-shooter.html">Typing Shooter</a>
+                    </div>
+                </div>
+
+                <aside class="play-now-card" aria-label="Quick game summary">
+                    <div class="play-now-top">
+                        <h2>Ready to play?</h2>
+                        <p>Choose a challenge and start improving your typing today.</p>
+                    </div>
+
+                    <div class="play-now-body">
+                        <div class="quick-stats">
+                            <div class="stat-box">
+                                <span>Games</span>
+                                <strong>4 Modes</strong>
+                            </div>
+
+                            <div class="stat-box">
+                                <span>Focus</span>
+                                <strong>Speed</strong>
+                            </div>
+
+                            <div class="stat-box">
+                                <span>Progress</span>
+                                <strong>Scores</strong>
+                            </div>
+
+                            <div class="stat-box">
+                                <span>Rewards</span>
+                                <strong>Badges</strong>
+                            </div>
+                        </div>
+
+                        <a class="primary-btn" href="index.html">Choose Your Game</a>
+                    </div>
+                </aside>
+            </section>
+
+            <section class="game-grid" aria-label="Game choices">
+                <a class="game-card reverse" href="reverse-setup.html" aria-label="Play Reverse Typing Game">
+                    <h2>Reverse Typing</h2>
+                    <p>Type words backwards, beat the timer, and sharpen your focus.</p>
+                    <span class="mini-play">Play now →</span>
+                </a>
+
+                <a class="game-card jump" href="keyboard-jump.html" aria-label="Play Keyboard Jump Game">
+                    <h2>Keyboard Jump</h2>
+                    <p>Type the correct word to jump across platforms and stay alive.</p>
+                    <span class="mini-play">Jump in →</span>
+                </a>
+
+                <a class="game-card circus" href="circus-game.html" aria-label="Play Type Toss Circus Game">
+                    <h2>Type Toss Circus</h2>
+                    <p>A colourful typing challenge with playful circus energy.</p>
+                    <span class="mini-play">Enter circus →</span>
+                </a>
+
+                <a class="game-card shooter" href="typing-shooter.html" aria-label="Play Typing Shooter Game">
+                    <h2>Typing Shooter</h2>
+                    <p>Destroy falling space words, use EMP power, and survive higher waves.</p>
+                    <span class="mini-play">Shoot words →</span>
+                </a>
+            </section>
+
+            <section class="layout">
+                <section class="section-stack" aria-label="Main about content">
+                    <section class="mission-card">
+                        <h2>What is ReverseType?</h2>
+
+                        <p>
+                            ReverseType is a browser-based typing game project designed to make keyboard practice more exciting. Instead of only typing normal words, players can enter different challenges, track scores, unlock achievements, and customise the experience.
+                        </p>
+
+                        <ul class="mini-list">
+                            <li>
+                                <strong>Fast to understand</strong>
+                                <span>Players can quickly choose a game and start typing.</span>
+                            </li>
+
+                            <li>
+                                <strong>Fun to replay</strong>
+                                <span>Scores, achievements, and different modes encourage repeated play.</span>
+                            </li>
+
+                            <li>
+                                <strong>Built for improvement</strong>
+                                <span>The games help with speed, accuracy, reaction time, and concentration.</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="section-card">
+                        <h2>Why players will want to play</h2>
+
+                        <div class="feature-grid">
+                            <article class="feature-card">
+                                <div class="feature-icon">⚡</div>
+                                <h3>Quick Challenge</h3>
+                                <p>Short rounds make it easy to play, improve, and try again.</p>
+                            </article>
+
+                            <article class="feature-card">
+                                <div class="feature-icon">🎯</div>
+                                <h3>Accuracy Training</h3>
+                                <p>The games reward careful typing, focus, and fewer mistakes.</p>
+                            </article>
+
+                            <article class="feature-card">
+                                <div class="feature-icon">🚀</div>
+                                <h3>Typing Shooter</h3>
+                                <p>Players type falling space words to shoot enemies, survive waves, and use EMP power.</p>
+                            </article>
+
+                            <article class="feature-card">
+                                <div class="feature-icon">🏆</div>
+                                <h3>Achievements</h3>
+                                <p>Players can unlock rewards and see their progress over time.</p>
+                            </article>
+
+                            <article class="feature-card">
+                                <div class="feature-icon">⚙</div>
+                                <h3>Personal Settings</h3>
+                                <p>Theme, sound, contrast, motion, and font size make the game feel personal.</p>
+                            </article>
+
+                            <article class="feature-card">
+                                <div class="feature-icon">💾</div>
+                                <h3>Saved Progress</h3>
+                                <p>Scores and achievements are saved locally so players can return and continue improving.</p>
+                            </article>
+                        </div>
+                    </section>
+
+                    <section class="section-card">
+                        <h2>How the project works</h2>
+
+                        <p>
+                            The website uses HTML for structure, CSS for layout and visual design, and JavaScript for gameplay logic. Browser localStorage is used to save settings, scores, and achievements, so the experience feels more complete when players return.
+                        </p>
+
+                        <div class="feature-grid">
+                            <article class="feature-card">
+                                <div class="feature-icon">🌐</div>
+                                <h3>HTML Pages</h3>
+                                <p>Separate pages create a complete website with navigation, games, scores, settings, and explanations.</p>
+                            </article>
+
+                            <article class="feature-card">
+                                <div class="feature-icon">🎨</div>
+                                <h3>CSS Design</h3>
+                                <p>Cards, gradients, responsive layouts, and game-like visuals make the project more engaging.</p>
+                            </article>
+
+                            <article class="feature-card">
+                                <div class="feature-icon">🧠</div>
+                                <h3>JavaScript Logic</h3>
+                                <p>JavaScript controls timing, scoring, achievements, saved preferences, and interactive behaviour.</p>
+                            </article>
+
+                            <article class="feature-card">
+                                <div class="feature-icon">💾</div>
+                                <h3>Saved Data</h3>
+                                <p>localStorage keeps player settings and progress available even after refreshing the page.</p>
+                            </article>
+                        </div>
+                    </section>
+                </section>
+
+                <aside class="section-stack" aria-label="About side information">
+                    <section class="section-card">
+                        <h3>Play now</h3>
+                        <p>Choose a game and test your typing skill.</p>
+
+                        <div class="action-column">
+                            <a class="primary-btn" href="reverse-setup.html">Play Reverse Game</a>
+                            <a class="secondary-btn" href="keyboard-jump.html">Keyboard Jump</a>
+                            <a class="secondary-btn" href="circus-game.html">Circus Game</a>
+                            <a class="secondary-btn" href="typing-shooter.html">Typing Shooter</a>
+                            <a class="ghost-btn" href="scores.html">View Scores</a>
+                            <a class="ghost-btn" href="achievements.html">View Achievements</a>
+                        </div>
+                    </section>
+
+                    <section class="section-card">
+                        <h3>Best first game</h3>
+
+                        <ul class="mini-list">
+                            <li>
+                                <strong>Start with Reverse Typing</strong>
+                                <span>It is the main challenge and the easiest way to understand the project.</span>
+                            </li>
+
+                            <li>
+                                <strong>Then try Keyboard Jump</strong>
+                                <span>This adds action and movement to typing practice.</span>
+                            </li>
+
+                            <li>
+                                <strong>Play Type Toss Circus</strong>
+                                <span>This gives the site a colourful and playful typing challenge.</span>
+                            </li>
+
+                            <li>
+                                <strong>Finish with Typing Shooter</strong>
+                                <span>This adds a space battle challenge with falling words, waves, EMP, and reverse typing mode.</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="section-card">
+                        <h3>Why this project stands out</h3>
+
+                        <ul class="mini-list">
+                            <li>
+                                <strong>Four typing games</strong>
+                                <span>The site includes multiple typing challenges instead of only one activity.</span>
+                            </li>
+
+                            <li>
+                                <strong>Player progress</strong>
+                                <span>Scores and achievements make players want to keep improving.</span>
+                            </li>
+
+                            <li>
+                                <strong>Custom experience</strong>
+                                <span>Settings make the project feel more polished and user-focused.</span>
+                            </li>
+                        </ul>
+                    </section>
+                </aside>
+            </section>
+
+            <section class="final-cta" aria-label="Final play call to action">
+                <h2>Enough reading — ready to play?</h2>
+
+                <p>
+                    Jump into a challenge, test your speed, and see how quickly you can master ReverseType.
+                </p>
+
+                <div class="final-actions">
+                    <a class="big-play-btn" href="typing-shooter.html">▶ Play Typing Shooter</a>
+                    <a class="outline-play-btn" href="reverse-setup.html">Play Reverse Game</a>
+                    <a class="outline-play-btn" href="index.html">View All Games</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="scores.html">Scores</a>
+                <a href="settings.html">Settings</a>
+                <a href="about.html">About</a>
+            </div>
+
+            <p>© 2026 ReverseType.fun. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/shared-settings.js"></script>
+    <script src="js/theme-loader.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,443 @@
+/* =========================================================
+   Reverse Typing Game - responsive.css
+   Responsive layout rules for all pages
+   Use after style.css and page-specific CSS
+   ========================================================= */
+
+
+/* ---------- Large tablets / small laptops ---------- */
+
+@media (max-width: 1180px) {
+    .hero,
+    .hero-grid,
+    .layout,
+    .page-layout,
+    .page-grid,
+    .two-col,
+    .site-map {
+        grid-template-columns: 1fr;
+    }
+    .page-grid {
+        gap: 1rem;
+    }
+    .sidebar-section {
+        position: static !important;
+    }
+    .hero {
+        gap: 1rem;
+    }
+    .hero-grid {
+        gap: 1.2rem;
+    }
+    .main-hud {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .preview-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .site-map {
+        gap: 1rem;
+    }
+    .topbar-inner {
+        gap: 0.9rem;
+    }
+}
+
+
+/* ---------- Tablet ---------- */
+
+@media (max-width: 980px) {
+    .topbar-inner {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .brand {
+        align-items: center;
+    }
+    .nav {
+        justify-content: flex-start;
+        gap: 0.45rem;
+    }
+    .nav a {
+        padding: 0.62rem 0.86rem;
+    }
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .grid-4,
+    .achievement-grid,
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .summary-grid,
+    .settings-grid,
+    .mode-grid,
+    .grid-2 {
+        grid-template-columns: 1fr 1fr;
+    }
+    .hud {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .main-hud {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .preview-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .theme-options {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .controls-row,
+    .controls-section {
+        grid-template-columns: 1fr;
+        align-items: stretch;
+    }
+    .filter-group,
+    .filter-row {
+        justify-content: flex-start;
+    }
+    .hero-copy,
+    .game-shell,
+    .card-body,
+    .card-header,
+    .section-card,
+    .feature-card,
+    .mode-card,
+    .stat-card,
+    .setting-card,
+    .achievement-card {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .preview-actions {
+        gap: 0.7rem;
+    }
+}
+
+
+/* ---------- Small tablets / large phones ---------- */
+
+@media (max-width: 760px) {
+    html {
+        font-size: 15px;
+    }
+    main {
+        padding-top: 1.4rem;
+        padding-bottom: 3rem;
+    }
+    .container {
+        width: min(100% - 1rem, var(--max-width));
+    }
+    .hero-copy h2,
+    .hero h2 {
+        font-size: clamp(1.9rem, 7vw, 2.7rem);
+    }
+    .status-line h2 {
+        font-size: 1.45rem;
+    }
+    .hero-copy,
+    .game-shell {
+        padding: 1rem;
+    }
+    .card-header,
+    .card-body {
+        padding: 0.95rem 1rem;
+    }
+    .summary-grid,
+    .grid-2,
+    .settings-grid,
+    .mode-grid,
+    .results-grid,
+    .mini-grid,
+    .stats-grid,
+    .preview-grid,
+    .achievement-grid,
+    .theme-options,
+    .example-row {
+        grid-template-columns: 1fr;
+    }
+    .main-hud {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    .hud {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    .input-row,
+    .controls-row,
+    .controls-section {
+        grid-template-columns: 1fr;
+    }
+    .action-row,
+    .hero-actions,
+    .preview-actions,
+    .modal-actions {
+        flex-direction: column;
+    }
+    .action-row>*,
+    .hero-actions>*,
+    .preview-actions>*,
+    .modal-actions>* {
+        width: 100%;
+        flex: 1 1 auto;
+    }
+    .step,
+    .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 0.55rem;
+    }
+    .timeline-label {
+        margin-bottom: 0.1rem;
+    }
+    .prompt-panel,
+    .word-box,
+    .preview-prompt,
+    .preview-box,
+    .example-box {
+        padding: 1rem;
+    }
+    .prompt-word,
+    .word-box .prompt,
+    .preview-prompt strong {
+        font-size: clamp(1.8rem, 9vw, 2.8rem);
+    }
+    .preview-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .preview-badges,
+    .badge-row,
+    .hero-points {
+        gap: 0.5rem;
+    }
+    .theme-options {
+        gap: 0.75rem;
+    }
+    .theme-btn {
+        padding: 0.8rem;
+    }
+    .leaderboard-table-wrap {
+        border-radius: 14px;
+    }
+    th,
+    td {
+        padding: 0.8rem 0.75rem;
+    }
+}
+
+
+/* ---------- Phones ---------- */
+
+@media (max-width: 520px) {
+    html {
+        font-size: 14px;
+    }
+    .topbar-inner {
+        align-items: stretch;
+    }
+    .brand {
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    .brand-badge {
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
+        border-radius: 14px;
+    }
+    .brand-text h1 {
+        font-size: 1rem;
+    }
+    .brand-text p {
+        font-size: 0.84rem;
+    }
+    .nav {
+        gap: 0.4rem;
+    }
+    .nav a {
+        padding: 0.55rem 0.75rem;
+        font-size: 0.92rem;
+    }
+    .hero-copy h2,
+    .hero h2 {
+        font-size: 2rem;
+        line-height: 1.08;
+    }
+    .hero-copy,
+    .card-body,
+    .card-header,
+    .game-shell,
+    .section-card,
+    .feature-card,
+    .mode-card,
+    .stat-card,
+    .setting-card,
+    .achievement-card {
+        padding-left: 0.9rem;
+        padding-right: 0.9rem;
+    }
+    .grid-3,
+    .grid-4,
+    .stats-grid,
+    .main-hud,
+    .hud,
+    .preview-grid {
+        grid-template-columns: 1fr;
+    }
+    .filter-group,
+    .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .filter-btn,
+    .primary-btn,
+    .secondary-btn,
+    .ghost-btn,
+    .danger-btn,
+    .action-btn,
+    .preview-btn,
+    .btn {
+        width: 100%;
+    }
+    .theme-options {
+        grid-template-columns: 1fr;
+    }
+    .main-hud .hud-box,
+    .hud .hud-card,
+    .stat-box,
+    .summary-box,
+    .mini-box,
+    .result-box {
+        min-height: auto;
+    }
+    .prompt-panel {
+        padding: 0.95rem 0.85rem;
+    }
+    .prompt-word,
+    .word-box .prompt,
+    .preview-prompt strong {
+        font-size: 1.9rem;
+        letter-spacing: 0.05em;
+    }
+    .input-panel label {
+        font-size: 0.95rem;
+    }
+    #answerInput,
+    input[type="text"],
+    select,
+    textarea {
+        min-height: 52px;
+        padding: 0.8rem 0.9rem;
+    }
+    .step-number,
+    .icon-circle,
+    .achievement-icon,
+    .mini-ach-icon,
+    .ach-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1rem;
+        border-radius: 14px;
+    }
+    .modal {
+        width: 100%;
+        border-radius: 18px;
+    }
+    .modal-head,
+    .modal-body {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .footer-inner {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+
+/* ---------- Very small phones ---------- */
+
+@media (max-width: 380px) {
+    html {
+        font-size: 13.5px;
+    }
+    .container {
+        width: min(100% - 0.75rem, var(--max-width));
+    }
+    .hero-copy h2,
+    .hero h2 {
+        font-size: 1.75rem;
+    }
+    .nav a {
+        font-size: 0.88rem;
+        padding: 0.5rem 0.68rem;
+    }
+    .brand-text p {
+        display: none;
+    }
+    .prompt-word,
+    .word-box .prompt,
+    .preview-prompt strong {
+        font-size: 1.65rem;
+    }
+    .card-header h2,
+    .card-header h3,
+    .section-card h3 {
+        font-size: 1rem;
+    }
+    .summary-box strong,
+    .stat-box strong,
+    .hud-box strong,
+    .result-box strong,
+    .mini-box strong,
+    .preview-stat strong,
+    .preview-item strong {
+        font-size: 1.1rem;
+    }
+}
+
+
+/* ---------- Landscape phones ---------- */
+
+@media (max-height: 520px) and (orientation: landscape) {
+    .topbar {
+        position: static;
+    }
+    main {
+        padding-top: 1rem;
+    }
+    .sidebar-section {
+        position: static !important;
+    }
+    .hero-copy,
+    .game-shell {
+        padding-top: 0.9rem;
+        padding-bottom: 0.9rem;
+    }
+}
+
+
+/* ---------- Reduced motion fallback ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .timer-critical {
+        animation: none !important;
+    }
+    .mode-btn:hover,
+    .filter-btn:hover,
+    .theme-btn:hover,
+    .feature-card:hover,
+    .mode-card:hover,
+    .stat-card:hover,
+    .setting-card:hover,
+    .achievement-card:hover,
+    .feature-box:hover,
+    .tech-box:hover,
+    .design-box:hover {
+        transform: none !important;
+    }
+}

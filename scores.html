@@ -1,0 +1,2098 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Scores page showing saved results from Reverse Typing, Keyboard Jump, Type Toss Circus, and Typing Shooter." />
+    <title>ReverseType | Scores</title>
+
+    <link rel="stylesheet" href="css/shared-settings.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+
+    <style>
+         :root {
+            --bg-1: #07111f;
+            --bg-2: #10172f;
+            --bg-3: #151034;
+            --dark: #14213d;
+            --muted: #c9d7ff;
+            --blue: #2f80ed;
+            --cyan: #33c8f2;
+            --red-main: #d71920;
+            --gold: #ffc83d;
+            --purple-main: #7b55ff;
+            --green-main: #2ecc71;
+            --card: rgba(255, 255, 255, 0.09);
+            --line: rgba(255, 255, 255, 0.14);
+            --shadow: 0 22px 50px rgba(0, 0, 0, 0.28);
+            --shadow-hover: 0 24px 52px rgba(0, 0, 0, 0.35);
+            --radius: 24px;
+            --transition: 220ms ease;
+            --max-width: 1400px;
+            --dark-1: #06142d;
+            --dark-2: #0b2245;
+            --text: #f1f7ff;
+            --soft: #9fb2e8;
+            --blue-1: #4aa3ff;
+            --blue-2: #33d1ff;
+            --purple: #7b55ff;
+            --gold-2: #ffd54a;
+            --green: #47ffbe;
+            --red: #ff6b8a;
+            --card-line: rgba(255, 255, 255, 0.14);
+            --shadow-soft: 0 16px 36px rgba(0, 0, 0, 0.24);
+        }
+        
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #ffffff;
+            background: radial-gradient(circle at 8% 10%, rgba(47, 128, 237, 0.34), transparent 30%), radial-gradient(circle at 92% 16%, rgba(123, 85, 255, 0.35), transparent 30%), radial-gradient(circle at 50% 100%, rgba(51, 200, 242, 0.16), transparent 38%), linear-gradient(135deg, var(--bg-1), var(--bg-2) 48%, var(--bg-3));
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        body.theme-blue {
+            --blue: #2f80ed;
+            --cyan: #59d7ff;
+            --purple: #33c8f2;
+            background: radial-gradient(circle at 8% 10%, rgba(47, 128, 237, 0.38), transparent 28%), radial-gradient(circle at 88% 16%, rgba(51, 200, 242, 0.3), transparent 30%), linear-gradient(135deg, #07101f, #0c1b35);
+        }
+        
+        body.theme-green {
+            --blue: #2ecc71;
+            --cyan: #74ffcb;
+            --purple: #29d98c;
+            background: radial-gradient(circle at 8% 10%, rgba(46, 204, 113, 0.32), transparent 28%), radial-gradient(circle at 88% 16%, rgba(116, 255, 203, 0.22), transparent 30%), linear-gradient(135deg, #06140f, #0a2018);
+        }
+        
+        body.theme-light {
+            --bg-1: #ffffff;
+            --bg-2: #ffffff;
+            --bg-3: #ffffff;
+            --dark: #14213d;
+            --muted: #667085;
+            --soft: #6f84a7;
+            --blue: #2f80ed;
+            --cyan: #33c8f2;
+            --card: #ffffff;
+            --line: rgba(20, 33, 61, 0.1);
+            --card-line: #d9e1ef;
+            --shadow: 0 18px 38px rgba(20, 33, 61, 0.12);
+            --shadow-soft: 0 16px 36px rgba(20, 33, 61, 0.12);
+            color: #14213d;
+            background: #ffffff !important;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        button,
+        select {
+            font: inherit;
+        }
+        
+        button {
+            border: none;
+            cursor: pointer;
+        }
+        
+        .skip-link {
+            position: absolute;
+            top: -60px;
+            left: 12px;
+            z-index: 999;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #000000;
+            box-shadow: var(--shadow);
+            transition: top var(--transition);
+        }
+        
+        .skip-link:focus {
+            top: 12px;
+        }
+        
+        .container {
+            width: min(100% - 32px, var(--max-width));
+            margin: 0 auto;
+        }
+        /* =========================
+           Header
+        ========================= */
+        
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: radial-gradient(circle at 8% 10%, rgba(46, 204, 113, 0.24), transparent 32%), radial-gradient(circle at 92% 18%, rgba(51, 200, 242, 0.12), transparent 34%), linear-gradient(135deg, rgba(6, 20, 15, 0.96), rgba(10, 32, 24, 0.96));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+        }
+        
+        .header-inner {
+            min-height: 86px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 900;
+            color: #f1fff8;
+        }
+        
+        .brand-mark {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #2ecc71, #33c8f2);
+            color: #ffffff;
+            font-weight: 900;
+            box-shadow: 0 10px 22px rgba(46, 204, 113, 0.24), 0 0 24px rgba(51, 200, 242, 0.18);
+            overflow: hidden;
+        }
+        
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .brand-text {
+            display: grid;
+            gap: 2px;
+        }
+        
+        .brand-name {
+            font-size: 1.2rem;
+            letter-spacing: -0.03em;
+            color: #f1fff8;
+        }
+        
+        .brand-subtitle {
+            font-size: 0.78rem;
+            color: #9fb2e8;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav a {
+            min-height: 44px;
+            padding: 0 14px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #c9d7ff;
+            font-size: 0.95rem;
+            font-weight: 800;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid transparent;
+            transition: background var(--transition), color var(--transition), transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+        }
+        
+        .nav a:hover,
+        .nav a:focus-visible {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.16);
+            transform: translateY(-1px);
+            outline: none;
+        }
+        
+        .nav a[aria-current="page"] {
+            background: linear-gradient(135deg, #2ecc71, #33c8f2);
+            color: #041126;
+            box-shadow: 0 10px 24px rgba(46, 204, 113, 0.25);
+        }
+        
+        main {
+            padding: 38px 0 70px;
+        }
+        /* =========================
+           Hero
+        ========================= */
+        
+        .score-hero {
+            position: relative;
+            overflow: hidden;
+            border-radius: 36px;
+            padding: clamp(2rem, 4vw, 4rem);
+            margin-bottom: 1.4rem;
+            background: radial-gradient(circle at 86% 18%, rgba(123, 85, 255, 0.35), transparent 32%), radial-gradient(circle at 12% 16%, rgba(51, 209, 255, 0.24), transparent 28%), linear-gradient(135deg, var(--dark-1), var(--dark-2) 58%, #283c75);
+            color: var(--text);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        
+        .score-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+            background-size: 48px 48px;
+            pointer-events: none;
+        }
+        
+        .score-hero::after {
+            content: "SCORE";
+            position: absolute;
+            right: 4%;
+            bottom: -0.16em;
+            color: rgba(255, 255, 255, 0.045);
+            font-size: clamp(5rem, 16vw, 14rem);
+            font-weight: 900;
+            letter-spacing: -0.08em;
+            pointer-events: none;
+        }
+        
+        .hero-layout {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .hero-copy {
+            display: grid;
+            gap: 1.2rem;
+        }
+        
+        .eyebrow {
+            display: inline-flex;
+            width: fit-content;
+            align-items: center;
+            gap: 0.55rem;
+            min-height: 38px;
+            padding: 0 14px;
+            border-radius: 999px;
+            background: rgba(71, 255, 190, 0.12);
+            color: var(--green);
+            font-size: 0.86rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        
+        .hero-copy h1 {
+            font-size: clamp(3rem, 7vw, 6.5rem);
+            line-height: 0.92;
+            font-weight: 900;
+            letter-spacing: -0.08em;
+            text-shadow: 0 12px 34px rgba(0, 0, 0, 0.35);
+        }
+        
+        .hero-copy p {
+            max-width: 680px;
+            color: #b9c9e8;
+            font-size: clamp(1rem, 2vw, 1.22rem);
+            line-height: 1.7;
+            font-weight: 700;
+        }
+        
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .hero-btn {
+            min-height: 58px;
+            padding: 0 1.35rem;
+            border-radius: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            transition: transform var(--transition), filter var(--transition), box-shadow var(--transition);
+        }
+        
+        .hero-btn.primary {
+            background: linear-gradient(135deg, var(--green), var(--blue-2));
+            color: #041126;
+            box-shadow: 0 18px 38px rgba(71, 255, 190, 0.24);
+        }
+        
+        .hero-btn.secondary {
+            background: rgba(255, 255, 255, 0.10);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+        }
+        
+        .hero-btn:hover,
+        .hero-btn:focus-visible {
+            transform: translateY(-3px);
+            filter: brightness(1.05);
+            outline: none;
+        }
+        
+        .hero-panel {
+            position: relative;
+            min-height: 360px;
+            border-radius: 30px;
+            padding: 1.4rem;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.045));
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            overflow: hidden;
+        }
+        
+        .hero-panel-title {
+            color: #9fb3d4;
+            font-size: 0.78rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            margin-bottom: 1rem;
+        }
+        
+        .big-score {
+            display: grid;
+            place-items: center;
+            min-height: 160px;
+            border-radius: 24px;
+            background: rgba(3, 14, 34, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            text-align: center;
+        }
+        
+        .big-score span {
+            color: #9fb3d4;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: 0.78rem;
+        }
+        
+        .big-score strong {
+            display: block;
+            margin-top: 0.3rem;
+            color: var(--gold-2);
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            line-height: 1;
+            font-weight: 900;
+            text-shadow: 0 5px 0 rgba(0, 0, 0, 0.25);
+        }
+        
+        .hero-mini-grid {
+            margin-top: 1rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+        }
+        
+        .hero-mini {
+            min-height: 88px;
+            border-radius: 20px;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: 0.8rem;
+            background: rgba(3, 14, 34, 0.62);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+        }
+        
+        .hero-mini strong {
+            display: block;
+            color: var(--blue-2);
+            font-size: 1.35rem;
+            font-weight: 900;
+        }
+        
+        .hero-mini span {
+            color: #9fb3d4;
+            font-size: 0.76rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        /* =========================
+           Game CTA Cards
+        ========================= */
+        
+        .game-cta-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+            width: 100%;
+            align-items: stretch;
+        }
+        
+        .game-cta-card {
+            position: relative;
+            overflow: hidden;
+            min-height: 185px;
+            border-radius: 26px;
+            padding: 1.3rem;
+            color: #ffffff;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+        }
+        
+        .game-cta-card:hover,
+        .game-cta-card:focus-visible {
+            transform: translateY(-6px);
+            filter: brightness(1.04);
+            box-shadow: var(--shadow-hover);
+            outline: none;
+        }
+        
+        .game-cta-card::after {
+            content: "";
+            position: absolute;
+            width: 190px;
+            height: 190px;
+            right: -70px;
+            top: -70px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.17);
+            pointer-events: none;
+        }
+        
+        .game-cta-card.reverse {
+            background: linear-gradient(135deg, #07162f, #5a42e8);
+        }
+        
+        .game-cta-card.keyboard {
+            background: linear-gradient(135deg, #28b7e9, #2fce73);
+        }
+        
+        .game-cta-card.circus {
+            background: repeating-linear-gradient(90deg, #8b0000 0 34px, #c70b0b 34px 68px);
+        }
+        
+        .game-cta-card.shooter {
+            background: radial-gradient(circle at 25% 25%, rgba(57, 255, 231, 0.32), transparent 28%), radial-gradient(circle at 75% 15%, rgba(255, 151, 0, 0.25), transparent 26%), linear-gradient(135deg, #02070d, #082b2e);
+        }
+        
+        .game-cta-card h2 {
+            position: relative;
+            z-index: 2;
+            font-size: 1.45rem;
+            line-height: 1.1;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            margin-bottom: 0.55rem;
+        }
+        
+        .game-cta-card p {
+            position: relative;
+            z-index: 2;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.55;
+            font-weight: 700;
+        }
+        
+        .game-cta-card span {
+            position: relative;
+            z-index: 2;
+            width: fit-content;
+            margin-top: 1rem;
+            display: inline-flex;
+            align-items: center;
+            min-height: 42px;
+            padding: 0 1rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.18);
+            font-weight: 900;
+        }
+        /* =========================
+           Panels and Table
+        ========================= */
+        
+        .layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            align-items: start;
+        }
+        
+        .section-stack {
+            display: grid;
+            gap: 1rem;
+            align-content: start;
+        }
+        
+        .panel {
+            padding: 0.9rem;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: var(--shadow-soft);
+            height: auto;
+            min-height: 0;
+            align-self: start;
+            backdrop-filter: blur(16px);
+        }
+        
+        .panel h3 {
+            font-size: 1rem;
+            margin-bottom: 0.6rem;
+            color: #ffffff;
+            font-weight: 900;
+        }
+        
+        .controls-grid {
+            display: grid;
+            grid-template-columns: 1fr minmax(220px, 320px);
+            gap: 0.65rem;
+            align-items: center;
+            height: auto;
+            min-height: 0;
+        }
+        
+        .filter-row {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            min-width: 0;
+        }
+        
+        .filter-btn,
+        .sort-select,
+        .danger-btn {
+            min-height: 42px;
+            border-radius: 13px;
+            padding: 0.65rem 0.85rem;
+            font-size: 0.9rem;
+            font-weight: 900;
+            transition: transform var(--transition), background var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
+        }
+        
+        .filter-btn,
+        .sort-select {
+            background: rgba(255, 255, 255, 0.09);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+        }
+        
+        .sort-select {
+            width: 100%;
+        }
+        
+        .sort-select option {
+            color: #111827;
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: #ffffff;
+            border-color: transparent;
+            box-shadow: 0 10px 18px rgba(47, 128, 237, 0.22);
+        }
+        
+        .danger-btn {
+            position: relative;
+            overflow: hidden;
+            grid-column: 1 / -1;
+            width: 100%;
+            min-height: 48px;
+            color: #ffe7ec;
+            background: linear-gradient(135deg, rgba(255, 93, 115, 0.18), rgba(123, 85, 255, 0.12)), rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 93, 115, 0.34);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+        
+        .danger-btn::before {
+            content: "⚠ ";
+        }
+        
+        .danger-btn::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+            transform: translateX(-120%);
+            transition: transform 500ms ease;
+        }
+        
+        .filter-btn:hover,
+        .danger-btn:hover,
+        .filter-btn:focus-visible,
+        .danger-btn:focus-visible,
+        .sort-select:focus-visible {
+            transform: translateY(-2px);
+            outline: none;
+        }
+        
+        .danger-btn:hover,
+        .danger-btn:focus-visible {
+            border-color: rgba(255, 93, 115, 0.55);
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.28), 0 0 26px rgba(255, 93, 115, 0.2);
+        }
+        
+        .danger-btn:hover::after,
+        .danger-btn:focus-visible::after {
+            transform: translateX(120%);
+        }
+        
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.75rem;
+        }
+        
+        .table-header span {
+            color: var(--soft);
+            font-size: 0.92rem;
+            font-weight: 900;
+        }
+        
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 980px;
+            background: rgba(255, 255, 255, 0.06);
+        }
+        
+        thead {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        th,
+        td {
+            padding: 0.95rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            vertical-align: middle;
+        }
+        
+        th {
+            color: #c9d7ff;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+        
+        td {
+            color: #dbe7ff;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            font-weight: 700;
+        }
+        
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+        
+        .rank-badge {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: inline-grid;
+            place-items: center;
+            font-weight: 900;
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+        }
+        
+        .rank-badge.gold {
+            background: #fff4cf;
+            color: #9b7000;
+        }
+        
+        .rank-badge.silver {
+            background: #eef2f7;
+            color: #617793;
+        }
+        
+        .rank-badge.bronze {
+            background: #ffe6d7;
+            color: #a95a2a;
+        }
+        
+        .game-tag,
+        .mode-tag,
+        .typing-tag,
+        .winner-tag {
+            display: inline-block;
+            padding: 0.38rem 0.7rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 900;
+        }
+        
+        .game-tag.reverse {
+            background: rgba(123, 85, 255, 0.16);
+            border: 1px solid rgba(123, 85, 255, 0.28);
+            color: #dcd6ff;
+        }
+        
+        .game-tag.keyboard {
+            background: rgba(51, 200, 242, 0.14);
+            border: 1px solid rgba(51, 200, 242, 0.28);
+            color: #c9f4ff;
+        }
+        
+        .game-tag.circus {
+            background: rgba(255, 93, 115, 0.14);
+            border: 1px solid rgba(255, 93, 115, 0.26);
+            color: #ffdce3;
+        }
+        
+        .game-tag.shooter {
+            background: rgba(57, 255, 231, 0.14);
+            border: 1px solid rgba(57, 255, 231, 0.28);
+            color: #d7fff9;
+        }
+        
+        .mode-tag,
+        .typing-tag {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: #dbe7ff;
+        }
+        
+        .winner-tag {
+            background: rgba(46, 204, 113, 0.14);
+            border: 1px solid rgba(46, 204, 113, 0.28);
+            color: #cbffdf;
+        }
+        
+        .winner-tag.loss {
+            background: rgba(255, 93, 115, 0.14);
+            border-color: rgba(255, 93, 115, 0.28);
+            color: #ffdce3;
+        }
+        
+        .winner-tag.draw {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.14);
+            color: #dbe7ff;
+        }
+        
+        .empty-state {
+            padding: 1.2rem;
+            color: var(--soft);
+            font-weight: 700;
+        }
+        /* =========================
+           Confirm Modal / Toast
+        ========================= */
+        
+        .confirm-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: grid;
+            place-items: center;
+            padding: 20px;
+            background: rgba(3, 7, 18, 0.72);
+            backdrop-filter: blur(14px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 220ms ease;
+        }
+        
+        .confirm-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .confirm-modal {
+            width: min(100%, 470px);
+            border-radius: 28px;
+            padding: 24px;
+            background: radial-gradient(circle at top left, rgba(255, 93, 115, 0.18), transparent 34%), radial-gradient(circle at top right, rgba(123, 85, 255, 0.2), transparent 38%), rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transform: translateY(18px) scale(0.96);
+            transition: transform 220ms ease;
+        }
+        
+        .confirm-overlay.show .confirm-modal {
+            transform: translateY(0) scale(1);
+        }
+        
+        .confirm-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 20px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 16px;
+            font-size: 1.6rem;
+            background: rgba(255, 93, 115, 0.16);
+            border: 1px solid rgba(255, 93, 115, 0.34);
+            box-shadow: 0 0 30px rgba(255, 93, 115, 0.22);
+        }
+        
+        .confirm-kicker {
+            color: #ffb8c3;
+            font-size: 0.82rem;
+            font-weight: 950;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+        }
+        
+        .confirm-content h2 {
+            color: #ffffff;
+            font-size: 1.55rem;
+            line-height: 1.1;
+            margin-bottom: 8px;
+            letter-spacing: -0.04em;
+        }
+        
+        .confirm-content p {
+            color: #c9d7ff;
+            font-weight: 700;
+        }
+        
+        .confirm-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 22px;
+        }
+        
+        .confirm-cancel,
+        .confirm-delete {
+            min-height: 50px;
+            border-radius: 16px;
+            font-weight: 950;
+            transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
+        }
+        
+        .confirm-cancel {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+        }
+        
+        .confirm-delete {
+            color: #ffffff;
+            background: linear-gradient(135deg, #ff5d73, #b8336a);
+            box-shadow: 0 0 26px rgba(255, 93, 115, 0.28);
+        }
+        
+        .confirm-cancel:hover,
+        .confirm-delete:hover,
+        .confirm-cancel:focus-visible,
+        .confirm-delete:focus-visible {
+            transform: translateY(-3px);
+            outline: none;
+        }
+        
+        .toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 10000;
+            max-width: min(420px, calc(100% - 40px));
+            padding: 14px 16px;
+            border-radius: 18px;
+            color: #d7ffe8;
+            background: rgba(46, 204, 113, 0.16);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(16px);
+            font-weight: 900;
+            opacity: 0;
+            transform: translateY(16px);
+            pointer-events: none;
+            transition: opacity 220ms ease, transform 220ms ease;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        footer {
+            margin-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            padding: 28px 0 36px;
+            color: var(--soft);
+            text-align: center;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.04);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--soft);
+            font-size: 0.95rem;
+        }
+        
+        .footer-links a:hover,
+        .footer-links a:focus-visible {
+            color: var(--cyan);
+            outline: none;
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+         :focus-visible {
+            outline: 3px solid rgba(47, 128, 237, 0.35);
+            outline-offset: 2px;
+            border-radius: 12px;
+        }
+        /* =========================
+           Light Theme Fixes
+        ========================= */
+        
+        body.theme-light .site-header {
+            background: rgba(255, 255, 255, 0.92);
+            border-bottom: 1px solid rgba(20, 33, 61, 0.1);
+            box-shadow: none;
+        }
+        
+        body.theme-light .brand,
+        body.theme-light .brand-name {
+            color: #14213d;
+        }
+        
+        body.theme-light .brand-subtitle {
+            color: #667085;
+        }
+        
+        body.theme-light .nav a {
+            color: #344054;
+            background: transparent;
+            border-color: transparent;
+        }
+        
+        body.theme-light .nav a:hover,
+        body.theme-light .nav a:focus-visible {
+            background: rgba(47, 128, 237, 0.1);
+            color: var(--blue);
+            border-color: transparent;
+        }
+        
+        body.theme-light .nav a[aria-current="page"] {
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: #ffffff;
+        }
+        
+        body.theme-light .panel {
+            background: #ffffff;
+            border: 1px solid #d9e1ef;
+            box-shadow: 0 16px 36px rgba(20, 33, 61, 0.12);
+        }
+        
+        body.theme-light .panel h3,
+        body.theme-light .table-header h3 {
+            color: #18355f;
+        }
+        
+        body.theme-light .filter-btn,
+        body.theme-light .sort-select {
+            background: #f3f6fb;
+            color: #18355f;
+            border: 1px solid #d9e1ef;
+        }
+        
+        body.theme-light .danger-btn {
+            color: #8a1f38;
+            background: linear-gradient(135deg, rgba(255, 93, 115, 0.12), rgba(123, 85, 255, 0.06)), #ffffff;
+            border: 1px solid rgba(255, 93, 115, 0.24);
+        }
+        
+        body.theme-light .table-wrap {
+            border: 1px solid #e3e9f3;
+            background: #ffffff;
+        }
+        
+        body.theme-light table {
+            background: #ffffff;
+        }
+        
+        body.theme-light thead {
+            background: #f7f9fd;
+        }
+        
+        body.theme-light th,
+        body.theme-light td {
+            border-bottom: 1px solid #e9eef6;
+        }
+        
+        body.theme-light th {
+            color: #4b6287;
+        }
+        
+        body.theme-light td {
+            color: #5e7394;
+        }
+        
+        body.theme-light tbody tr:hover {
+            background: #fafcff;
+        }
+        
+        body.theme-light .rank-badge {
+            background: #eef2f8;
+            color: #18355f;
+        }
+        
+        body.theme-light .mode-tag {
+            background: #f3f6fb;
+            border: 1px solid #dce4f1;
+            color: #4f6587;
+        }
+        
+        body.theme-light .typing-tag {
+            background: #eef1ff;
+            border: 1px solid #d8ddff;
+            color: #5664d9;
+        }
+        
+        body.theme-light .game-tag.reverse {
+            background: #eef1ff;
+            border: 1px solid #d8ddff;
+            color: #5664d9;
+        }
+        
+        body.theme-light .game-tag.keyboard {
+            background: #eaf5ff;
+            border: 1px solid #c9e5ff;
+            color: #1f6db6;
+        }
+        
+        body.theme-light .game-tag.circus {
+            background: #fff1f1;
+            border: 1px solid #ffc8c8;
+            color: #bd1e1e;
+        }
+        
+        body.theme-light .game-tag.shooter {
+            background: #e8fbff;
+            border: 1px solid #baeaf4;
+            color: #15779a;
+        }
+        
+        body.theme-light .winner-tag {
+            background: #eef8f4;
+            border: 1px solid #b8e6cf;
+            color: #239260;
+        }
+        
+        body.theme-light .winner-tag.loss {
+            background: #fff1f4;
+            border-color: #f0b9c5;
+            color: #d14d69;
+        }
+        
+        body.theme-light .winner-tag.draw {
+            background: #f3f6fb;
+            border-color: #dce4f1;
+            color: #617793;
+        }
+        
+        body.theme-light .empty-state {
+            color: #6f84a7;
+        }
+        
+        body.theme-light footer {
+            background: #ffffff;
+            color: #667085;
+            border-top: 1px solid rgba(20, 33, 61, 0.1);
+        }
+        
+        body.theme-light .footer-links a {
+            color: #475467;
+        }
+        
+        body.theme-light .confirm-overlay {
+            background: rgba(255, 255, 255, 0.72);
+        }
+        
+        body.theme-light .confirm-modal {
+            background: #ffffff;
+            border: 1px solid rgba(20, 33, 61, 0.12);
+            box-shadow: 0 30px 80px rgba(27, 51, 91, 0.2);
+        }
+        
+        body.theme-light .confirm-content h2 {
+            color: #14213d;
+        }
+        
+        body.theme-light .confirm-content p {
+            color: #52607a;
+        }
+        
+        body.theme-light .confirm-cancel {
+            color: #14213d;
+            background: rgba(20, 33, 61, 0.06);
+            border: 1px solid rgba(20, 33, 61, 0.12);
+        }
+        
+        body.theme-light .toast {
+            background: #ffffff;
+            color: #17663d;
+            border: 1px solid rgba(46, 204, 113, 0.25);
+        }
+        /* =========================
+           Responsive
+        ========================= */
+        
+        @media (max-width: 1180px) {
+            .hero-layout {
+                grid-template-columns: 1fr;
+            }
+            .game-cta-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 760px) {
+            .container {
+                width: min(100% - 20px, var(--max-width));
+            }
+            .header-inner {
+                min-height: auto;
+                padding: 14px 0;
+            }
+            .score-hero {
+                padding: 1.4rem;
+                border-radius: 26px;
+            }
+            .hero-mini-grid,
+            .game-cta-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-actions {
+                align-items: stretch;
+                flex-direction: column;
+            }
+            .hero-btn {
+                width: 100%;
+            }
+            .nav {
+                justify-content: flex-start;
+            }
+            .nav a {
+                min-height: 42px;
+                padding: 0 12px;
+                font-size: 0.9rem;
+            }
+            .filter-btn,
+            .sort-select,
+            .danger-btn {
+                width: 100%;
+            }
+            .confirm-actions {
+                grid-template-columns: 1fr;
+            }
+            .panel {
+                padding: 0.75rem;
+                border-radius: 20px;
+            }
+            .table-wrap {
+                overflow: visible;
+                border: 0;
+                background: transparent;
+            }
+            table {
+                min-width: 0;
+                width: 100%;
+                background: transparent;
+            }
+            thead {
+                display: none;
+            }
+            tbody,
+            tr,
+            td {
+                display: block;
+                width: 100%;
+            }
+            tbody tr {
+                margin-bottom: 1rem;
+                padding: 1rem;
+                border-radius: 20px;
+                background: rgba(255, 255, 255, 0.09);
+                border: 1px solid rgba(255, 255, 255, 0.14);
+                box-shadow: var(--shadow-soft);
+            }
+            tbody tr:hover {
+                background: rgba(255, 255, 255, 0.11);
+            }
+            td {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1rem;
+                padding: 0.75rem 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                white-space: normal;
+                text-align: right;
+            }
+            td:last-child {
+                border-bottom: 0;
+            }
+            td::before {
+                content: attr(data-label);
+                color: #c9d7ff;
+                font-size: 0.82rem;
+                font-weight: 900;
+                text-align: left;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+            }
+            td[colspan] {
+                display: block;
+                text-align: left;
+            }
+            td[colspan]::before {
+                display: none;
+            }
+            .game-tag,
+            .mode-tag,
+            .typing-tag,
+            .winner-tag {
+                white-space: normal;
+                text-align: center;
+            }
+            .rank-badge {
+                flex: 0 0 auto;
+            }
+            body.theme-light tbody tr {
+                background: #ffffff;
+                border: 1px solid #d9e1ef;
+                box-shadow: 0 16px 36px rgba(20, 33, 61, 0.12);
+            }
+            body.theme-light td {
+                border-bottom: 1px solid #e9eef6;
+            }
+            body.theme-light td::before {
+                color: #4b6287;
+            }
+        }
+        
+        @media (max-width: 460px) {
+            .brand-subtitle {
+                display: none;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                scroll-behavior: auto;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        (function() {
+            const value = localStorage.getItem("rtgSettings");
+
+            try {
+                const settings = value ? JSON.parse(value) : {};
+
+                if (settings.theme === "blue") {
+                    document.body.classList.add("theme-blue");
+                } else if (settings.theme === "green") {
+                    document.body.classList.add("theme-green");
+                } else if (settings.theme === "light") {
+                    document.body.classList.add("theme-light");
+                }
+
+                if (settings.highContrast) {
+                    document.body.classList.add("high-contrast");
+                }
+
+                if (settings.fontSize) {
+                    document.documentElement.style.setProperty("--base-font-size", `${settings.fontSize}px`);
+                }
+            } catch (error) {
+                console.warn("Theme settings could not be loaded.");
+            }
+        })();
+    </script>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand" aria-label="ReverseType home">
+                <div class="brand-mark">
+                    <img src="images/logo.png" alt="ReverseType logo" onerror="this.style.display='none'; this.parentNode.textContent='RT';" />
+                </div>
+
+                <div class="brand-text">
+                    <div class="brand-name">ReverseType</div>
+                    <div class="brand-subtitle">Typing Games</div>
+                </div>
+            </a>
+
+            <nav class="nav" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="reverse-setup.html">Reverse Game</a>
+                <a href="keyboard-jump.html">Keyboard Jump</a>
+                <a href="circus-game.html">Circus Game</a>
+                <a href="typing-shooter.html">Typing Shooter</a>
+                <a href="scores.html" aria-current="page">Scores</a>
+                <a href="achievements.html">Achievements</a>
+                <a href="settings.html">Settings</a>
+                <a href="about.html">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="container">
+            <section class="score-hero" aria-labelledby="scoresTitle">
+                <div class="hero-layout">
+                    <div class="hero-copy">
+                        <div class="eyebrow">🏆 Scoreboard</div>
+
+                        <h1 id="scoresTitle">Beat Your Best Score</h1>
+
+                        <p>
+                            Track your best runs across Reverse Typing, Keyboard Jump, Type Toss Circus, and Typing Shooter. Check your progress, choose a game, and jump back in to set a new high score.
+                        </p>
+
+                        <div class="hero-actions">
+                            <a class="hero-btn primary" href="index.html">Choose a Game →</a>
+                            <a class="hero-btn secondary" href="reverse-setup.html">Replay ReverseType</a>
+                            <a class="hero-btn secondary" href="typing-shooter.html">Play Typing Shooter</a>
+                        </div>
+                    </div>
+
+                    <aside class="hero-panel" aria-label="Top score preview">
+                        <div class="hero-panel-title">Best saved performance</div>
+
+                        <div class="big-score">
+                            <div>
+                                <span>Best Score</span>
+                                <strong id="bestPlayerScoreValue">0</strong>
+                            </div>
+                        </div>
+
+                        <div class="hero-mini-grid">
+                            <div class="hero-mini">
+                                <div>
+                                    <strong id="bestWpmValue">0</strong>
+                                    <span>Best WPM</span>
+                                </div>
+                            </div>
+
+                            <div class="hero-mini">
+                                <div>
+                                    <strong id="bestAccuracyValue">0%</strong>
+                                    <span>Accuracy</span>
+                                </div>
+                            </div>
+
+                            <div class="hero-mini">
+                                <div>
+                                    <strong id="gamesPlayedValue">0</strong>
+                                    <span>Games</span>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+
+            <section class="game-cta-grid" aria-label="Game shortcuts">
+                <a class="game-cta-card reverse" href="reverse-setup.html">
+                    <div>
+                        <h2>Reverse Typing</h2>
+                        <p>Train your brain by typing backwards and improving WPM.</p>
+                    </div>
+                    <span>Play Reverse →</span>
+                </a>
+
+                <a class="game-cta-card keyboard" href="keyboard-jump.html">
+                    <div>
+                        <h2>Keyboard Jump</h2>
+                        <p>Type platform words and make the character jump higher.</p>
+                    </div>
+                    <span>Play Jump →</span>
+                </a>
+
+                <a class="game-cta-card circus" href="circus-game.html">
+                    <div>
+                        <h2>Type Toss Circus</h2>
+                        <p>Pop circus animals by typing words quickly and accurately.</p>
+                    </div>
+                    <span>Play Circus →</span>
+                </a>
+
+                <a class="game-cta-card shooter" href="typing-shooter.html">
+                    <div>
+                        <h2>Typing Shooter</h2>
+                        <p>Type falling words, shoot enemies, and use EMP power.</p>
+                    </div>
+                    <span>Play Shooter →</span>
+                </a>
+            </section>
+
+            <section class="layout">
+                <section class="section-stack" aria-label="Main score content">
+                    <section class="panel">
+                        <h3>Filter and Sort Results</h3>
+
+                        <div class="controls-grid">
+                            <div class="filter-row">
+                                <button class="filter-btn active" type="button" data-game-filter="all">All Games</button>
+                                <button class="filter-btn" type="button" data-game-filter="reverse">Reverse Typing</button>
+                                <button class="filter-btn" type="button" data-game-filter="keyboard">Keyboard Jump</button>
+                                <button class="filter-btn" type="button" data-game-filter="circus">Type Toss Circus</button>
+                                <button class="filter-btn" type="button" data-game-filter="shooter">Typing Shooter</button>
+                            </div>
+
+                            <label class="sr-only" for="sortSelect">Sort scores</label>
+
+                            <select id="sortSelect" class="sort-select">
+                                <option value="recent">Sort by most recent</option>
+                                <option value="playerScore">Sort by score</option>
+                                <option value="computerScore">Sort by computer score</option>
+                                <option value="wpm">Sort by WPM</option>
+                                <option value="accuracy">Sort by accuracy</option>
+                                <option value="errors">Sort by fewest errors</option>
+                            </select>
+
+                            <button id="resetScoresBtn" class="danger-btn" type="button">Reset All Scores</button>
+                        </div>
+                    </section>
+
+                    <section class="panel">
+                        <div class="table-header">
+                            <h3>Leaderboard</h3>
+                            <span id="resultsCount">Showing 0 results</span>
+                        </div>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Game</th>
+                                        <th>Mode</th>
+                                        <th>Typing</th>
+                                        <th>Score</th>
+                                        <th>Computer</th>
+                                        <th>Result</th>
+                                        <th>WPM</th>
+                                        <th>Accuracy</th>
+                                        <th>Errors</th>
+                                        <th>Extra</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="scoresTableBody">
+                                    <tr>
+                                        <td colspan="12">
+                                            <div class="empty-state">No saved scores yet. Play a game to create results.</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="scores.html">Scores</a>
+                <a href="settings.html">Settings</a>
+                <a href="about.html">About</a>
+            </div>
+
+            <p>© 2026 ReverseType.fun. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="confirm-overlay" id="confirmOverlay" aria-hidden="true">
+        <div class="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+            <div class="confirm-icon">⚠</div>
+
+            <div class="confirm-content">
+                <p class="confirm-kicker">Danger action</p>
+                <h2 id="confirmTitle">Reset all scores?</h2>
+
+                <p>
+                    This will permanently delete saved scores from Reverse Typing, Keyboard Jump, Type Toss Circus, and Typing Shooter.
+                </p>
+            </div>
+
+            <div class="confirm-actions">
+                <button class="confirm-cancel" type="button" id="confirmCancelBtn">Cancel</button>
+                <button class="confirm-delete" type="button" id="confirmDeleteBtn">Reset scores</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toastMessage" role="status" aria-live="polite">
+        All saved scores have been reset.
+    </div>
+
+    <script>
+        const STORAGE_KEYS = {
+            reverseScores: "rtgHighScores",
+            keyboardScores: "keyboardJumpHighScores",
+            circusScores: "circusTypingHighScores",
+
+            shooterNormalBest: "ztypeNormalBest",
+            shooterReverseBest: "ztypeReverseBest",
+            shooterScores: "typingShooterScores"
+        };
+
+        const ui = {
+            bestWpmValue: document.getElementById("bestWpmValue"),
+            bestPlayerScoreValue: document.getElementById("bestPlayerScoreValue"),
+            gamesPlayedValue: document.getElementById("gamesPlayedValue"),
+            bestAccuracyValue: document.getElementById("bestAccuracyValue"),
+            scoresTableBody: document.getElementById("scoresTableBody"),
+            resultsCount: document.getElementById("resultsCount"),
+            sortSelect: document.getElementById("sortSelect"),
+            resetScoresBtn: document.getElementById("resetScoresBtn"),
+            filterButtons: document.querySelectorAll(".filter-btn"),
+            confirmOverlay: document.getElementById("confirmOverlay"),
+            confirmCancelBtn: document.getElementById("confirmCancelBtn"),
+            confirmDeleteBtn: document.getElementById("confirmDeleteBtn"),
+            toastMessage: document.getElementById("toastMessage")
+        };
+
+        let currentGameFilter = "all";
+        let currentSort = "recent";
+        let toastTimer = null;
+
+        function safeParse(value, fallback) {
+            try {
+                return value ? JSON.parse(value) : fallback;
+            } catch {
+                return fallback;
+            }
+        }
+
+        function readStorageArray(key) {
+            const data = safeParse(localStorage.getItem(key), []);
+            return Array.isArray(data) ? data : [];
+        }
+
+        function writeStorageArray(key, value) {
+            localStorage.setItem(key, JSON.stringify(Array.isArray(value) ? value : []));
+        }
+
+        function escapeHtml(value) {
+            return String(value)
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+        }
+
+        function normaliseDate(value) {
+            if (!value) return "";
+
+            const date = new Date(value);
+            return Number.isNaN(date.getTime()) ? "" : date.toISOString();
+        }
+
+        function formatDate(value) {
+            if (!value) return "Unknown";
+
+            const date = new Date(value);
+
+            if (Number.isNaN(date.getTime())) {
+                return "Unknown";
+            }
+
+            return date.toLocaleString();
+        }
+
+        function toNumber(value, fallback = 0) {
+            const number = Number(value);
+            return Number.isFinite(number) ? number : fallback;
+        }
+
+        function formatTimeFromSeconds(seconds) {
+            const safeSeconds = Math.max(0, Math.floor(toNumber(seconds)));
+            const minutes = Math.floor(safeSeconds / 60);
+            const remainingSeconds = safeSeconds % 60;
+
+            return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
+        }
+
+        function titleCase(value) {
+            return String(value || "-")
+                .replaceAll("-", " ")
+                .replaceAll("_", " ")
+                .replace(/\b\w/g, (char) => char.toUpperCase());
+        }
+
+        function normaliseReverseScore(score) {
+            return {
+                gameKey: "reverse",
+                gameName: "Reverse Typing",
+                mode: score.mode || "common",
+                typingMode: score.typingMode || "reverse",
+                score: toNumber(score.score),
+                computerScore: toNumber(score.computerScore),
+                winner: score.winner || "Solo",
+                wpm: toNumber(score.wpm),
+                accuracy: toNumber(score.accuracy),
+                bestStreak: toNumber(score.bestStreak),
+                errors: toNumber(score.errors),
+                extra: `Streak: ${toNumber(score.bestStreak)}`,
+                playedAt: normaliseDate(score.playedAt)
+            };
+        }
+
+        function normaliseKeyboardScore(score) {
+            const timePlayed = score.timePlayed || score.time || score.duration || "-";
+
+            return {
+                gameKey: "keyboard",
+                gameName: "Keyboard Jump",
+                mode: score.mode || score.difficulty || "Platform",
+                typingMode: score.typingMode || "normal",
+                score: toNumber(score.score),
+                computerScore: 0,
+                winner: score.winner || "Completed",
+                wpm: toNumber(score.wpm),
+                accuracy: score.accuracy === undefined ? 0 : toNumber(score.accuracy),
+                bestStreak: toNumber(score.bestStreak),
+                errors: toNumber(score.errors),
+                extra: `Grade: ${score.grade || "-"} | Time: ${typeof timePlayed === "number" ? formatTimeFromSeconds(timePlayed) : timePlayed}`,
+                playedAt: normaliseDate(score.playedAt)
+            };
+        }
+
+        function normaliseCircusScore(score) {
+            return {
+                gameKey: "circus",
+                gameName: "Type Toss Circus",
+                mode: score.difficulty || score.mode || "Circus",
+                typingMode: score.typingMode || "normal",
+                score: toNumber(score.score),
+                computerScore: 0,
+                winner: score.winner || "Completed",
+                wpm: toNumber(score.wpm),
+                accuracy: score.accuracy === undefined ? 0 : toNumber(score.accuracy),
+                bestStreak: toNumber(score.bestStreak),
+                errors: toNumber(score.errors),
+                extra: `Grade: ${score.grade || "-"} | Lesson: ${titleCase(score.lesson || score.wordList || "-")}`,
+                playedAt: normaliseDate(score.playedAt)
+            };
+        }
+
+        function normaliseShooterScore(score) {
+            return {
+                gameKey: "shooter",
+                gameName: "Typing Shooter",
+                mode: score.mode || "Space",
+                typingMode: score.typingMode || "normal",
+                score: toNumber(score.score),
+                computerScore: 0,
+                winner: score.winner || "Completed",
+                wpm: toNumber(score.wpm),
+                accuracy: score.accuracy === undefined ? 0 : toNumber(score.accuracy),
+                bestStreak: toNumber(score.bestStreak || score.longestStreak),
+                errors: toNumber(score.errors),
+                extra: `Wave: ${toNumber(score.wave, 1)} | EMP: ${toNumber(score.empUsed || 0)}`,
+                playedAt: normaliseDate(score.playedAt)
+            };
+        }
+
+        function getShooterBestScores() {
+            const normalBest = toNumber(localStorage.getItem(STORAGE_KEYS.shooterNormalBest));
+            const reverseBest = toNumber(localStorage.getItem(STORAGE_KEYS.shooterReverseBest));
+
+            const scores = [];
+
+            if (normalBest > 0) {
+                scores.push({
+                    gameKey: "shooter",
+                    gameName: "Typing Shooter",
+                    mode: "Space",
+                    typingMode: "normal",
+                    score: normalBest,
+                    computerScore: 0,
+                    winner: "Best Score",
+                    wpm: 0,
+                    accuracy: 0,
+                    bestStreak: 0,
+                    errors: 0,
+                    extra: "Normal Mode Best",
+                    playedAt: ""
+                });
+            }
+
+            if (reverseBest > 0) {
+                scores.push({
+                    gameKey: "shooter",
+                    gameName: "Typing Shooter",
+                    mode: "Space",
+                    typingMode: "reverse",
+                    score: reverseBest,
+                    computerScore: 0,
+                    winner: "Best Score",
+                    wpm: 0,
+                    accuracy: 0,
+                    bestStreak: 0,
+                    errors: 0,
+                    extra: "Reverse Mode Best",
+                    playedAt: ""
+                });
+            }
+
+            return scores;
+        }
+
+        function getAllScores() {
+            const reverseScores = readStorageArray(STORAGE_KEYS.reverseScores).map(normaliseReverseScore);
+            const keyboardScores = readStorageArray(STORAGE_KEYS.keyboardScores).map(normaliseKeyboardScore);
+            const circusScores = readStorageArray(STORAGE_KEYS.circusScores).map(normaliseCircusScore);
+            const shooterHistoryScores = readStorageArray(STORAGE_KEYS.shooterScores).map(normaliseShooterScore);
+            const shooterBestScores = getShooterBestScores();
+
+            return [
+                ...reverseScores,
+                ...keyboardScores,
+                ...circusScores,
+                ...shooterHistoryScores,
+                ...shooterBestScores
+            ];
+        }
+
+        function getGameTagClass(gameKey) {
+            if (gameKey === "keyboard") return "keyboard";
+            if (gameKey === "circus") return "circus";
+            if (gameKey === "shooter") return "shooter";
+
+            return "reverse";
+        }
+
+        function getRankClass(index) {
+            if (index === 0) return "gold";
+            if (index === 1) return "silver";
+            if (index === 2) return "bronze";
+
+            return "";
+        }
+
+        function getWinnerClass(winner) {
+            const value = String(winner || "").toLowerCase();
+
+            if (value.includes("draw")) return "draw";
+            if (value.includes("computer")) return "loss";
+            if (value.includes("completed")) return "draw";
+            if (value.includes("solo")) return "draw";
+            if (value.includes("best")) return "draw";
+
+            return "";
+        }
+
+        function formatReverseMode(mode) {
+            const labels = {
+                common: "Common",
+                quotes: "Quotes",
+                code: "Code",
+                numbers: "Numbers",
+                custom: "Custom"
+            };
+
+            return labels[mode] || titleCase(mode);
+        }
+
+        function formatMode(score) {
+            if (score.gameKey === "reverse") {
+                return formatReverseMode(score.mode);
+            }
+
+            return titleCase(score.mode);
+        }
+
+        function formatTypingMode(mode) {
+            return mode === "reverse" ? "Reverse" : "Normal";
+        }
+
+        function filterScores(scores) {
+            if (currentGameFilter === "all") {
+                return scores;
+            }
+
+            return scores.filter((score) => score.gameKey === currentGameFilter);
+        }
+
+        function sortScores(scores) {
+            const sorted = [...scores];
+
+            if (currentSort === "playerScore") {
+                sorted.sort((a, b) => {
+                    if (b.score !== a.score) return b.score - a.score;
+                    return b.wpm - a.wpm;
+                });
+            } else if (currentSort === "computerScore") {
+                sorted.sort((a, b) => {
+                    if (b.computerScore !== a.computerScore) {
+                        return b.computerScore - a.computerScore;
+                    }
+
+                    return b.score - a.score;
+                });
+            } else if (currentSort === "wpm") {
+                sorted.sort((a, b) => {
+                    if (b.wpm !== a.wpm) return b.wpm - a.wpm;
+                    return b.score - a.score;
+                });
+            } else if (currentSort === "accuracy") {
+                sorted.sort((a, b) => {
+                    if (b.accuracy !== a.accuracy) return b.accuracy - a.accuracy;
+                    return b.score - a.score;
+                });
+            } else if (currentSort === "errors") {
+                sorted.sort((a, b) => {
+                    if (a.errors !== b.errors) return a.errors - b.errors;
+                    return b.score - a.score;
+                });
+            } else {
+                sorted.sort((a, b) => {
+                    const dateA = new Date(a.playedAt || 0).getTime();
+                    const dateB = new Date(b.playedAt || 0).getTime();
+
+                    if (dateB !== dateA) {
+                        return dateB - dateA;
+                    }
+
+                    return b.score - a.score;
+                });
+            }
+
+            return sorted;
+        }
+
+        function updateSummary(scores) {
+            if (!scores.length) {
+                ui.bestWpmValue.textContent = "0";
+                ui.bestPlayerScoreValue.textContent = "0";
+                ui.gamesPlayedValue.textContent = "0";
+                ui.bestAccuracyValue.textContent = "0%";
+                return;
+            }
+
+            const bestWpm = Math.max(...scores.map((score) => toNumber(score.wpm)));
+            const bestScore = Math.max(...scores.map((score) => toNumber(score.score)));
+            const bestAccuracy = Math.max(...scores.map((score) => toNumber(score.accuracy)));
+
+            ui.bestWpmValue.textContent = String(bestWpm);
+            ui.bestPlayerScoreValue.textContent = String(bestScore);
+            ui.gamesPlayedValue.textContent = String(scores.length);
+            ui.bestAccuracyValue.textContent = `${bestAccuracy}%`;
+        }
+
+        function renderTable() {
+            const allScores = getAllScores();
+            updateSummary(allScores);
+
+            const filtered = filterScores(allScores);
+            const sorted = sortScores(filtered);
+
+            ui.resultsCount.textContent = `Showing ${sorted.length} result${sorted.length === 1 ? "" : "s"}`;
+
+            if (!sorted.length) {
+                ui.scoresTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="12">
+                            <div class="empty-state">No scores match the selected filter yet.</div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            ui.scoresTableBody.innerHTML = sorted.map((score, index) => {
+                return `
+                    <tr>
+                        <td data-label="Rank">
+                            <span class="rank-badge ${getRankClass(index)}">${index + 1}</span>
+                        </td>
+
+                        <td data-label="Game">
+                            <span class="game-tag ${getGameTagClass(score.gameKey)}">${escapeHtml(score.gameName)}</span>
+                        </td>
+
+                        <td data-label="Mode">
+                            <span class="mode-tag">${escapeHtml(formatMode(score))}</span>
+                        </td>
+
+                        <td data-label="Typing">
+                            <span class="typing-tag">${escapeHtml(formatTypingMode(score.typingMode))}</span>
+                        </td>
+
+                        <td data-label="Score">${escapeHtml(score.score)}</td>
+                        <td data-label="Computer">${escapeHtml(score.computerScore)}</td>
+
+                        <td data-label="Result">
+                            <span class="winner-tag ${getWinnerClass(score.winner)}">${escapeHtml(score.winner)}</span>
+                        </td>
+
+                        <td data-label="WPM">${escapeHtml(score.wpm)}</td>
+                        <td data-label="Accuracy">${escapeHtml(score.accuracy)}%</td>
+                        <td data-label="Errors">${escapeHtml(score.errors)}</td>
+                        <td data-label="Extra">${escapeHtml(score.extra)}</td>
+                        <td data-label="Date">${escapeHtml(formatDate(score.playedAt))}</td>
+                    </tr>
+                `;
+            }).join("");
+        }
+
+        function setActiveFilter(button) {
+            ui.filterButtons.forEach((btn) => btn.classList.remove("active"));
+            button.classList.add("active");
+        }
+
+        function openConfirmModal() {
+            ui.confirmOverlay.classList.add("show");
+            ui.confirmOverlay.setAttribute("aria-hidden", "false");
+
+            setTimeout(() => {
+                ui.confirmCancelBtn.focus();
+            }, 50);
+        }
+
+        function closeConfirmModal() {
+            ui.confirmOverlay.classList.remove("show");
+            ui.confirmOverlay.setAttribute("aria-hidden", "true");
+        }
+
+        function showToast(message) {
+            ui.toastMessage.textContent = message;
+            ui.toastMessage.classList.add("show");
+
+            clearTimeout(toastTimer);
+
+            toastTimer = setTimeout(() => {
+                ui.toastMessage.classList.remove("show");
+            }, 2600);
+        }
+
+        function resetScores() {
+            writeStorageArray(STORAGE_KEYS.reverseScores, []);
+            writeStorageArray(STORAGE_KEYS.keyboardScores, []);
+            writeStorageArray(STORAGE_KEYS.circusScores, []);
+            writeStorageArray(STORAGE_KEYS.shooterScores, []);
+
+            localStorage.removeItem(STORAGE_KEYS.shooterNormalBest);
+            localStorage.removeItem(STORAGE_KEYS.shooterReverseBest);
+
+            renderTable();
+            closeConfirmModal();
+            showToast("All saved scores have been reset.");
+        }
+
+        ui.filterButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                currentGameFilter = button.dataset.gameFilter;
+                setActiveFilter(button);
+                renderTable();
+            });
+        });
+
+        ui.sortSelect.addEventListener("change", () => {
+            currentSort = ui.sortSelect.value;
+            renderTable();
+        });
+
+        ui.resetScoresBtn.addEventListener("click", openConfirmModal);
+        ui.confirmCancelBtn.addEventListener("click", closeConfirmModal);
+        ui.confirmDeleteBtn.addEventListener("click", resetScores);
+
+        ui.confirmOverlay.addEventListener("click", (event) => {
+            if (event.target === ui.confirmOverlay) {
+                closeConfirmModal();
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && ui.confirmOverlay.classList.contains("show")) {
+                closeConfirmModal();
+            }
+        });
+
+        renderTable();
+    </script>
+
+    <script src="js/shared-settings.js"></script>
+    <script src="js/theme-loader.js"></script>
+</body>
+
+</html>

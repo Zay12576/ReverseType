@@ -1,0 +1,147 @@
+:root {
+    --bg-1: #070b18;
+    --bg-2: #101a33;
+    --text: #ffffff;
+    --muted: #c9d7ff;
+    --soft: #9fb2e8;
+    --accent: #7b55ff;
+    --accent-2: #2f80ed;
+    --accent-3: #33c8f2;
+    --border: rgba(255, 255, 255, 0.16);
+    --shadow: 0 20px 45px rgba(0, 0, 0, 0.26);
+    --glow: 0 0 28px rgba(51, 200, 242, 0.34);
+    --base-font-size: 16px;
+}
+
+html {
+    font-size: var(--base-font-size);
+}
+
+body.theme-blue {
+    --accent: #2f80ed;
+    --accent-2: #33c8f2;
+    --accent-3: #59d7ff;
+    --glow: 0 0 28px rgba(51, 200, 242, 0.38);
+    background: radial-gradient(circle at 8% 10%, rgba(47, 128, 237, 0.38), transparent 28%), radial-gradient(circle at 88% 16%, rgba(51, 200, 242, 0.3), transparent 30%), linear-gradient(135deg, #07101f, #0c1b35);
+}
+
+body.theme-green {
+    --accent: #29d98c;
+    --accent-2: #2ecc71;
+    --accent-3: #74ffcb;
+    --glow: 0 0 28px rgba(41, 217, 140, 0.36);
+    background: radial-gradient(circle at 8% 10%, rgba(46, 204, 113, 0.32), transparent 28%), radial-gradient(circle at 88% 16%, rgba(116, 255, 203, 0.22), transparent 30%), linear-gradient(135deg, #06140f, #0a2018);
+}
+
+body.theme-light {
+    --bg-1: #ffffff;
+    --bg-2: #ffffff;
+    --text: #14213d;
+    --muted: #52607a;
+    --soft: #6b7a90;
+    --accent: #2f80ed;
+    --accent-2: #33c8f2;
+    --accent-3: #66c8ff;
+    --border: rgba(20, 33, 61, 0.12);
+    --shadow: 0 18px 40px rgba(27, 51, 91, 0.1);
+    --glow: 0 0 24px rgba(47, 128, 237, 0.16);
+    color: #14213d;
+    background: #ffffff !important;
+}
+
+body.high-contrast {
+    --text: #ffffff;
+    --muted: #f0f0f0;
+    --soft: #dddddd;
+    --border: rgba(255, 255, 255, 0.32);
+}
+
+body.theme-light.high-contrast {
+    --text: #111827;
+    --muted: #374151;
+    --soft: #4b5563;
+    --border: rgba(17, 24, 39, 0.22);
+    color: #111827;
+    background: #ffffff !important;
+}
+
+
+/* Shared light theme fixes */
+
+body.theme-light .hero-card,
+body.theme-light .ready-card,
+body.theme-light .card,
+body.theme-light .section-card,
+body.theme-light .setting-card,
+body.theme-light .overview-card,
+body.theme-light .score-card,
+body.theme-light .achievement-card,
+body.theme-light .profile-card,
+body.theme-light .game-panel,
+body.theme-light .panel,
+body.theme-light .modal,
+body.theme-light .box {
+    background: #ffffff !important;
+    color: #14213d;
+    border-color: rgba(20, 33, 61, 0.12) !important;
+    box-shadow: 0 16px 34px rgba(27, 51, 91, 0.1);
+}
+
+body.theme-light .preview-panel,
+body.theme-light .ready-stat,
+body.theme-light .preview-stat,
+body.theme-light .toggle-row,
+body.theme-light .mini-list li,
+body.theme-light .stat-card,
+body.theme-light .table-card,
+body.theme-light .leaderboard-card,
+body.theme-light .run-card {
+    background: #f8fafc !important;
+    color: #14213d;
+    border-color: rgba(20, 33, 61, 0.1) !important;
+}
+
+body.theme-light .eyebrow,
+body.theme-light .pill,
+body.theme-light .preview-pill,
+body.theme-light .mini-play,
+body.theme-light .badge,
+body.theme-light .tag {
+    background: rgba(20, 33, 61, 0.06) !important;
+    color: #14213d !important;
+    border-color: rgba(20, 33, 61, 0.1) !important;
+}
+
+body.theme-light .outline-play-btn,
+body.theme-light .secondary-btn,
+body.theme-light .ghost-btn,
+body.theme-light .preview-btn.secondary,
+body.theme-light button.secondary,
+body.theme-light .btn.secondary {
+    color: #14213d !important;
+    background: rgba(20, 33, 61, 0.06) !important;
+    border: 1px solid rgba(20, 33, 61, 0.12) !important;
+}
+
+body.theme-light input,
+body.theme-light select,
+body.theme-light textarea {
+    background: #ffffff !important;
+    color: #14213d !important;
+    border: 1px solid rgba(20, 33, 61, 0.14) !important;
+}
+
+body.theme-light table {
+    color: #14213d;
+}
+
+body.theme-light th,
+body.theme-light td {
+    border-color: rgba(20, 33, 61, 0.1) !important;
+}
+
+body.theme-light footer {
+    background: #ffffff !important;
+    color: #667085 !important;
+    border-top-color: rgba(20, 33, 61, 0.1) !important;
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ZTYPE style typing shooter with normal and reverse typing mode." />
+    <title>ZTYPE Reverse Typing Shooter</title>
+    <link rel="stylesheet" href="css/typing-shooter.css" />
+</head>
+
+<body>
+    <main class="game-shell">
+        <canvas id="starCanvas" aria-hidden="true"></canvas>
+
+        <!-- TITLE SCREEN -->
+        <section class="screen title-screen active" id="titleScreen">
+            <div class="brand">PHOBOSLAB</div>
+            <h1>ZTYPE</h1>
+
+            <div class="title-ship-wrap">
+                <div class="title-beam"></div>
+                <div class="ship title-ship"></div>
+            </div>
+
+            <nav class="title-menu" aria-label="Title menu">
+                <button id="newGameBtn" class="menu-btn active-btn">new game</button>
+                <button id="soundMenuBtn" class="menu-btn muted-btn">sound menu</button>
+                <button id="reverseTypeBtn" class="menu-btn reverse-btn" aria-pressed="false">
+          <span class="reverse-icon">↔</span>
+          reverse type: <span id="reverseStateText">off</span>
+        </button>
+            </nav>
+
+            <button class="info-btn" id="infoBtn" title="How to play">i</button>
+        </section>
+
+        <!-- PLAY SCREEN -->
+        <section class="screen play-screen" id="playScreen">
+            <div class="game-hud">
+                <div class="hud-item">SCORE <span id="scoreText">000000</span></div>
+                <div class="hud-item">WAVE <span id="waveText">001</span></div>
+                <div class="hud-item">MODE <span id="modeText">NORMAL</span></div>
+            </div>
+
+            <div class="help-text" id="helpText">
+                <p id="mainHelpText">Type the words to shoot!</p>
+                <p>ENTER for EMP • ESC to pause</p>
+            </div>
+
+            <div class="ship player-ship" id="playerShip"></div>
+            <div class="emp-badge" id="empBadge">3</div>
+            <div id="wordLayer" class="word-layer"></div>
+            <div id="laserLayer" class="laser-layer"></div>
+        </section>
+
+        <!-- PAUSE / SOUND MENU -->
+        <section class="screen pause-screen" id="pauseScreen">
+            <h2>GAME PAUSED</h2>
+
+            <div class="volume-box">
+                <div class="volume-label">SOUND</div>
+                <div class="volume-row active-volume">
+                    <button id="soundMinus">−</button>
+                    <span id="soundValue">100%</span>
+                    <button id="soundPlus">+</button>
+                </div>
+            </div>
+
+            <div class="volume-box">
+                <div class="volume-label">MUSIC</div>
+                <div class="volume-row">
+                    <button id="musicMinus">−</button>
+                    <span id="musicValue">100%</span>
+                    <button id="musicPlus">+</button>
+                </div>
+            </div>
+
+            <button id="resumeBtn" class="pause-link">resume game</button>
+            <button id="backTitleBtn" class="pause-link">back to title</button>
+        </section>
+
+        <!-- RESULT SCREEN -->
+        <section class="screen result-screen" id="resultScreen">
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <span>FINAL SCORE</span>
+                    <strong id="finalScore">000000</strong>
+                </article>
+                <article class="stat-card">
+                    <span>YOU REACHED</span>
+                    <strong>WAVE <b id="finalWave">001</b></strong>
+                </article>
+                <article class="stat-card">
+                    <span>ACCURACY</span>
+                    <strong><b id="accuracyText">0</b>%</strong>
+                </article>
+                <article class="stat-card">
+                    <span>LONGEST STREAK</span>
+                    <strong id="streakText">0</strong>
+                </article>
+            </div>
+
+            <div class="best-row" id="bestRow">
+                <span class="best-hex"></span>
+                <span>NEW PERSONAL BEST</span>
+            </div>
+
+            <button id="restartBtn" class="orange-link">back to title</button>
+        </section>
+
+        <!-- INFO SCREEN -->
+        <section class="screen info-screen" id="infoScreen">
+            <h2>HOW TO PLAY</h2>
+            <p>Words fall from space. Type a word to lock on, then finish typing it to destroy the enemy.</p>
+            <p><strong>Reverse Type</strong> makes the visible enemy words backwards. You must type the backwards word exactly.</p>
+            <p>Press <strong>ENTER</strong> to use EMP and clear all visible enemies.</p>
+            <p>Press <strong>ESC</strong> to pause.</p>
+
+            <button type="button" id="closeInfoBtn" class="orange-link">back</button>
+        </section>
+    </main>
+    <script src="js/typing-shooter.js"></script>
+
+</body>
+
+</html>

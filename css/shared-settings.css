@@ -1,0 +1,194 @@
+/* =====================================================
+   ReverseType Shared Settings CSS
+   Add this CSS file to every page.
+===================================================== */
+
+:root {
+    --base-font-size: 16px;
+    --shared-theme-accent: #7b55ff;
+    --shared-theme-accent-2: #2f80ed;
+    --shared-theme-accent-3: #33c8f2;
+}
+
+html {
+    font-size: var(--base-font-size);
+}
+
+
+/* =========================
+   Theme Classes
+========================= */
+
+body.theme-purple {
+    --shared-theme-accent: #7b55ff;
+    --shared-theme-accent-2: #2f80ed;
+    --shared-theme-accent-3: #ff6be7;
+}
+
+body.theme-blue {
+    --shared-theme-accent: #2f80ed;
+    --shared-theme-accent-2: #33c8f2;
+    --shared-theme-accent-3: #59d7ff;
+}
+
+body.theme-green {
+    --shared-theme-accent: #29d98c;
+    --shared-theme-accent-2: #2ecc71;
+    --shared-theme-accent-3: #74ffcb;
+}
+
+
+/* =========================
+   Apply Theme to Common Elements
+========================= */
+
+body.theme-purple .play-btn,
+body.theme-purple .primary-btn,
+body.theme-purple .big-play-btn,
+body.theme-purple .preview-btn.primary,
+body.theme-purple .nav a[aria-current="page"] {
+    background: linear-gradient(135deg, #7b55ff, #2f80ed) !important;
+}
+
+body.theme-blue .play-btn,
+body.theme-blue .primary-btn,
+body.theme-blue .big-play-btn,
+body.theme-blue .preview-btn.primary,
+body.theme-blue .nav a[aria-current="page"] {
+    background: linear-gradient(135deg, #2f80ed, #33c8f2) !important;
+}
+
+body.theme-green .play-btn,
+body.theme-green .primary-btn,
+body.theme-green .big-play-btn,
+body.theme-green .preview-btn.primary,
+body.theme-green .nav a[aria-current="page"] {
+    background: linear-gradient(135deg, #29d98c, #74ffcb) !important;
+}
+
+body.theme-purple .brand-mark {
+    background: linear-gradient(135deg, #7b55ff, #2f80ed) !important;
+}
+
+body.theme-blue .brand-mark {
+    background: linear-gradient(135deg, #2f80ed, #33c8f2) !important;
+}
+
+body.theme-green .brand-mark {
+    background: linear-gradient(135deg, #29d98c, #74ffcb) !important;
+}
+
+
+/* =========================
+   High Contrast Mode
+========================= */
+
+body.high-contrast {
+    background: #000000 !important;
+    color: #ffffff !important;
+}
+
+body.high-contrast main,
+body.high-contrast section,
+body.high-contrast article,
+body.high-contrast aside {
+    color: #ffffff !important;
+}
+
+body.high-contrast .site-header,
+body.high-contrast footer {
+    background: #000000 !important;
+    border-color: #ffffff !important;
+}
+
+body.high-contrast .brand,
+body.high-contrast .brand-name,
+body.high-contrast .brand-subtitle,
+body.high-contrast .nav a,
+body.high-contrast footer,
+body.high-contrast footer a {
+    color: #ffffff !important;
+}
+
+body.high-contrast .card,
+body.high-contrast .game-card,
+body.high-contrast .section-card,
+body.high-contrast .setting-card,
+body.high-contrast .panel,
+body.high-contrast .summary-box,
+body.high-contrast .hero-card,
+body.high-contrast .ready-card,
+body.high-contrast .game-cta-card,
+body.high-contrast .achievement-card,
+body.high-contrast .recent-item,
+body.high-contrast .mini-list li {
+    background: #111111 !important;
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+}
+
+body.high-contrast p,
+body.high-contrast span,
+body.high-contrast small,
+body.high-contrast strong,
+body.high-contrast h1,
+body.high-contrast h2,
+body.high-contrast h3,
+body.high-contrast h4,
+body.high-contrast li,
+body.high-contrast .game-desc,
+body.high-contrast .value-note,
+body.high-contrast .toggle-info span,
+body.high-contrast .mini-list span {
+    color: #ffffff !important;
+}
+
+body.high-contrast input,
+body.high-contrast select,
+body.high-contrast button {
+    border-color: #ffffff !important;
+}
+
+
+/* =========================
+   Reduced Motion
+========================= */
+
+body.reduced-motion *,
+body.reduced-motion *::before,
+body.reduced-motion *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+}
+
+
+/* =========================
+   Sound Disabled Indicator
+========================= */
+
+body.sound-off .sound-status,
+body.sound-off .music-status {
+    opacity: 0.55;
+}
+
+
+/* =========================
+   Preferred Mode Helpers
+========================= */
+
+body.mode-classic {
+    --preferred-mode-label: "Classic";
+}
+
+body.mode-rush {
+    --preferred-mode-label: "Time Rush";
+}
+
+body.mode-endless {
+    --preferred-mode-label: "Endless";
+}
+
+body.mode-hardcore {
+    --preferred-mode-label: "Hardcore";
+}

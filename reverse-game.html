@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ReverseType reverse typing game page." />
+    <title>ReverseType | Reverse Game</title>
+
+    <link rel="stylesheet" href="css/shared-settings.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+
+    <style>
+         :root {
+            --bg-1: #07111f;
+            --bg-2: #10172f;
+            --bg-3: #151034;
+            --dark: #14213d;
+            --muted: #c9d7ff;
+            --blue: #2f80ed;
+            --cyan: #33c8f2;
+            --red-main: #d71920;
+            --gold: #ffc83d;
+            --purple-main: #7b55ff;
+            --green-main: #2ecc71;
+            --card: rgba(255, 255, 255, 0.09);
+            --line: rgba(255, 255, 255, 0.14);
+            --shadow: 0 22px 50px rgba(0, 0, 0, 0.28);
+            --shadow-hover: 0 24px 52px rgba(0, 0, 0, 0.35);
+            --radius: 24px;
+            --transition: 220ms ease;
+            --max-width: 1400px;
+            --dark-1: #06142d;
+            --dark-2: #0b2245;
+            --text: #f1f7ff;
+            --soft: #9fb2e8;
+            --blue-1: #4aa3ff;
+            --blue-2: #33d1ff;
+            --purple: #7b55ff;
+            --gold-2: #ffd54a;
+            --green: #47ffbe;
+            --red: #ff6b8a;
+            --card-line: rgba(255, 255, 255, 0.14);
+            --shadow-soft: 0 16px 36px rgba(0, 0, 0, 0.24);
+            --game-dark-1: #06142d;
+            --game-dark-2: #0b2245;
+            --game-dark-3: #172f5c;
+            --game-panel: rgba(11, 27, 58, 0.86);
+            --game-panel-dark: rgba(3, 14, 34, 0.92);
+            --game-glass: rgba(255, 255, 255, 0.08);
+            --game-text: #f1f7ff;
+            --game-muted: #9bb0d5;
+            --game-line: rgba(255, 255, 255, 0.12);
+            --game-shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
+            --game-green: #47ffbe;
+            --game-red: #ff6b8a;
+            --game-orange: #ff8f35;
+        }
+        
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #ffffff;
+            background: radial-gradient(circle at 8% 10%, rgba(47, 128, 237, 0.34), transparent 30%), radial-gradient(circle at 92% 16%, rgba(123, 85, 255, 0.35), transparent 30%), radial-gradient(circle at 50% 100%, rgba(51, 200, 242, 0.16), transparent 38%), linear-gradient(135deg, var(--bg-1), var(--bg-2) 48%, var(--bg-3));
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        body.theme-blue {
+            --blue: #2f80ed;
+            --cyan: #59d7ff;
+            --purple: #33c8f2;
+            background: radial-gradient(circle at 8% 10%, rgba(47, 128, 237, 0.38), transparent 28%), radial-gradient(circle at 88% 16%, rgba(51, 200, 242, 0.3), transparent 30%), linear-gradient(135deg, #07101f, #0c1b35);
+        }
+        
+        body.theme-green {
+            --blue: #2ecc71;
+            --cyan: #74ffcb;
+            --purple: #29d98c;
+            background: radial-gradient(circle at 8% 10%, rgba(46, 204, 113, 0.32), transparent 28%), radial-gradient(circle at 88% 16%, rgba(116, 255, 203, 0.22), transparent 30%), linear-gradient(135deg, #06140f, #0a2018);
+        }
+        
+        body.theme-light {
+            --bg-1: #ffffff;
+            --bg-2: #ffffff;
+            --bg-3: #ffffff;
+            --dark: #14213d;
+            --muted: #667085;
+            --soft: #6f84a7;
+            --blue: #2f80ed;
+            --cyan: #33c8f2;
+            --card: #ffffff;
+            --line: rgba(20, 33, 61, 0.1);
+            --card-line: #d9e1ef;
+            --shadow: 0 18px 38px rgba(20, 33, 61, 0.12);
+            --shadow-soft: 0 16px 36px rgba(20, 33, 61, 0.12);
+            color: #14213d;
+            background: #ffffff !important;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        button,
+        textarea {
+            font: inherit;
+        }
+        
+        button {
+            border: none;
+            cursor: pointer;
+        }
+        
+        .skip-link {
+            position: absolute;
+            top: -60px;
+            left: 12px;
+            z-index: 999;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #000000;
+            box-shadow: var(--shadow);
+            transition: top var(--transition);
+        }
+        
+        .skip-link:focus {
+            top: 12px;
+        }
+        
+        .container {
+            width: min(100% - 32px, var(--max-width));
+            margin: 0 auto;
+        }
+        /* =========================
+           Header with green dark effect
+        ========================= */
+        
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: radial-gradient(circle at 8% 10%, rgba(46, 204, 113, 0.24), transparent 32%), radial-gradient(circle at 92% 18%, rgba(51, 200, 242, 0.12), transparent 34%), linear-gradient(135deg, rgba(6, 20, 15, 0.96), rgba(10, 32, 24, 0.96));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+        }
+        
+        .header-inner {
+            min-height: 86px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 900;
+            color: #f1fff8;
+        }
+        
+        .brand-mark {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #2ecc71, #33c8f2);
+            color: #ffffff;
+            font-weight: 900;
+            box-shadow: 0 10px 22px rgba(46, 204, 113, 0.24), 0 0 24px rgba(51, 200, 242, 0.18);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .brand-text {
+            display: grid;
+            gap: 2px;
+        }
+        
+        .brand-name {
+            font-size: 1.2rem;
+            letter-spacing: -0.03em;
+            color: #f1fff8;
+            line-height: 1.1;
+        }
+        
+        .brand-subtitle {
+            font-size: 0.78rem;
+            color: #9fb2e8;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            line-height: 1.1;
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav a {
+            min-height: 44px;
+            padding: 0 14px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #c9d7ff;
+            font-size: 0.95rem;
+            font-weight: 800;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid transparent;
+            transition: background var(--transition), color var(--transition), transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+        }
+        
+        .nav a:hover,
+        .nav a:focus-visible {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.16);
+            transform: translateY(-1px);
+            outline: none;
+        }
+        
+        .nav a[aria-current="page"] {
+            background: linear-gradient(135deg, #2ecc71, #33c8f2);
+            color: #041126;
+            box-shadow: 0 10px 24px rgba(46, 204, 113, 0.25);
+        }
+        /* =========================
+           Main Reverse Game Page
+        ========================= */
+        
+        main {
+            position: relative;
+            min-height: calc(100vh - 86px);
+            padding: 34px 0 56px;
+            background: radial-gradient(circle at 12% 12%, rgba(74, 163, 255, 0.22), transparent 28%), radial-gradient(circle at 88% 18%, rgba(123, 85, 255, 0.18), transparent 30%), radial-gradient(circle at 50% 100%, rgba(51, 209, 255, 0.10), transparent 36%), linear-gradient(135deg, var(--game-dark-1), var(--game-dark-2) 55%, #31435d);
+            overflow: hidden;
+        }
+        
+        main::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+            background-size: 52px 52px;
+            mask-image: linear-gradient(to bottom, black, transparent 86%);
+        }
+        
+        main::after {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            right: -120px;
+            bottom: -130px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(51, 209, 255, 0.22), transparent 65%);
+            pointer-events: none;
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+        
+        .game-shell {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            gap: 1.2rem;
+        }
+        
+        .game-hero {
+            position: relative;
+            overflow: hidden;
+            border-radius: 32px;
+            padding: 1.8rem 2rem;
+            background: linear-gradient(135deg, rgba(8, 25, 58, 0.96), rgba(19, 48, 96, 0.86)), radial-gradient(circle at top right, rgba(51, 209, 255, 0.28), transparent 36%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: var(--game-shadow);
+        }
+        
+        .game-hero::before {
+            content: "";
+            position: absolute;
+            width: 360px;
+            height: 360px;
+            right: -100px;
+            top: -130px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(123, 85, 255, 0.36), transparent 68%);
+            pointer-events: none;
+        }
+        
+        .game-hero::after {
+            content: "epyT";
+            position: absolute;
+            right: 4%;
+            bottom: -0.2em;
+            color: rgba(255, 255, 255, 0.035);
+            font-size: clamp(5rem, 15vw, 12rem);
+            font-weight: 900;
+            letter-spacing: -0.08em;
+            pointer-events: none;
+        }
+        
+        .game-hero-inner {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .game-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .game-logo {
+            width: 58px;
+            height: 58px;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: #ffffff;
+            font-weight: 900;
+            box-shadow: 0 16px 34px rgba(74, 163, 255, 0.35);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .game-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .game-title-text {
+            display: grid;
+            gap: 0.35rem;
+        }
+        
+        .game-eyebrow {
+            display: inline-flex;
+            width: fit-content;
+            align-items: center;
+            gap: 0.45rem;
+            min-height: 32px;
+            padding: 0 12px;
+            border-radius: 999px;
+            background: rgba(71, 255, 190, 0.12);
+            color: var(--game-green);
+            font-size: 0.76rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        
+        .game-title-text h1 {
+            color: #f1f7ff;
+            font-size: clamp(2rem, 5vw, 4rem);
+            line-height: 0.95;
+            font-weight: 900;
+            letter-spacing: -0.07em;
+            text-shadow: 0 12px 34px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-hero-note {
+            max-width: 430px;
+            color: #b9c9e8;
+            line-height: 1.6;
+            font-weight: 700;
+            text-align: right;
+        }
+        /* =========================
+           Stats
+        ========================= */
+        
+        .stats-area {
+            display: grid;
+            gap: 0.7rem;
+            align-items: center;
+            justify-items: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(92px, 1fr));
+            gap: 0.5rem;
+            width: min(100%, 680px);
+        }
+        
+        .stats-grid.comp-grid {
+            grid-template-columns: repeat(3, minmax(120px, 1fr));
+            width: min(100%, 500px);
+        }
+        
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+            min-height: 50px;
+            border-radius: 14px;
+            padding: 0.46rem 0.62rem;
+            background: rgba(255, 255, 255, 0.075);
+            border: 1px solid rgba(255, 255, 255, 0.11);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.13);
+        }
+        
+        .stat-card::after {
+            content: "";
+            position: absolute;
+            inset: auto -20% -45% auto;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(51, 209, 255, 0.12), transparent 64%);
+            pointer-events: none;
+        }
+        
+        .stat-card span {
+            display: block;
+            color: #9fb3d4;
+            font-size: 0.58rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 0.15rem;
+            letter-spacing: 0.08em;
+        }
+        
+        .stat-card strong {
+            display: block;
+            color: var(--cyan);
+            font-size: 0.95rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+        
+        #accuracyValue,
+        .accuracy {
+            color: var(--game-green);
+        }
+        
+        #timerValue,
+        .time {
+            color: var(--gold);
+        }
+        
+        #errorsValue,
+        .errors {
+            color: var(--game-red);
+        }
+        
+        #winnerValue {
+            color: var(--game-orange);
+        }
+        /* =========================
+           Typing Stage
+        ========================= */
+        
+        .typing-stage {
+            display: grid;
+            gap: 1rem;
+            padding: 1.4rem;
+            border-radius: 32px;
+            background: rgba(11, 27, 58, 0.74);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            box-shadow: var(--game-shadow);
+            backdrop-filter: blur(8px);
+        }
+        
+        .prompt-wrap {
+            min-height: 180px;
+            padding: 1.4rem;
+            border-radius: 26px;
+            outline: none;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03)), rgba(3, 14, 34, 0.42);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+        }
+        
+        .prompt-wrap:focus-visible {
+            outline: 3px solid rgba(51, 209, 255, 0.55);
+            outline-offset: 3px;
+        }
+        
+        .prompt-word {
+            font-size: clamp(1.15rem, 2vw, 1.55rem);
+            line-height: 1.75;
+            white-space: pre-wrap;
+            word-break: break-word;
+            color: #b9c9e8;
+            letter-spacing: 0.01em;
+            font-weight: 700;
+        }
+        
+        .prompt-word .typed {
+            color: var(--game-green);
+        }
+        
+        .prompt-word .current {
+            color: #ffffff;
+            border-left: 4px solid var(--cyan);
+            padding-left: 2px;
+            background: rgba(51, 209, 255, 0.10);
+            border-radius: 4px;
+        }
+        
+        .prompt-word .remaining {
+            color: #b9c9e8;
+        }
+        
+        .prompt-word .error {
+            color: #ffffff;
+            background: rgba(255, 107, 138, 0.36);
+            border-radius: 6px;
+            padding: 0 3px;
+        }
+        
+        .input-zone {
+            display: grid;
+            gap: 0.8rem;
+        }
+        
+        .input-label {
+            display: inline-flex;
+            width: fit-content;
+            min-height: 34px;
+            align-items: center;
+            padding: 0 12px;
+            border-radius: 999px;
+            background: rgba(71, 255, 190, 0.12);
+            color: var(--game-green);
+            font-size: 0.78rem;
+            font-weight: 900;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+        
+        .answer-input {
+            width: 100%;
+            min-height: 120px;
+            border-radius: 24px;
+            padding: 1rem 1.1rem;
+            background: rgba(255, 255, 255, 0.94);
+            border: 2px solid rgba(74, 163, 255, 0.25);
+            color: #07162f;
+            font-size: 1.02rem;
+            line-height: 1.6;
+            outline: none;
+            resize: vertical;
+            box-shadow: 0 12px 26px rgba(0, 0, 0, 0.14);
+        }
+        
+        .answer-input:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 4px rgba(51, 209, 255, 0.18), 0 16px 34px rgba(0, 0, 0, 0.18);
+        }
+        
+        .answer-input::placeholder {
+            color: #7f8ea8;
+        }
+        
+        .action-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        
+        .action-btn {
+            min-width: 132px;
+            min-height: 54px;
+            border-radius: 16px;
+            padding: 0 1rem;
+            font-weight: 900;
+            font-size: 0.92rem;
+            transition: transform var(--transition), filter var(--transition), box-shadow var(--transition), background var(--transition);
+        }
+        
+        .action-btn:hover:not(:disabled),
+        .action-btn:focus-visible:not(:disabled) {
+            transform: translateY(-2px);
+            outline: none;
+        }
+        
+        .action-btn:disabled {
+            opacity: 0.48;
+            cursor: not-allowed;
+        }
+        
+        .start-btn,
+        .submit-btn {
+            background: linear-gradient(135deg, #47ffbe, #33d1ff);
+            color: #041126;
+            box-shadow: 0 18px 38px rgba(71, 255, 190, 0.22);
+        }
+        
+        .pause-btn,
+        .resume-btn {
+            background: rgba(255, 255, 255, 0.10);
+            color: #dfe8f8;
+            border: 1px solid rgba(255, 255, 255, 0.13);
+        }
+        
+        .restart-btn {
+            background: rgba(255, 107, 138, 0.12);
+            color: #ff9caf;
+            border: 1px solid rgba(255, 107, 138, 0.32);
+        }
+        /* =========================
+           Keyboard
+        ========================= */
+        
+        .keyboard-block {
+            display: grid;
+            gap: 0.9rem;
+            justify-items: center;
+            padding-top: 0.2rem;
+        }
+        
+        .keyboard-title {
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 900;
+            color: #f1f7ff;
+            letter-spacing: 0.04em;
+        }
+        
+        .keyboard-shell {
+            width: 100%;
+            max-width: 980px;
+            padding: 1rem;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.075);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            overflow-x: auto;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+        }
+        
+        .keyboard-shell-inner {
+            display: grid;
+            gap: 0.62rem;
+        }
+        
+        .keyboard-row {
+            display: flex;
+            justify-content: center;
+            gap: 0.42rem;
+            flex-wrap: nowrap;
+        }
+        
+        .key {
+            min-width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid rgba(190, 210, 240, 0.85);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #07162f;
+            font-weight: 900;
+            font-size: 0.72rem;
+            padding: 0.2rem;
+            flex: 0 0 auto;
+            transition: background 0.22s ease, color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+        }
+        
+        .key span {
+            display: block;
+            line-height: 1.02;
+        }
+        
+        .key.wide {
+            min-width: 84px;
+        }
+        
+        .key.xwide {
+            min-width: 124px;
+        }
+        
+        .key.space {
+            min-width: 210px;
+        }
+        
+        .key.active {
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 14px 28px rgba(51, 209, 255, 0.24), 0 0 18px rgba(51, 209, 255, 0.22);
+            transform: translateY(-2px);
+        }
+        
+        .feedback-box,
+        .save-status {
+            display: none;
+        }
+        /* =========================
+           Modal
+        ========================= */
+        
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(3, 10, 25, 0.64);
+            backdrop-filter: blur(8px);
+            padding: 1rem;
+            z-index: 9999;
+        }
+        
+        .modal-overlay.show {
+            display: flex;
+        }
+        
+        .modal {
+            width: min(100%, 580px);
+            overflow: hidden;
+            border-radius: 28px;
+            background: linear-gradient(180deg, rgba(11, 27, 58, 0.98), rgba(3, 14, 34, 0.98));
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            box-shadow: var(--game-shadow);
+            color: var(--game-text);
+        }
+        
+        .modal-head {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .modal-head h3 {
+            color: #f1f7ff;
+            font-size: 1.15rem;
+            font-weight: 900;
+        }
+        
+        .modal-body {
+            padding: 1.2rem;
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .modal-body p {
+            color: #b9c9e8;
+            font-size: 0.96rem;
+            font-weight: 700;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.85rem;
+        }
+        
+        .result-box {
+            padding: 1rem;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.075);
+            border: 1px solid rgba(255, 255, 255, 0.11);
+        }
+        
+        .result-box span {
+            display: block;
+            color: #9fb3d4;
+            font-size: 0.76rem;
+            margin-bottom: 0.25rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        
+        .result-box strong {
+            color: var(--cyan);
+            font-size: 1.15rem;
+            font-weight: 900;
+        }
+        
+        .modal-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        
+        .modal-actions a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .visually-hidden,
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        /* =========================
+           Footer - Scores page style
+        ========================= */
+        
+        footer {
+            margin-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            padding: 28px 0 36px;
+            color: var(--soft);
+            text-align: center;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.04);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--soft);
+            font-size: 0.95rem;
+        }
+        
+        .footer-links a:hover,
+        .footer-links a:focus-visible {
+            color: var(--cyan);
+            outline: none;
+        }
+        
+         :focus-visible {
+            outline: 3px solid rgba(47, 128, 237, 0.35);
+            outline-offset: 2px;
+            border-radius: 12px;
+        }
+        /* =========================
+           White Light fixes
+        ========================= */
+        
+        body.theme-light .site-header {
+            background: rgba(255, 255, 255, 0.92);
+            border-bottom: 1px solid rgba(20, 33, 61, 0.1);
+            box-shadow: none;
+        }
+        
+        body.theme-light .brand,
+        body.theme-light .brand-name {
+            color: #14213d;
+        }
+        
+        body.theme-light .brand-subtitle {
+            color: #667085;
+        }
+        
+        body.theme-light .nav a {
+            color: #344054;
+            background: transparent;
+            border-color: transparent;
+        }
+        
+        body.theme-light .nav a:hover,
+        body.theme-light .nav a:focus-visible {
+            background: rgba(47, 128, 237, 0.1);
+            color: var(--blue);
+            border-color: transparent;
+        }
+        
+        body.theme-light .nav a[aria-current="page"] {
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: #ffffff;
+        }
+        
+        body.theme-light main {
+            background: #ffffff !important;
+        }
+        
+        body.theme-light main::before,
+        body.theme-light main::after {
+            display: none;
+        }
+        
+        body.theme-light .game-hero,
+        body.theme-light .typing-stage,
+        body.theme-light .keyboard-shell,
+        body.theme-light .stat-card {
+            background: #ffffff;
+            border: 1px solid #d9e1ef;
+            box-shadow: 0 16px 36px rgba(20, 33, 61, 0.12);
+        }
+        
+        body.theme-light .game-hero::before {
+            background: radial-gradient(circle, rgba(47, 128, 237, 0.12), transparent 68%);
+        }
+        
+        body.theme-light .game-hero::after {
+            color: rgba(20, 33, 61, 0.045);
+        }
+        
+        body.theme-light .game-title-text h1,
+        body.theme-light .keyboard-title {
+            color: #14213d;
+            text-shadow: none;
+        }
+        
+        body.theme-light .game-hero-note,
+        body.theme-light .prompt-word,
+        body.theme-light .prompt-word .remaining,
+        body.theme-light .modal-body p {
+            color: #667085;
+        }
+        
+        body.theme-light .prompt-wrap {
+            background: #f7f9fd;
+            border: 1px solid #d9e1ef;
+        }
+        
+        body.theme-light .prompt-word .current {
+            color: #14213d;
+        }
+        
+        body.theme-light .pause-btn,
+        body.theme-light .resume-btn {
+            color: #14213d;
+            background: #f3f6fb;
+            border: 1px solid #d9e1ef;
+        }
+        
+        body.theme-light .restart-btn {
+            background: #fff1f4;
+            color: #d14d69;
+            border: 1px solid #f0b9c5;
+        }
+        
+        body.theme-light .stat-card span,
+        body.theme-light .result-box span {
+            color: #667085;
+        }
+        
+        body.theme-light .modal {
+            background: #ffffff;
+            color: #14213d;
+            border: 1px solid rgba(20, 33, 61, 0.12);
+            box-shadow: 0 30px 80px rgba(27, 51, 91, 0.2);
+        }
+        
+        body.theme-light .modal-head {
+            border-bottom: 1px solid rgba(20, 33, 61, 0.1);
+        }
+        
+        body.theme-light .modal-head h3 {
+            color: #14213d;
+        }
+        
+        body.theme-light .result-box {
+            background: #f7f9fd;
+            border: 1px solid #d9e1ef;
+        }
+        
+        body.theme-light footer {
+            background: #ffffff;
+            color: #667085;
+            border-top: 1px solid rgba(20, 33, 61, 0.1);
+        }
+        
+        body.theme-light .footer-links a {
+            color: #475467;
+        }
+        
+        body.theme-light .footer-links a:hover,
+        body.theme-light .footer-links a:focus-visible {
+            color: var(--blue);
+        }
+        
+        @keyframes pulseGlow {
+            0%,
+            100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.08);
+            }
+        }
+        /* =========================
+           Responsive
+        ========================= */
+        
+        @media (max-width: 1100px) {
+            .game-hero-note {
+                text-align: left;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                width: 100%;
+            }
+            .stats-grid.comp-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                width: 100%;
+            }
+            .keyboard-shell-inner {
+                min-width: 780px;
+            }
+        }
+        
+        @media (max-width: 760px) {
+            .container {
+                width: min(100% - 20px, var(--max-width));
+            }
+            .header-inner {
+                min-height: auto;
+                padding: 14px 0;
+            }
+            .nav {
+                justify-content: flex-start;
+            }
+            .nav a {
+                min-height: 42px;
+                padding: 0 12px;
+                font-size: 0.9rem;
+            }
+            main {
+                padding: 1.4rem 0 2.4rem;
+            }
+            .game-hero {
+                padding: 1.4rem;
+                border-radius: 26px;
+            }
+            .game-title-wrap {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+            .stats-grid,
+            .stats-grid.comp-grid {
+                grid-template-columns: 1fr;
+            }
+            .typing-stage {
+                padding: 1rem;
+            }
+            .prompt-wrap {
+                min-height: 150px;
+                padding: 1rem;
+            }
+            .answer-input {
+                min-height: 110px;
+            }
+            .action-row,
+            .modal-actions {
+                flex-direction: column;
+            }
+            .action-row>*,
+            .modal-actions>* {
+                width: 100%;
+            }
+            .keyboard-shell-inner {
+                min-width: 720px;
+            }
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 460px) {
+            .brand-subtitle {
+                display: none;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                scroll-behavior: auto;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+        /* =====================================================
+   Reverse Game Keyboard Activity Responsive Fix
+   Paste at the END of reverse-game.html <style>
+===================================================== */
+        
+        .keyboard-block {
+            width: 100%;
+            min-width: 0;
+        }
+        
+        .keyboard-shell {
+            width: 100%;
+            max-width: 980px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 1rem;
+            scrollbar-width: thin;
+        }
+        
+        .keyboard-shell-inner {
+            width: max-content;
+            min-width: 760px;
+            margin: 0 auto;
+        }
+        
+        .keyboard-row {
+            width: max-content;
+            min-width: 100%;
+        }
+        /* Tablet */
+        
+        @media (max-width: 900px) {
+            .keyboard-shell {
+                padding: 0.9rem;
+                border-radius: 24px;
+            }
+            .keyboard-shell-inner {
+                min-width: 700px;
+            }
+            .key {
+                min-width: 42px;
+                height: 42px;
+                border-radius: 12px;
+                font-size: 0.68rem;
+            }
+            .key.wide {
+                min-width: 76px;
+            }
+            .key.xwide {
+                min-width: 110px;
+            }
+            .key.space {
+                min-width: 180px;
+            }
+        }
+        /* Phone */
+        
+        @media (max-width: 760px) {
+            .keyboard-block {
+                margin-top: 0.4rem;
+            }
+            .keyboard-title {
+                font-size: 0.95rem;
+                margin-bottom: 0.2rem;
+            }
+            .keyboard-shell {
+                max-width: 100%;
+                padding: 0.75rem;
+                border-radius: 22px;
+            }
+            .keyboard-shell-inner {
+                min-width: 620px;
+                gap: 0.45rem;
+            }
+            .keyboard-row {
+                gap: 0.32rem;
+                justify-content: flex-start;
+            }
+            .key {
+                min-width: 36px;
+                height: 38px;
+                border-radius: 11px;
+                font-size: 0.6rem;
+                padding: 0.15rem;
+            }
+            .key.wide {
+                min-width: 64px;
+            }
+            .key.xwide {
+                min-width: 92px;
+            }
+            .key.space {
+                min-width: 150px;
+            }
+        }
+        /* Small phone like iPhone SE */
+        
+        @media (max-width: 420px) {
+            .typing-stage {
+                padding: 0.8rem;
+                border-radius: 24px;
+            }
+            .keyboard-shell {
+                padding: 0.65rem;
+                border-radius: 20px;
+            }
+            .keyboard-shell-inner {
+                min-width: 560px;
+                gap: 0.36rem;
+            }
+            .keyboard-row {
+                gap: 0.26rem;
+            }
+            .key {
+                min-width: 32px;
+                height: 34px;
+                border-radius: 10px;
+                font-size: 0.54rem;
+            }
+            .key.wide {
+                min-width: 56px;
+            }
+            .key.xwide {
+                min-width: 78px;
+            }
+            .key.space {
+                min-width: 128px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        (function() {
+            const value = localStorage.getItem("rtgSettings");
+
+            try {
+                const settings = value ? JSON.parse(value) : {};
+
+                if (settings.theme === "blue") {
+                    document.body.classList.add("theme-blue");
+                } else if (settings.theme === "green") {
+                    document.body.classList.add("theme-green");
+                } else if (settings.theme === "light") {
+                    document.body.classList.add("theme-light");
+                }
+
+                if (settings.highContrast) {
+                    document.body.classList.add("high-contrast");
+                }
+
+                if (settings.fontSize) {
+                    document.documentElement.style.setProperty("--base-font-size", `${settings.fontSize}px`);
+                }
+            } catch (error) {
+                console.warn("Theme settings could not be loaded.");
+            }
+        })();
+    </script>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand" aria-label="ReverseType home">
+                <div class="brand-mark">
+                    <img src="images/logo.png" alt="ReverseType logo" onerror="this.style.display='none'; this.parentNode.textContent='RT';" />
+                </div>
+
+                <div class="brand-text">
+                    <div class="brand-name">ReverseType</div>
+                    <div class="brand-subtitle">Typing Games</div>
+                </div>
+            </a>
+
+            <nav class="nav" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="scores.html">Scores</a>
+                <a href="achievements.html">Achievements</a>
+                <a href="settings.html">Settings</a>
+                <a href="about.html">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="container game-shell">
+            <section class="stats-area" aria-label="Game statistics">
+                <section class="stats-grid" aria-label="Game stats">
+                    <article class="stat-card">
+                        <span>WPM</span>
+                        <strong id="scoreValue" class="wpm">0</strong>
+                    </article>
+
+                    <article class="stat-card">
+                        <span>Accuracy</span>
+                        <strong id="accuracyValue" class="accuracy">100%</strong>
+                    </article>
+
+                    <article class="stat-card">
+                        <span>Time</span>
+                        <strong id="timerValue" class="time">60s</strong>
+                    </article>
+
+                    <article class="stat-card">
+                        <span>Errors</span>
+                        <strong id="errorsValue" class="errors">0</strong>
+                    </article>
+
+                    <article class="stat-card">
+                        <span>KPS</span>
+                        <strong id="levelValue" class="kps">0</strong>
+                    </article>
+                </section>
+
+                <section class="stats-grid comp-grid" aria-label="Competition stats">
+                    <article class="stat-card">
+                        <span>Player Score</span>
+                        <strong id="playerScoreValue">0</strong>
+                    </article>
+
+                    <article class="stat-card">
+                        <span>Computer Score</span>
+                        <strong id="computerScoreValue">0</strong>
+                    </article>
+
+                    <article class="stat-card">
+                        <span>Leader</span>
+                        <strong id="winnerValue">Draw</strong>
+                    </article>
+                </section>
+            </section>
+
+            <section class="typing-stage" aria-label="Typing game">
+                <div class="prompt-wrap" id="promptWrap" tabindex="0">
+                    <div class="prompt-word" id="promptWord">
+                        <span class="remaining">press start to begin</span>
+                    </div>
+                </div>
+
+                <div class="input-zone">
+                    <div class="input-label" id="inputLabel">TYPE BACKWARD</div>
+
+                    <textarea id="answerInput" class="answer-input" rows="4" autocomplete="off" spellcheck="false" placeholder="Type here..." disabled></textarea>
+
+                    <div class="action-row">
+                        <button id="startBtn" class="action-btn start-btn" type="button">Start</button>
+                        <button id="submitBtn" class="action-btn submit-btn" type="button" disabled>Submit</button>
+                        <button id="pauseBtn" class="action-btn pause-btn" type="button" disabled>Pause</button>
+                        <button id="resumeBtn" class="action-btn resume-btn" type="button" disabled>Resume</button>
+                        <button id="restartBtn" class="action-btn restart-btn" type="button">Restart</button>
+                    </div>
+                </div>
+
+                <div class="keyboard-block">
+                    <h2 class="keyboard-title">Keyboard Activity</h2>
+
+                    <div class="keyboard-shell">
+                        <div class="keyboard-shell-inner">
+                            <div class="keyboard-row">
+                                <div class="key" data-key="`"><span>~<br>`</span></div>
+                                <div class="key" data-key="1"><span>!<br>1</span></div>
+                                <div class="key" data-key="2"><span>@<br>2</span></div>
+                                <div class="key" data-key="3"><span>#<br>3</span></div>
+                                <div class="key" data-key="4"><span>$<br>4</span></div>
+                                <div class="key" data-key="5"><span>%<br>5</span></div>
+                                <div class="key" data-key="6"><span>^<br>6</span></div>
+                                <div class="key" data-key="7"><span>&amp;<br>7</span></div>
+                                <div class="key" data-key="8"><span>*<br>8</span></div>
+                                <div class="key" data-key="9"><span>(<br>9</span></div>
+                                <div class="key" data-key="0"><span>)<br>0</span></div>
+                                <div class="key" data-key="-"><span>_<br>-</span></div>
+                                <div class="key" data-key="="><span>+<br>=</span></div>
+                                <div class="key xwide" data-key="Backspace"><span>Backspace</span></div>
+                            </div>
+
+                            <div class="keyboard-row">
+                                <div class="key wide" data-key="Tab"><span>Tab</span></div>
+                                <div class="key" data-key="q"><span>Q</span></div>
+                                <div class="key" data-key="w"><span>W</span></div>
+                                <div class="key" data-key="e"><span>E</span></div>
+                                <div class="key" data-key="r"><span>R</span></div>
+                                <div class="key" data-key="t"><span>T</span></div>
+                                <div class="key" data-key="y"><span>Y</span></div>
+                                <div class="key" data-key="u"><span>U</span></div>
+                                <div class="key" data-key="i"><span>I</span></div>
+                                <div class="key" data-key="o"><span>O</span></div>
+                                <div class="key" data-key="p"><span>P</span></div>
+                                <div class="key" data-key="["><span>{<br>[</span></div>
+                                <div class="key" data-key="]"><span>}<br>]</span></div>
+                                <div class="key" data-key="\"><span>|<br>\</span></div>
+                            </div>
+
+                            <div class="keyboard-row">
+                                <div class="key xwide" data-key="CapsLock"><span>Caps Lock</span></div>
+                                <div class="key" data-key="a"><span>A</span></div>
+                                <div class="key" data-key="s"><span>S</span></div>
+                                <div class="key" data-key="d"><span>D</span></div>
+                                <div class="key" data-key="f"><span>F</span></div>
+                                <div class="key" data-key="g"><span>G</span></div>
+                                <div class="key" data-key="h"><span>H</span></div>
+                                <div class="key" data-key="j"><span>J</span></div>
+                                <div class="key" data-key="k"><span>K</span></div>
+                                <div class="key" data-key="l"><span>L</span></div>
+                                <div class="key" data-key=";"><span>:<br>;</span></div>
+                                <div class="key" data-key="'"><span>"<br>'</span></div>
+                                <div class="key xwide" data-key="Enter"><span>Enter</span></div>
+                            </div>
+
+                            <div class="keyboard-row">
+                                <div class="key xwide" data-key="Shift"><span>Shift</span></div>
+                                <div class="key" data-key="z"><span>Z</span></div>
+                                <div class="key" data-key="x"><span>X</span></div>
+                                <div class="key" data-key="c"><span>C</span></div>
+                                <div class="key" data-key="v"><span>V</span></div>
+                                <div class="key" data-key="b"><span>B</span></div>
+                                <div class="key" data-key="n"><span>N</span></div>
+                                <div class="key" data-key="m"><span>M</span></div>
+                                <div class="key" data-key=","><span>&lt;<br>,</span></div>
+                                <div class="key" data-key="."><span>&gt;<br>.</span></div>
+                                <div class="key" data-key="/"><span>?<br>/</span></div>
+                                <div class="key xwide" data-key="ShiftRight"><span>Shift</span></div>
+                            </div>
+
+                            <div class="keyboard-row">
+                                <div class="key wide" data-key="Control"><span>Ctrl</span></div>
+                                <div class="key wide" data-key="Alt"><span>Alt</span></div>
+                                <div class="key space" data-key=" "><span>Space</span></div>
+                                <div class="key wide" data-key="AltRight"><span>Alt</span></div>
+                                <div class="key wide" data-key="ControlRight"><span>Ctrl</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="visually-hidden" aria-hidden="true">
+                    <span id="modeLabel">REVERSE</span>
+                    <span id="statusText">PRESS START TO BEGIN</span>
+                    <span id="streakSummary">0</span>
+                    <span id="testsSummary">0</span>
+                    <span id="achievementsSummary">0</span>
+
+                    <div id="feedbackBox"></div>
+                    <div id="saveStatus"></div>
+
+                    <button id="reverseModeBtn" type="button">Reverse</button>
+                    <button id="normalModeBtn" type="button">Normal</button>
+
+                    <button class="time-btn" data-time="30" type="button">30s</button>
+                    <button class="time-btn" data-time="60" type="button">60s</button>
+                    <button class="time-btn" data-time="120" type="button">120s</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="resultModal" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+            <div class="modal-head">
+                <h3 id="resultTitle">Time Up</h3>
+                <button class="action-btn pause-btn" id="closeModalBtn" type="button">Close</button>
+            </div>
+
+            <div class="modal-body">
+                <p id="resultMessage">You vs Computer has ended.</p>
+
+                <div class="results-grid">
+                    <div class="result-box">
+                        <span>Your Score</span>
+                        <strong id="finalScoreValue">0</strong>
+                    </div>
+
+                    <div class="result-box">
+                        <span>Computer Score</span>
+                        <strong id="finalLevelValue">0</strong>
+                    </div>
+
+                    <div class="result-box">
+                        <span>Accuracy</span>
+                        <strong id="finalAccuracyValue">0%</strong>
+                    </div>
+
+                    <div class="result-box">
+                        <span>Winner</span>
+                        <strong id="finalStreakValue">Draw</strong>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button id="playAgainBtn" class="action-btn submit-btn" type="button">Play Again</button>
+                    <a href="scores.html" class="action-btn pause-btn">View Scores</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="scores.html">Scores</a>
+                <a href="settings.html">Settings</a>
+                <a href="about.html">About</a>
+            </div>
+
+            <p>© 2026 ReverseType.fun. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/game.js" defer></script>
+    <script src="js/shared-settings.js"></script>
+    <script src="js/theme-loader.js"></script>
+</body>
+
+</html>
